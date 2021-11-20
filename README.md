@@ -1,5 +1,8 @@
 # Flask React Project
+ CREATE USER zibapython WITH PASSWORD 'password' CREATEDB;
+  CREATE DATABASE zibapythondb WITH OWNER zibapython;
 
+  
 This is the starter for the Flask React project.
 
 ## Getting started
