@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // import ProfileButton from './ProfileButton';
-// import NewPostModal from '../NewPost/'; 
+import NewPost from '../NewPost/';  
 import { AiOutlineHome } from "react-icons/ai";
 import { AiOutlineCompass } from "react-icons/ai";
 import { AiOutlineNotification } from "react-icons/ai"; 
@@ -30,7 +30,7 @@ function Navigation({ isLoaded }){
                       <BiMessage/> 
                     </button>  
                     <button  className='Navprofile'>  
-                    {/* <NewPostModal/>  */}
+                    <NewPost/> 
                     </button>  
                     <button  className='Navprofile'>  
                       <AiOutlineCompass/> 
