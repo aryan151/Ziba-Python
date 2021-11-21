@@ -1,4 +1,5 @@
 from .db import db
+from datetime import datetime     
 
 class Post(db.Model):
     __tablename__ = 'posts'
@@ -10,7 +11,7 @@ class Post(db.Model):
     lat = db.Column(db.Float, nullable=True, default=40.7128)  
     long = db.Column(db.Float, nullable=True, default=74.0060)    
     tags = db.Column(db.ARRAY(db.String(100)), nullable=True)
-    createdAt = db.Column(db.DateTime, nullable=False)   
+    createdAt = db.Column(db.DateTime, nullable=False, default=datetime.now())    
 
     #Relationships 
     user = db.relationship("User", back_populates='post')
