@@ -5,13 +5,14 @@
     font-weight: bold;
     font-size: 70px;
     color: white;;
-    padding-left: 1em;
+    padding-left: 1em; 
   }
   
   .SplashscrollContainer {
     position: fixed;
     left: 20px;
     bottom: 70px;
+    margin: 10px;    
   }
   
   .Splashcarousel {
@@ -22,25 +23,48 @@
     width: 400px;
     text-align:start;  
   }
-  
-  .Splashinner {
-      animation: scroll 25s ease-in-out infinite;
+  .Splashcarousel + .Splashtext {
+      margin-top: 20px;
+  }
+
+
+  /* .change:before {
+    content: 'Discover Beauty';
+    font-size: 100%;
+    animation-name: change-letter;
+    animation-duration: 6s; 
+    animation-iteration-count: infinite;
   }
   
-  @keyframes scroll {
-    0%{
-          transform: translateY(0%);
-      }
-      17.5%{
-          transform: translateY(-25%);
-      }
-      33%{
-          transform: translateY(-50%);
-      }
-      66%{
-          transform: translateY(-75%);
-      }
-  } 
+  @keyframes change-letter {
+    0% {
+      opacity: 1;
+      content: "2asda"
+    }
+    20% {
+      opacity: 0.5;
+      content: "2asda"
+    }
+    40% {
+      opacity: 0;
+      content: "2asdad"
+    }
+    60% {
+      opacity: 0.5;
+      content: "3asdad"
+    }
+    80% {
+      opacity: 1;
+      content: "3asdad"
+    }
+    100% {
+      opacity: 0;
+      content: "asdad3"
+    }
+
+  } */
+
+
   .word {
     padding-left: 8px;
     color: rgb(92, 166, 227);

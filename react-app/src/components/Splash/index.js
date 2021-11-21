@@ -59,11 +59,10 @@ function Splash() {
             <div className='Splashslider'>
                 <div className='Splashcarousel'>
                     <div className='Splashinner'>
-                        <div className='SplashWord'>Discover Beauty</div>
-                        <div className='SplashWord'>Discover test</div>
+                    <span class="change"></span> 
                     </div> 
                 </div>
-                <div>Social Media, Reimagined</div>    
+                <div className='Splashtext'>Social Media, Reimagined</div>    
             </div>
         </div>
         <div className='imagebackground'> 
