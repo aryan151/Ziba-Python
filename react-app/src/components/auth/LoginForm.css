@@ -1,0 +1,103 @@
+.loginContainer {
+    position: relative;
+    min-height: 380px;
+    width: 350px; 
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 3px;
+    margin-left: 25px;
+}
+
+.loginTitle {
+    font-family: 'Grand Hotel', cursive;
+    font-size: 48px;
+    letter-spacing: 1.1px;
+    color: #231F20;
+    margin: 27px 0px 35px 0px;
+    font-weight: 600;
+}
+
+.loginField {
+    height: 36px;
+    width: 266px;
+    border-radius: 3px;
+    background-color: #fafafa;
+    text-indent: 8px;
+    margin-bottom: 6px;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.loginBtn {
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    height: 30px;
+    width: 268px;
+    margin-top: 8px;
+}
+
+.orContainer {
+    height: 30px;
+    width: 268px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+}
+
+.orText {
+    color: #8e8e8e;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.line {
+    width: 110px;
+    height: 1px;
+    background: rgba(0, 0, 0, .2);
+    margin-top: 6px;
+}
+
+.demo {
+    cursor: pointer;
+    background: none;
+    outline: none;
+    border: none;
+    color:  #0095f6;
+    font-weight: bold;
+}
+
+.demoContainer {
+    display: grid;
+    place-items: center;
+    margin-top: 10px;
+}
+
+.errorContainer {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.errorText {
+    color: #ee5460;
+
+}
+
+.demo2LoginContainer {
+    display: grid;
+    place-items: center;
+    margin-top: 15px;
+    transform: translateY(5px);
+
+}
+
+.demo2Login {
+    color: #295783;
+    font-size: 12px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+}

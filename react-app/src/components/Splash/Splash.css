@@ -1,0 +1,94 @@
+.Splashslider {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-weight: bold;
+    font-size: 70px;
+    color: white;;
+    padding-left: 1em;
+  }
+  
+  .SplashscrollContainer {
+    position: fixed;
+    left: 20px;
+    bottom: 70px;
+  }
+  
+  .Splashcarousel {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    height: 50px;
+    width: 400px;
+    text-align:start;  
+  }
+  
+  .Splashinner {
+      animation: scroll 25s ease-in-out infinite;
+  }
+  
+  @keyframes scroll {
+    0%{
+          transform: translateY(0%);
+      }
+      17.5%{
+          transform: translateY(-25%);
+      }
+      33%{
+          transform: translateY(-50%);
+      }
+      66%{
+          transform: translateY(-75%);
+      }
+  } 
+  .word {
+    padding-left: 8px;
+    color: rgb(92, 166, 227);
+    font-weight: bold;
+    font-size: 50px;
+  }
+  
+
+.topbox {
+    float: right;
+    z-index: 5;
+}
+
+.image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    transition: opacity 1.5s ease;
+    opacity: 0;
+}
+
+.active {
+    opacity: 1;
+}
+
+.redirectContainer {
+    width: 350px;
+    height: 63px;
+    background-color: white;
+    margin-left: 25px;
+    margin-top: 10px;
+    border: 1px solid rgba(0, 0, 0, .2);
+    float: right;
+}
+
+.redirectContainer {  
+    display: grid;
+    place-items: center;
+}
+
+.redirectSignUp {
+    color: #0095f6;
+    font-weight: bold;
+}  
+
+

@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
+import { useDispatch, useSelector } from 'react-redux';
 import NavBar from './components/NavBar';
+import Splash from './components/Splash';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
 import { authenticate } from './store/session';
 
-function App() {
+function App() { 
+  const sessionUser = useSelector(state => state.session.user);
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
@@ -18,7 +16,7 @@ function App() {
       await dispatch(authenticate());
       setLoaded(true);
     })();
-  }, [dispatch]);
+  }, [dispatch]); 
 
   if (!loaded) {
     return null;
@@ -26,24 +24,33 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      {!sessionUser && (
+        <Route exact path='/'>
+          <Splash/>
+        </Route> 
+      )}
+
+    {sessionUser && (
       <Switch>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
+        <ProtectedRoute path='/posts/:postId' exact={true} >
+            <NavBar/>
+        </ProtectedRoute> 
         <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
+            <NavBar/>
         </ProtectedRoute>
         <ProtectedRoute path='/Home' exact={true} >
-          <h1>My Home Page</h1>
+            <NavBar/>
+            <h1>Home Feed</h1>  
         </ProtectedRoute>
-      </Switch>
+        <ProtectedRoute path='/Discover' exact={true} >
+            <NavBar/>
+            <h1>Discover Feed</h1>
+        </ProtectedRoute>
+        <ProtectedRoute path='/Analytics' exact={true} >
+            <NavBar/>
+            <h1>Analytics Feed</h1>    
+        </ProtectedRoute>
+      </Switch>)}
     </BrowserRouter>
   );
 }
