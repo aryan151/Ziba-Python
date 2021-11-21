@@ -100,4 +100,8 @@
     border: none;
     outline: none;
     background: none;
+}  
+
+.errorText + .loginFormContainer {
+    margin-top: 20px;
 }
