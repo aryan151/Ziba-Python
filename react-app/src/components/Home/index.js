@@ -14,7 +14,7 @@ function Home() {
     useEffect(() => {
         dispatch(findFollows(user?.id));
       }, [dispatch]);
-  
+    
 
     useEffect(() => {
     dispatch(findFollowingPosts());
