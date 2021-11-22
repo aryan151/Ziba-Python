@@ -5,6 +5,7 @@ import Splash from './components/Splash';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
 import Navigation from './components/Navigation'; 
+import Home from './components/Home';
 
 function App() { 
   const sessionUser = useSelector(state => state.session.user);
@@ -23,34 +24,34 @@ function App() {
   }
 
   return (
+
     <BrowserRouter>
-      {!sessionUser && (
+        <Switch>
         <Route exact path='/'>
           <Splash/>
         </Route> 
-      )}
-
-    {sessionUser && (  
-      <>
-        <Switch>
-        <Navigation isLoaded={loaded} /> 
           <ProtectedRoute path='/posts/:postId' exact={true} >
+          <Navigation isLoaded={loaded} /> 
             <h1>One Post</h1>  
           </ProtectedRoute> 
           <ProtectedRoute path='/users/:userId' exact={true} >
+          <Navigation isLoaded={loaded} /> 
             <h1>One User Page</h1>  
           </ProtectedRoute>
-          <ProtectedRoute path='/' exact={true} >
-              <h1>Home Feed</h1>  
+          <ProtectedRoute path='/Home' exact={true} >
+          <Navigation isLoaded={loaded} /> 
+              <Home/> 
           </ProtectedRoute>
           <ProtectedRoute path='/Discover' exact={true} >
+          <Navigation isLoaded={loaded} /> 
               <h1>Discover Feed</h1>
           </ProtectedRoute>
           <ProtectedRoute path='/Analytics' exact={true} >
+            <Navigation isLoaded={loaded} /> 
               <h1>Analytics Feed</h1>    
           </ProtectedRoute>
         </Switch> 
-      </>)}
+
       
     </BrowserRouter>
   );

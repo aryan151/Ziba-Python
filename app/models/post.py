@@ -24,7 +24,7 @@ class Post(db.Model):
             'id': self.id,  
             'user_id': self.user_id,
             'img_url': self.img_url,
-            'caption': self.description,
+            'caption': self.caption,
             'lat': self.lat,
             'long': self.long,
             'tags': self.tags,
