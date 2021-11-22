@@ -63,12 +63,14 @@ def following_posts():
 @login_required
 def discover_posts():
 
-    all_posts = []
+    all_posts = [] 
     likes_comp = []  
-    complete_comments = [] 
+    complete_comments = []  
  
+    following = Follow.query.filter_by(follower_id=current_user.id).all()
+    userIds = [follow.to_dict()['following_id'] for follow in following] 
 
-    posts = Post.query.filter(Post.user_id !=current_user.id).all()
+    posts = Post.query.filter(Post.user_id !=current_user.id, Post.user_id.notin_(userIds)).all()
     for post in posts:
         user = User.query.get(post.user_id)
         comments = Comment.query.filter_by(post_id=post.id).order_by(Comment.id.desc()).all()
