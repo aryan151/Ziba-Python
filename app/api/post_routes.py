@@ -13,18 +13,6 @@ def posts():
     return {'posts': [post.to_dict() for post in posts]}
  
 
-#Discover Route 
-@post_routes.route('/all/<int:id>')  
-def get_all_posts(id):  
-    allPosts = [] 
-    follows = Follow.query.filter_by(follower_id=current_user.id).all()
-    userIds = [follow.to_dict()['followId'] for follow in follows]
-    allPosts.append(Post.query.filter(Post.user_id.notin_(userIds), Post.userId != id).all())
-    posts = [item for sublist in allPosts for item in sublist]
-    return {'posts': [post.to_dict() for post in posts]}
-
-
-
 
 #Route for Main Feed (/Home) --> All images from Followed Accounts 
 @post_routes.route('/following')
@@ -58,7 +46,7 @@ def following_posts():
     return {'following': [post for post in sort]} 
  
 
-
+#Route for Discover Feed (/Discover) --> All images from Accounts not followed or the Current User 
 @post_routes.route('/discover')
 @login_required
 def discover_posts():
@@ -88,3 +76,26 @@ def discover_posts():
     sort = sorted(all_posts, key=lambda x:x['post']['id'], reverse=True)
 
     return {'discover': [post for post in sort]} 
+
+
+@post_routes.route('/single/<int:id>')   
+@login_required 
+def spec_posts(id):
+    post = Post.query.get(id)
+
+    likes_comp = []
+    comment_comp = []
+
+    user = User.query.filter_by(id=post.user_id).first()
+
+    likes = Like.query.filter_by(post_id=post.id).all()
+    for like in likes:
+        user = User.query.filter_by(id=like.user_id).first()
+        likes_comp.append(user.to_dict())
+
+    comments = Comment.query.filter_by(post_id=post.id).all()
+    for comment in comments:
+        user2 = User.query.filter_by(id=comment.user_id).first()
+        comment_comp.append({'comment': comment.to_dict(), 'user': user2.to_dict()})
+
+    return {'single': {'post': post.to_dict(), 'likes': likes_comp, 'comments': comment_comp, 'user': user.to_dict()}}
