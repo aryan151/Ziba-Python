@@ -99,3 +99,6 @@ def spec_posts(id):
         comment_comp.append({'comment': comment.to_dict(), 'user': user2.to_dict()})
 
     return {'single': {'post': post.to_dict(), 'likes': likes_comp, 'comments': comment_comp, 'user': user.to_dict()}}
+
+
+

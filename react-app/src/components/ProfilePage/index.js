@@ -2,18 +2,39 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router";
 import { findFollows, followUser } from "../../store/follow"; 
-import './Profile.css'  
+import { getAllUsers } from "../../store/session";
+import './Profile.css'     
+
+  
+function Profile () {  
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const { userId } = useParams();  
+
+    const sessionUser = useSelector((state) => state.session.user); 
+    const thisPageUser = useSelector((state)=> state?.session?.allUsers?.filter((user) => user.id === +userId)[0])
+    console.log(sessionUser)
+    console.log(thisPageUser)  
+   
 
 
-function Profile () {
+    useEffect(() => {
+        dispatch(getAllUsers());   
+      }, [dispatch]);
 
-    const currentUser = useSelector((state) => state.session.user);
-    const { userId } = useParams();
-    return ( 
+
+    return (     
 
         <div> 
             <p> Profile Page {userId}</p>
-            {currentUser.id == userId && <p> welcome</p>} 
+            <p> {sessionUser?.id} |||| {thisPageUser?.username}</p>
+            
+            {sessionUser.id == userId && <p> welcome</p>} 
+            <div className='prof-main' >
+            
+
+
+            </div>
         </div>
     )
 }
