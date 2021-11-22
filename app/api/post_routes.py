@@ -5,6 +5,28 @@ from datetime import datetime
   
 post_routes = Blueprint('posts', __name__)     
 
+
+@post_routes.route('/all')
+@login_required
+def posts():
+    posts = Post.query.all()  
+    return {'Allposts': [post.to_dict() for post in posts]}
+
+
+#Discover Route 
+@post_routes.route('/all/<int:id>')  
+def get_all_posts(id):  
+    allPosts = [] 
+    follows = Follow.query.filter_by(follower_id=current_user.id).all()
+    userIds = [follow.to_dict()['followId'] for follow in follows]
+    allPosts.append(Post.query.filter(Post.user_id.notin_(userIds), Post.userId != id).all())
+    posts = [item for sublist in allPosts for item in sublist]
+    return {'posts': [post.to_dict() for post in posts]}
+
+
+
+
+#Route for Main Feed (/Home) --> All images from Followed Accounts 
 @post_routes.route('/following')
 @login_required
 def following_posts():
@@ -12,12 +34,8 @@ def following_posts():
     following = Follow.query.filter_by(follower_id=current_user.id).all()
 
     all_posts = []
-    likes_comp = []
-
-    complete_comments = []
-
-    complete_comments2 = []
-    likes_comp2 = []
+    likes_comp = []  
+    complete_comments = [] 
 
     for follow in following:
         posts = Post.query.filter_by(user_id=follow.following_id).all()
@@ -33,22 +51,7 @@ def following_posts():
                 likes_comp.append(user6.to_dict())
             all_posts.append({'post': post.to_dict(), 'user': user.to_dict(), 'comments': complete_comments, 'likes': likes_comp})
             complete_comments = []
-            likes_comp = []
-
-    user_posts = Post.query.filter_by(user_id=current_user.id).all()
-
-    for post in user_posts:
-        comments2 = Comment.query.filter_by(post_id=post.id).order_by(Comment.id.desc()).all()
-        for comment2 in comments2:
-            comment_user2 = User.query.get(comment2.user_id)
-            complete_comments2.append({'comment': comment2.to_dict(), 'user': comment_user2.to_dict()})
-        likes = Like.query.filter_by(post_id=post.id).all()
-        for like in likes:
-            user5 = User.query.filter_by(id=like.user_id).first()
-            likes_comp2.append(user5.to_dict())
-        all_posts.append({'post': post.to_dict(), 'user': current_user.to_dict(), 'comments': complete_comments2, 'likes': likes_comp2})
-        complete_comments2 = []
-        likes_comp2 = []
+            likes_comp = [] 
 
     sort = sorted(all_posts, key=lambda x:x['post']['id'], reverse=True)
 

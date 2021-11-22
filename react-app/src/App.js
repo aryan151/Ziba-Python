@@ -6,7 +6,8 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
 import Navigation from './components/Navigation'; 
 import Home from './components/Home';
-
+import PostPage from './components/PostPage';
+import Discover from './components/Discover';
 function App() { 
   const sessionUser = useSelector(state => state.session.user);
   const [loaded, setLoaded] = useState(false);
@@ -32,7 +33,7 @@ function App() {
         </Route> 
           <ProtectedRoute path='/posts/:postId' exact={true} >
           <Navigation isLoaded={loaded} /> 
-            <h1>One Post</h1>  
+            <PostPage/> 
           </ProtectedRoute> 
           <ProtectedRoute path='/users/:userId' exact={true} >
           <Navigation isLoaded={loaded} /> 
@@ -44,7 +45,7 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path='/Discover' exact={true} >
           <Navigation isLoaded={loaded} /> 
-              <h1>Discover Feed</h1>
+              <Discover/> 
           </ProtectedRoute>
           <ProtectedRoute path='/Messages' exact={true} >
           <Navigation isLoaded={loaded} /> 

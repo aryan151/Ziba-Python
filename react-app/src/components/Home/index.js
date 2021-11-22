@@ -13,12 +13,12 @@ function Home() {
 
     useEffect(() => {
         dispatch(findFollows(user?.id));
-      }, []);
-
+      }, [dispatch]);
+  
 
     useEffect(() => {
     dispatch(findFollowingPosts());
-    }, [user]);
+    }, [dispatch, user]);
  
     return (
         <div className='wrapper'>    
@@ -51,7 +51,7 @@ function Home() {
                         </div>
                         <div className='cardIcons'>
                             {/* <FavoriteButton photoId={photo.id} favorites={favorites}/> */}
-                            <p>test</p>
+                            <p>{post.post.tags}</p>
                         </div>
                     </div>
                 </div>
