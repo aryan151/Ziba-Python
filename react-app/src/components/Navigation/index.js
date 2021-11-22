@@ -9,7 +9,7 @@ import { AiOutlineNotification } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import { BiMessage } from "react-icons/bi";  
 import './Navigation.css';
-    
+      
 
 function Navigation({ isLoaded }){  
 
@@ -21,25 +21,25 @@ function Navigation({ isLoaded }){
             <NavLink exact to='/'>Ziba</NavLink> 
             {isLoaded && ( 
                 <div className='Navbuttons'>  
-                    <button  className='Navprofile'>  
+                    <button  className='Navprofile' >  
                       <BsSearch/> 
                     </button>  
-                    <button  className='Navprofile'>  
+                    <NavLink  className='Navprofile' exact to={`/Home`}>  
                       <AiOutlineHome/> 
-                    </button>  
-                    <button  className='Navprofile'>  
+                    </NavLink>  
+                    <NavLink  className='Navprofile' exact to={`/Messages`}>  
                       <BiMessage/> 
-                    </button>  
+                    </NavLink>  
                     <button  className='Navprofile'>  
                     <NewPost/> 
                     </button>  
-                    <button  className='Navprofile'>  
+                    <NavLink  className='Navprofile' exact to={`/Discover`}>  
                       <AiOutlineCompass/> 
-                    </button>  
+                    </NavLink>    
                     <button  className='Navprofile'>  
                     <AiOutlineNotification/> 
-                    </button>  
-                    <NavMenu user={sessionUser} />
+                    </button >   
+                    <NavMenu user={sessionUser} /> 
                 </div> 
             )}
         </div>

@@ -24,7 +24,7 @@ function App() {
   }
 
   return (
-
+  
     <BrowserRouter>
         <Switch>
         <Route exact path='/'>
@@ -45,6 +45,10 @@ function App() {
           <ProtectedRoute path='/Discover' exact={true} >
           <Navigation isLoaded={loaded} /> 
               <h1>Discover Feed</h1>
+          </ProtectedRoute>
+          <ProtectedRoute path='/Messages' exact={true} >
+          <Navigation isLoaded={loaded} /> 
+              <h1>Direct Messages</h1>
           </ProtectedRoute>
           <ProtectedRoute path='/Analytics' exact={true} >
             <Navigation isLoaded={loaded} /> 

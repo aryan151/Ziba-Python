@@ -1,30 +1,26 @@
 import {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { Link } from 'react-router-dom';
-import { findFollowingPosts } from '../../store/post'   
-import './Home.css' 
+import { getMainFeedPosts } from '../../store/post'   
+import './Home.css'  
         
 function Home() {           
-      
-    const dispatch = useDispatch()
-    const user = useSelector((state) => state.session.user); 
-    // const likes = useSelector(state => state?.likes?.likes)     
-    // const saves = useSelector(state => state?.saves?.saves)   
-    const feed =  useSelector((state) => state.post.following);   
-    //Sort this array by created at     
+       
+    const posts = useSelector((state) => Object.values(state.mainFeedPosts))
+    const sessionUser = useSelector((state) => state.session?.user)
 
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(findFollowingPosts());
-      }, [dispatch, user]);
-
-      
+        dispatch(getMainFeedPosts(sessionUser?.id))
+    }, [dispatch]) 
+       
  
     return (
         <div className='wrapper'>    
                 <p> TESTING </p>
             <p className='actP' >Feed</p>  
-            {feed?.map((post) => (
+            {posts?.map((post) => (
                 <div className='card' key={post.id}>
                     <div className='user'>
                         <Link to={`/users/${post.User.id}`}>
