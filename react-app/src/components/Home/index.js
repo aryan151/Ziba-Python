@@ -24,7 +24,7 @@ function Home() {
         <div className='wrapper'>    
             <p className='actP' >Feed</p>  
             {followingPosts?.map((post) => ( 
-                <div className='card' key={post.id}>
+                <div className='card' key={post.id}> 
                     <div className='user'>
                         <Link to={`/users/${post.user.id}`}> 
                             <div 
@@ -35,20 +35,19 @@ function Home() {
                         <Link to={`/users/${post.user.id}`}>
                             <p className='text'> {post.user.f_name} {post.user.l_name}</p>
                         </Link>
-                    </div>
-
+                    </div> 
                     <div>
-                        <Link to={`/posts/${post.id}`}>
+                        <Link to={`/posts/${post.post.id}`}> 
                             <div 
                                 className='feedPhoto' 
-                                style={{backgroundImage: `url('${post.img_url}')`}} 
+                                style={{backgroundImage: `url('${post.post.img_url}')`}} 
                             />
                         </Link>
                     </div>
 
                     <div className='cardBottom' >
-                        <div className='info'>
-                            <p className='setting' >{post.caption}</p>
+                        <div className='info'>  
+                            <p className='setting' >{post.post.caption}</p>
                         </div>
                         <div className='cardIcons'>
                             {/* <FavoriteButton photoId={photo.id} favorites={favorites}/> */}
