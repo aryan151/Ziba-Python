@@ -6,7 +6,7 @@ import { findFollows, followUser } from "../../store/follow";
 import { findFollowingPosts, findDiscoverPosts, findSinglePost } from "../../store/post" 
 function PostPage() {   
   
-    const dispatch = useDispatch()   
+    const dispatch = useDispatch()     
     const { postId } = useParams();  
 
     const user = useSelector((state) => state.session.user);

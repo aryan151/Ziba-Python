@@ -8,6 +8,8 @@ import Navigation from './components/Navigation';
 import Home from './components/Home';
 import PostPage from './components/PostPage';
 import Discover from './components/Discover';
+import Profile from './components/ProfilePage';
+
 function App() { 
   const sessionUser = useSelector(state => state.session.user);
   const [loaded, setLoaded] = useState(false);
@@ -37,7 +39,7 @@ function App() {
           </ProtectedRoute> 
           <ProtectedRoute path='/users/:userId' exact={true} >
           <Navigation isLoaded={loaded} /> 
-            <h1>One User Page</h1>  
+            <Profile/> 
           </ProtectedRoute>
           <ProtectedRoute path='/Home' exact={true} >
           <Navigation isLoaded={loaded} /> 
