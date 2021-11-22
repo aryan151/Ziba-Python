@@ -1,36 +1,39 @@
 import {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { Link } from 'react-router-dom';
-import { getMainFeedPosts } from '../../store/post'   
-import './Home.css'  
+import { findFollows } from "../../store/follow";
+import { findFollowingPosts } from '../../store/post'   
+import './Home.css'   
         
 function Home() {           
-       
-    const posts = useSelector((state) => Object.values(state.mainFeedPosts))
-    const sessionUser = useSelector((state) => state.session?.user)
-
     const dispatch = useDispatch()
 
+    const user = useSelector((state) => state.session.user); 
+    const followingPosts = useSelector((state) => state.post.following); 
+
     useEffect(() => {
-        dispatch(getMainFeedPosts(sessionUser?.id))
-    }, [dispatch]) 
-       
+        dispatch(findFollows(user?.id));
+      }, []);
+
+
+    useEffect(() => {
+    dispatch(findFollowingPosts());
+    }, [user]);
  
     return (
         <div className='wrapper'>    
-                <p> TESTING </p>
             <p className='actP' >Feed</p>  
-            {posts?.map((post) => (
+            {followingPosts?.map((post) => ( 
                 <div className='card' key={post.id}>
                     <div className='user'>
-                        <Link to={`/users/${post.User.id}`}>
+                        <Link to={`/users/${post.user.id}`}> 
                             <div 
                                 className='avatar'
-                                style={{backgroundImage: `url('${post.User.avatarUrl}')`}} 
+                                style={{backgroundImage: `url('${post.user.avatar}')`}} 
                             />
                         </Link>
-                        <Link to={`/users/${post.User.id}`}>
-                            <p className='text'> {post.User.f_name} {post.User.l_name}</p>
+                        <Link to={`/users/${post.user.id}`}>
+                            <p className='text'> {post.user.f_name} {post.user.l_name}</p>
                         </Link>
                     </div>
 
