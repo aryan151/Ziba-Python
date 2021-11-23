@@ -1,4 +1,4 @@
-function profilePosts () {
+function ProfilePosts () {
 
     return (
 
@@ -8,4 +8,4 @@ function profilePosts () {
     )
 }
 
-export default profilePosts
+export default ProfilePosts

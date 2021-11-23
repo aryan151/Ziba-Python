@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router";
 import { findFollows, followUser } from "../../store/follow"; 
 import { getAllUsers } from "../../store/session";
-import profileAbout from './About' 
-import profileAlbums from './Albums' 
-import profilePosts from './Posts' 
-import profileSaved from './Saved'
-import profileTagged from "./Tagged";
+import ProfileAbout from './About' 
+import ProfileAlbums from './Albums' 
+import ProfilePosts from './Posts'   
+import ProfileSaved from './Saved'
+import ProfileTagged from "./Tagged"; 
 import { BsGrid3X3Gap } from "react-icons/bs";
 import { AiOutlineTag } from "react-icons/ai";
 import { BsInfoSquare } from "react-icons/bs";
@@ -103,15 +103,20 @@ function Profile () {
                 <AiOutlineTag className={toggle === 4 ? 'imageActive' : null}  />  
                 TAGGED  
               </div>
-              {thisPageUser.id === sessionUser.id &&  
+              {thisPageUser?.id === sessionUser?.id &&   
                 <div onClick={() => setToggle(5)} className={toggle === 5 ? 'listItem listItemActive' : 'listItem'}>
                     <AiOutlineSave className={toggle === 5 ? 'imageActive' : null}  />  
                     SAVED    
                 </div>}   
             </div>
-        </div>
+        </div>   
+        {toggle === 1 && <ProfileAbout/> }   
+        {toggle === 2 && <ProfilePosts profileId={thisPageUser?.id}/>  }
+        {toggle === 3 && <ProfileAlbums/> } 
+        {toggle === 4 && <ProfileTagged/> } 
+        {toggle === 5 && <ProfileSaved/>  }  
 
-</div>
+        </div>
     </div>
     </>
         

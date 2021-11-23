@@ -1,4 +1,4 @@
-function profileSaved () {
+function ProfileSaved () {
 
     return (
 
@@ -8,4 +8,4 @@ function profileSaved () {
     )
 }
 
-export default profileSaved
+export default ProfileSaved

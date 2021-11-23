@@ -1,4 +1,4 @@
-function profileTagged () {
+function ProfileTagged () {
 
     return (
 
@@ -8,4 +8,4 @@ function profileTagged () {
     )
 }
 
-export default profileTagged   
+export default ProfileTagged   

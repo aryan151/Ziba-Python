@@ -1,13 +1,14 @@
 
 
-function profileAbout () {
+function ProfileAbout ({profileId}) { 
 
     return (
 
         <div>
-            About! 
+            {profileId}
+            About! AboutAboutAboutAboutAboutAboutAboutAboutAboutAboutAboutAboutAboutAbout
         </div>
     )
 }
 
-export default profileAbout
+export default ProfileAbout

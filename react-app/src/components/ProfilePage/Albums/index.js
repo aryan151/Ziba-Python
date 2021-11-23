@@ -1,4 +1,4 @@
-function profileAlbums () {
+function ProfileAlbums () {
 
     return (
 
@@ -8,4 +8,4 @@ function profileAlbums () {
     )
 }
 
-export default profileAlbums
+export default ProfileAlbums 
