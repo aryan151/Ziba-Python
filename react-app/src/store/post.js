@@ -4,10 +4,11 @@ const GET_SINGLE_POST = "post/GET_SINGLE_POST";
 const GET_POSTS = "post/GET_POSTS"   
 
  
-const load = (posts) => ({
-    type: GET_POSTS,  
-    posts  
-})    
+const getAllUserPosts = (posts, userId) => ({
+  type: GET_POSTS,
+  payload: posts,
+  userId,
+});   
 
 const getMaster = (posts) => ({
   type: GET_MASTER,
@@ -54,6 +55,14 @@ export const findSinglePost = (postId) => async (dispatch) => {
   }
 }; 
 
+export const findUserPosts = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${userId}`);
+  const data = await res.json();
+  if (res.ok) {
+    dispatch(getAllUserPosts(data, userId));  
+  }
+};
+
 
 
 //Comments: 
@@ -94,7 +103,7 @@ export const toggleLikePost = (postId) => async (dispatch) => {
 
 
 
-
+    
 
 
 
@@ -105,11 +114,13 @@ export default function reducer(state = initialState, action) {
   let newState
   switch (action.type) {
     case GET_DISCOVER_POSTS:  
-      return { ...state, discover: action.payload.discover };
+      return { ...state, discover: action.payload.discover }
     case GET_MASTER: 
-      return { ...state, master: action.payload.master };
+      return { ...state, master: action.payload.master }
     case GET_SINGLE_POST:
         return { ...state, ...action.payload} 
+        case GET_POSTS:
+          return { ...state, [action.userId]: action.payload }
     default:
       return state;
   }

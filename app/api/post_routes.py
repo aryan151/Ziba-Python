@@ -5,14 +5,6 @@ from datetime import datetime
   
 post_routes = Blueprint('posts', __name__)     
 
-  
-@post_routes.route('/')
-@login_required
-def posts():
-    posts = Post.query.all()  
-    return {'posts': [post.to_dict() for post in posts]}
- 
-
 
 #Route for all posts associated with user (following & owned)
 @post_routes.route('/master') 
@@ -95,9 +87,10 @@ def discover_posts():
     return {'discover': [post for post in sort]} 
 
 
+#Find Info on a Single Post  
 @post_routes.route('/single/<int:id>')   
 @login_required 
-def spec_posts(id):
+def one_post(id):
     post = Post.query.get(id)
 
     likes_comp = []
@@ -116,6 +109,45 @@ def spec_posts(id):
         comment_comp.append({'comment': comment.to_dict(), 'user': user2.to_dict()})
 
     return {'single': {'post': post.to_dict(), 'likes': likes_comp, 'comments': comment_comp, 'user': user.to_dict()}}
+
+
+#All Posts of a single User   
+@post_routes.route('/<int:id>')
+@login_required
+def posts(id):
+    posts = Post.query.filter_by(user_id=id).order_by(Post.id.desc()).all()
+
+    likes_comp = []
+    comment_comp = []
+    res = []
+
+    for post in posts:
+        likes = Like.query.filter_by(post_id=post.id).all()
+        for like in likes:
+            user = User.query.filter_by(id=like.user_id).first()
+            likes_comp.append(user.to_dict())
+
+        comments = Comment.query.filter_by(post_id=post.id).all()
+        for comment in comments:
+            user2 = User.query.filter_by(id=comment.user_id).first()
+            comment_comp.append(user2.to_dict())
+
+        res.append({'post': post.to_dict(), 'likes': likes_comp, 'comments': comment_comp})
+        likes_comp = []
+        comment_comp = []
+
+    return {'posts': [x for x in res]}    
+
+
+
+
+
+
+
+
+
+
+
 
 
 
