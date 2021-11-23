@@ -8,8 +8,13 @@ import profileAlbums from './Albums'
 import profilePosts from './Posts' 
 import profileSaved from './Saved'
 import profileTagged from "./Tagged";
+import { BsGrid3X3Gap } from "react-icons/bs";
+import { AiOutlineTag } from "react-icons/ai";
+import { BsInfoSquare } from "react-icons/bs";
+import { AiOutlineFolderOpen } from "react-icons/ai";
+import { AiOutlineSave } from "react-icons/ai";  
 
- 
+
 import './Profile.css'     
 
   
@@ -83,25 +88,25 @@ function Profile () {
           <div className="imageListContainer">
             <div className="imageList">
               <div onClick={() => setToggle(1)} className={toggle === 1 ? 'listItem listItemActive' : 'listItem'} >
-                <p className={toggle === 1 ? 'imageActive' : null}  /> 
+                <BsInfoSquare className={toggle === 1 ? 'imageActive' : null}  /> 
                 ABOUT
               </div>
               <div onClick={() => setToggle(2)} className={toggle === 2 ? 'listItem listItemActive' : 'listItem'}>
-                <p className={toggle === 2 ? 'imageActive' : null}  />  
+                <BsGrid3X3Gap className={toggle === 2 ? 'imageActive' : null}  />  
                 POSTS  
               </div>
               <div onClick={() => setToggle(3)} className={toggle === 3 ? 'listItem listItemActive' : 'listItem'}>
-                <p className={toggle === 3 ? 'imageActive' : null}  />  
+                <AiOutlineFolderOpen className={toggle === 3 ? 'imageActive' : null}  />  
                 ALBUMS  
               </div>
               <div onClick={() => setToggle(4)} className={toggle === 4 ? 'listItem listItemActive' : 'listItem'}>
-                <p className={toggle === 4 ? 'imageActive' : null}  />  
+                <AiOutlineTag className={toggle === 4 ? 'imageActive' : null}  />  
                 TAGGED  
               </div>
               {thisPageUser.id === sessionUser.id &&  
                 <div onClick={() => setToggle(5)} className={toggle === 5 ? 'listItem listItemActive' : 'listItem'}>
-                    <p className={toggle === 5 ? 'imageActive' : null}  />  
-                    SAVED  
+                    <AiOutlineSave className={toggle === 5 ? 'imageActive' : null}  />  
+                    SAVED    
                 </div>}   
             </div>
         </div>
