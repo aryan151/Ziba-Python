@@ -9,6 +9,11 @@ const load = (posts) => ({
     posts  
 })    
 
+const getMaster = (posts) => ({
+  type: GET_MASTER,
+  payload: posts,
+});  
+
 const getSingle = (posts) => ({
   type: GET_SINGLE_POST,
   payload: posts,
@@ -18,16 +23,13 @@ const getSingle = (posts) => ({
 const getDiscoverPosts = (posts) => ({
   type: GET_DISCOVER_POSTS,
   payload: posts, 
-});  
+});    
 
 
   
-const getMaster = (posts) => ({
-  type: GET_MASTER,
-  payload: posts,
-});  
 
 
+//Master that gets back all user related information   
 export const master = () => async (dispatch) => {
   const res = await fetch(`/api/posts/master`);
   const data = await res.json();

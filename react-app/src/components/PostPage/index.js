@@ -4,14 +4,15 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";  
 import { findFollows, followUser } from "../../store/follow";  
 import { master, findDiscoverPosts, findSinglePost } from "../../store/post" 
+import './PostPage.css'
 function PostPage() {   
   
     const dispatch = useDispatch()     
-    const { postId } = useParams();  
+    const { postId } = useParams();   
 
     const user = useSelector((state) => state.session.user);
     const post = useSelector((state) => state.post?.single); 
-    const f_posts = useSelector((state) => state.post?.following); 
+    const f_posts = useSelector((state) => state.post?.master); 
     const d_posts = useSelector(state => state.post?.discover)   
     const u_posts = ''  
 
@@ -22,7 +23,7 @@ function PostPage() {
       }, [postId, user, f_posts, d_posts]);
   
     return (
-        <div>
+        <div className='wrapper'>
             <p> Post {postId}</p>    
              <div className='card' key={post?.id}> 
                     <div className='user'>
