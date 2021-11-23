@@ -12,7 +12,7 @@ import { NimblePicker  } from 'emoji-mart'
 
 
 import './PostPage.css' 
-//ellipses   
+//ellipses       
 
 
 function PostPage() {    
@@ -156,7 +156,7 @@ function PostPage() {
                             </span>
                             </p>
                         </div>
-                        </div>
+                        </div>  
                         <div className="pp-date">
                         {p?.comment?.createdAt.split(" ").slice(1, 4).join(" ")}
                         </div>
