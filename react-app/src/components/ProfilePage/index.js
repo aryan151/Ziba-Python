@@ -3,18 +3,25 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router";
 import { findFollows, followUser } from "../../store/follow"; 
 import { getAllUsers } from "../../store/session";
+import profileAbout from './About' 
+import profileAlbums from './Albums' 
+import profilePosts from './Posts' 
+import profileSaved from './Saved'
+import profileTagged from "./Tagged";
+
+ 
 import './Profile.css'     
 
   
-function Profile () {  
+function Profile () {    
     const dispatch = useDispatch();
     const history = useHistory();
     const { userId } = useParams();  
 
+    const [toggle, setToggle] = useState(2)  
     const sessionUser = useSelector((state) => state.session.user); 
     const thisPageUser = useSelector((state)=> state?.session?.allUsers?.filter((user) => user.id === +userId)[0])
-    const follows = useSelector((state) => state.follow)
-    console.log(follows) 
+    const follows = useSelector((state) => state.follow)   
    
 
 
@@ -29,7 +36,7 @@ function Profile () {
 
 
     return (         
- 
+    <>
     <div className="profileContainer">   
         <div className="profileTop">
         <div className="profileAvatarBox">
@@ -55,41 +62,53 @@ function Profile () {
                 <button  className="editProfileModalButton button">Icon</button>
               </div> 
             }
-          </div>
+          </div>  
           <div className="profileDetails">
             <div className="profileCounts">
               <div className="profilePosts"><div className="profileCountsNumber">XX</div> posts</div>
               <div className="profileFollowers"><div className="profileCountsNumber">{follows[+userId]?.followers.length}</div> followers</div>
               <div className="profileFollowing"><div className="profileCountsNumber">{follows[+userId]?.following.length}</div> following</div>
             </div>
-            <div className="profileUsernameAndPronoun"> 
+            <div className="profileUsername"> 
               <div className="profileName">{thisPageUser?.f_name} {thisPageUser?.l_name}</div>
             </div>
             <div className="profileBio">
               {thisPageUser?.bio} 
-            </div>
-            {/* <div className="profileFollowedBy">Followed By <span className="profileFollowedByEmph">PEOPLE YOU KNOW</span> GOES HERE</div> */}
+            </div> 
           </div>
         </div>
       </div>
 
+      <div className="profileSwitchBox">
+          <div className="imageListContainer">
+            <div className="imageList">
+              <div onClick={() => setToggle(1)} className={toggle === 1 ? 'listItem listItemActive' : 'listItem'} >
+                <p className={toggle === 1 ? 'imageActive' : null}  /> 
+                ABOUT
+              </div>
+              <div onClick={() => setToggle(2)} className={toggle === 2 ? 'listItem listItemActive' : 'listItem'}>
+                <p className={toggle === 2 ? 'imageActive' : null}  />  
+                POSTS  
+              </div>
+              <div onClick={() => setToggle(3)} className={toggle === 3 ? 'listItem listItemActive' : 'listItem'}>
+                <p className={toggle === 3 ? 'imageActive' : null}  />  
+                ALBUMS  
+              </div>
+              <div onClick={() => setToggle(4)} className={toggle === 4 ? 'listItem listItemActive' : 'listItem'}>
+                <p className={toggle === 4 ? 'imageActive' : null}  />  
+                TAGGED  
+              </div>
+              {thisPageUser.id === sessionUser.id &&  
+                <div onClick={() => setToggle(5)} className={toggle === 5 ? 'listItem listItemActive' : 'listItem'}>
+                    <p className={toggle === 5 ? 'imageActive' : null}  />  
+                    SAVED  
+                </div>}   
+            </div>
+        </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
     </div>
+    </>
         
     )
 }
