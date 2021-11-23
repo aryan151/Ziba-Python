@@ -119,10 +119,85 @@
     color: maroon; 
 }
 
+
+/* Comment Container  */
+
 .CommentZone {
 width:50em;
 height:50em;
+overflow-y: scroll;
+margin-left: 30px;
 }
+
+
+
+.OneCommentContainer {
+    display: flex;
+    margin-top: 20px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.OneCommentContainer .channel-content-message {
+    padding-left: 1.5px; 
+}
+
+.CommentProfileContainer {
+    height: 45px;
+    width: 45px; 
+}
+
+.CommentImg {
+    height: 100%; 
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;  
+}
+
+.OneCommentInfo {  
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    width: 100%;
+    padding-right: 10px;
+}
+
+.commentUserName {
+    color: black;
+    font-family: 'Roboto', sans-serif;  
+    font-weight: 500;
+    margin-top: 3px;
+}
+
+.commentDate {
+    color: #6B6F75;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -136,6 +211,23 @@ height:50em;
     font-weight: 300;
     color:rgba(0, 0, 0, .7)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* New Comment  */
@@ -201,3 +293,5 @@ height:50em;
     transform: scale(1.2);
     filter: grayscale(0);
 }
+
+

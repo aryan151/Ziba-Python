@@ -76,6 +76,16 @@ function PostPage() {
         setCommentCharacterCounter(0)
     }
 
+    const handleHoverOn = (commentId) => {
+    
+        setShowCommentHover(commentId) 
+    }
+
+    const handleHoverOff = () => {
+    
+        setShowCommentHover(false) 
+    }
+
 
     const handleEmoji = (emoji) => {
         setComment(comment + emoji.native);
@@ -133,45 +143,46 @@ function PostPage() {
                                                     </div>
                                                     )}
                                                 </div>
-                                            </div>
-                                    </div>
+                                            </div>  
+                                    </div>     
                                     <div className='SoloCardRight'>
                                     <div className='SoloCardComments'>     
-                    <div className='CommentZone'>
-                        {post?.comments?.map((comment, i) => (
-                        <div key={comment?.comment?.id}>
-                            { showDeleteCommentModal === comment?.comment?.id && 
-                                <Modal onClose={() => setShowDeleteCommentModal(false)} comment={comment?.comment}>
-                                    <DeleteComment onClose={() => setShowDeleteCommentModal(false)} comment={comment?.comment} />
-                                </Modal>
-                            }
-                            <div className="message-with-profile-pic-container" >
-                                {/* <div className="message-profile-pic-container"> 
-                                    <img className="message-profile-pic" src={comment?.user?.avatar} alt="" />
-                                </div> */}
-                                <div className="username-message-container"> 
-                                    <div className="message-username">{comment?.user?.username}
-                                        <span className="message-date-time">{comment?.comment?.createdAt.split(" ").slice(1, 4).join(" ")}</span>
-                                    </div> 
-                                     
-                                    <EditComment 
-                                        setCommentBeingEdited={setCommentBeingEdited} 
-                                        comment={comment?.comment} 
-                                        commentBeingEdited={commentBeingEdited}
-                                        setShowDeleteCommentModal={setShowDeleteCommentModal}
-                                    />
-                                </div> 
-                                { showCommentHover === comment?.comment?.id && user.id === comment?.comment?.user_id && 
-                                <CommentHover     
-                                 comment={comment?.comment} 
-                                 setCommentBeingEdited={setCommentBeingEdited}
-                                 setShowCommentHover={setShowCommentHover} 
-                                 setShowDeleteCommentModal={setShowDeleteCommentModal}
-                                 />}
-                            </div>
-
-                        
-                    </div>
+                                        <div className='CommentZone'>
+                                            {post?.comments?.map((comment, i) => (
+                                            <div key={comment?.comment?.id}>
+                                                { showDeleteCommentModal === comment?.comment?.id && 
+                                                    <Modal onClose={() => setShowDeleteCommentModal(false)} comment={comment?.comment}>
+                                                        <DeleteComment onClose={() => setShowDeleteCommentModal(false)} comment={comment?.comment} />
+                                                    </Modal>
+                                                }
+                                                <div className="OneCommentContainer"  
+                                                onMouseOver={() => handleHoverOn(comment?.comment?.id)}
+                                                onMouseLeave={handleHoverOff} 
+                                                >
+                                                    <div className="CommentProfileContainer"> 
+                                                        <img className="CommentImg" src={comment?.user?.avatar} alt="" />
+                                                    </div>
+                                                    <div className="OneCommentInfo">  
+                                                        <div className="commentUserName">{comment?.user?.username}  
+                                                            <span className="commentDate">{comment?.comment?.createdAt.split(" ").slice(1, 4).join(" ")}</span>
+                                                        </div> 
+                                                        
+                                                        <EditComment 
+                                                            setCommentBeingEdited={setCommentBeingEdited} 
+                                                            comment={comment?.comment} 
+                                                            commentBeingEdited={commentBeingEdited}
+                                                            setShowDeleteCommentModal={setShowDeleteCommentModal}
+                                                        />
+                                                    </div> 
+                                                    { showCommentHover === comment?.comment?.id && user.id === comment?.comment?.user_id && 
+                                                    <CommentHover     
+                                                    comment={comment?.comment} 
+                                                    setCommentBeingEdited={setCommentBeingEdited}
+                                                    setShowCommentHover={setShowCommentHover} 
+                                                    setShowDeleteCommentModal={setShowDeleteCommentModal}
+                                                    />}
+                                                </div> 
+                                                </div>
                     ))}
                     </div>
                     <div className='MakeComment'>   

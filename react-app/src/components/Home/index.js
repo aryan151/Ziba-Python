@@ -22,13 +22,13 @@ function Home() {
  
     return (
         <div className='wrapper'>    
-            <p className='actP' >Feed</p>  
+            <p className='actP' >Feed</p>   
             {followersPosts?.map((post) => ( 
-                <div className='card' key={post.id}> 
+                <div className='Homecard' key={post.id}> 
                     <div className='user'>
                         <Link to={`/users/${post?.user?.id}`}> 
                             <div 
-                                className='avatar'
+                                className='Homeavatar'
                                 style={{backgroundImage: `url('${post?.user?.avatar}')`}} 
                             />
                         </Link>
