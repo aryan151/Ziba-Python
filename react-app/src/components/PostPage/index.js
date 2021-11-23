@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router";
 import { Link } from 'react-router-dom'; 
 import { useDispatch, useSelector } from "react-redux";  
 import { findFollows, followUser } from "../../store/follow";  
-import { findFollowingPosts, findDiscoverPosts, findSinglePost } from "../../store/post" 
+import { master, findDiscoverPosts, findSinglePost } from "../../store/post" 
 function PostPage() {   
   
     const dispatch = useDispatch()     

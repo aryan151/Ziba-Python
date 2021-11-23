@@ -14,17 +14,20 @@ def posts():
  
 
 
-#Route for Main Feed (/Home) --> All images from Followed Accounts 
-@post_routes.route('/following')
-@login_required
-def following_posts():
+#Route for all posts associated with user (following & owned)
+@post_routes.route('/master') 
+@login_required 
+def master(): 
+
 
     following = Follow.query.filter_by(follower_id=current_user.id).all()
 
     all_posts = []
     likes_comp = []  
-    complete_comments = []  
+    complete_comments = []    
 
+    complete_comments2 = []
+    likes_comp2 = []
     for follow in following:
         posts = Post.query.filter_by(user_id=follow.following_id).all()
         for post in posts:
@@ -35,22 +38,36 @@ def following_posts():
                 complete_comments.append({'comment': comment.to_dict(), 'user': comment_user.to_dict()})
             likes = Like.query.filter_by(post_id=post.id).all()
             for like in likes:
-                user6 = User.query.filter_by(id=like.user_id).first()
-                likes_comp.append(user6.to_dict())
+                user2 = User.query.filter_by(id=like.user_id).first()
+                likes_comp.append(user2.to_dict())
             all_posts.append({'post': post.to_dict(), 'user': user.to_dict(), 'comments': complete_comments, 'likes': likes_comp})
             complete_comments = []
             likes_comp = [] 
 
+    user_posts = Post.query.filter_by(user_id=current_user.id).all()
+
+    for post in user_posts:
+        comments2 = Comment.query.filter_by(post_id=post.id).order_by(Comment.id.desc()).all()
+        for comment2 in comments2:
+            comment_user2 = User.query.get(comment2.user_id)
+            complete_comments2.append({'comment': comment2.to_dict(), 'user': comment_user2.to_dict()})
+        likes = Like.query.filter_by(post_id=post.id).all()
+        for like in likes:
+            user5 = User.query.filter_by(id=like.user_id).first()
+            likes_comp2.append(user5.to_dict())
+        all_posts.append({'post': post.to_dict(), 'user': current_user.to_dict(), 'comments': complete_comments2, 'likes': likes_comp2})
+        complete_comments2 = []
+        likes_comp2 = []
     sort = sorted(all_posts, key=lambda x:x['post']['id'], reverse=True)
 
-    return {'following': [post for post in sort]} 
+    return {'master': [post for post in sort]} 
  
 
 #Route for Discover Feed (/Discover) --> All images from Accounts not followed or the Current User 
 @post_routes.route('/discover')
 @login_required
 def discover_posts():
-
+ 
     all_posts = [] 
     likes_comp = []  
     complete_comments = []  

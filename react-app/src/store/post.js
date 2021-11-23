@@ -1,4 +1,4 @@
-const GET_FOLLOWING_POSTS = "post/GET_FOLLOWER_POSTS";
+const GET_MASTER = "post/GET_MASTER";
 const GET_DISCOVER_POSTS = "post/GET_DISCOVER_POSTS";
 const GET_SINGLE_POST = "post/GET_SINGLE_POST"; 
 const GET_POSTS = "post/GET_POSTS"   
@@ -21,18 +21,18 @@ const getDiscoverPosts = (posts) => ({
 });  
 
 
-
-const getFollowingPosts = (posts) => ({
-  type: GET_FOLLOWING_POSTS,
+  
+const getMaster = (posts) => ({
+  type: GET_MASTER,
   payload: posts,
 });  
 
 
-export const findFollowingPosts = () => async (dispatch) => {
-  const res = await fetch(`/api/posts/following`);
+export const master = () => async (dispatch) => {
+  const res = await fetch(`/api/posts/master`);
   const data = await res.json();
   if (res.ok) {
-    dispatch(getFollowingPosts(data));
+    dispatch(getMaster(data));
   }
 };   
  
@@ -51,7 +51,7 @@ export const findSinglePost = (postId) => async (dispatch) => {
     dispatch(getSingle(data)); 
   }
 }; 
-
+ 
 
 
 const initialState = {};  
@@ -61,8 +61,8 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_DISCOVER_POSTS:  
       return { ...state, discover: action.payload.discover };
-    case GET_FOLLOWING_POSTS: 
-      return { ...state, following: action.payload.following };
+    case GET_MASTER: 
+      return { ...state, master: action.payload.master };
     case GET_SINGLE_POST:
         return { ...state, ...action.payload} 
     default:

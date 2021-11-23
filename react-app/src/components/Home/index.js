@@ -2,28 +2,28 @@ import {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { Link } from 'react-router-dom';
 import { findFollows } from "../../store/follow";
-import { findFollowingPosts } from '../../store/post'   
+import { master } from '../../store/post'   
 import './Home.css'   
         
 function Home() {           
     const dispatch = useDispatch()
-
-    const user = useSelector((state) => state.session.user); 
-    const followingPosts = useSelector((state) => state.post.following); 
+ 
+    const user = useSelector((state) => state.session.user);  
+    const followersPosts = useSelector((state) => state.post.master).filter((post) => post.user.id != user.id); 
 
     useEffect(() => {
-        dispatch(findFollows(user?.id));
+        dispatch(findFollows(user?.id));  
       }, [dispatch]);
     
 
     useEffect(() => {
-    dispatch(findFollowingPosts());
+    dispatch(master());
     }, [dispatch, user]);
  
     return (
         <div className='wrapper'>    
             <p className='actP' >Feed</p>  
-            {followingPosts?.map((post) => ( 
+            {followersPosts?.map((post) => ( 
                 <div className='card' key={post.id}> 
                     <div className='user'>
                         <Link to={`/users/${post.user.id}`}> 
