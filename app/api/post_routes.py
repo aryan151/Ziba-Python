@@ -119,4 +119,63 @@ def spec_posts(id):
 
 
 
+@post_routes.route('/<int:post_id>', methods=['DELETE'])
+@login_required
+def delete_posts(post_id):
 
+    post = Post.query.get(post_id)
+
+    db.session.delete(post)
+    db.session.commit()
+
+    return master()
+
+@post_routes.route('/<int:post_id>', methods=['PUT'])
+@login_required
+def edit_post(post_id):
+
+    data = request.json
+
+    post = Post.query.get(post_id)
+
+    post.caption = request.json['caption']
+
+    db.session.commit()
+
+    return master()          
+
+
+
+##Saved Routes 
+@post_routes.route('/saved/<int:user_id>/<int:post_id>/', methods=["POST"])
+def add_saved(user_id, post_id):
+
+    
+    user = User.query.get(user_id)
+
+    new_saved_posts = [post for post in user.saved]
+    new_saved_posts.append(post_id)
+
+    user.saved = new_saved_posts   
+
+    db.session.commit()
+
+    return user.to_dict()
+
+
+@post_routes.route('/saved/<int:user_id>/<int:post_id>/', methods=["DELETE"])
+def delete_saved(user_id, post_id):
+
+
+    
+    user = User.query.get(user_id)  
+
+  
+    new_saved_posts = [post for post in user.saved]
+    new_saved_posts.remove(post_id)
+
+    user.saved = new_saved_posts
+
+    db.session.commit()
+
+    return user.to_dict()

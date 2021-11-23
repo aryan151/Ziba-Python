@@ -50,10 +50,51 @@ export const findSinglePost = (postId) => async (dispatch) => {
   const res = await fetch(`/api/posts/single/${postId}`);
   const data = await res.json();
   if (res.ok) {
-    dispatch(getSingle(data)); 
+    dispatch(getSingle(data));  
   }
 }; 
  
+//Comments: 
+
+
+export const submitComment = (obj) => async (dispatch) => {
+  const res = await fetch(`/api/comments`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "Application/json",
+    },
+    body: JSON.stringify(obj),
+  });
+  const data = await res.json();
+  dispatch(getMaster(data));  
+};  
+
+
+//Likes         
+
+export const toggleLikePost = (postId) => async (dispatch) => {
+  const res = await fetch(`/api/likes/${postId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await res.json();
+  dispatch(getMaster(data));  
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const initialState = {};  

@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { findFollows, followUser } from "../../store/follow";  
 import { master, findDiscoverPosts, findSinglePost } from "../../store/post" 
 import './PostPage.css'
+
+
+
 function PostPage() {   
   
     const dispatch = useDispatch()     
