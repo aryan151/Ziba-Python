@@ -105,32 +105,33 @@ function PostPage() {
                     />
                         <p className='Solotext'> {post?.user?.f_name} {post?.user?.l_name}</p>
                     </div> 
-                    <div>
-                        <div className='SoloPhoto' 
-                            style={{backgroundImage: `url('${post?.post?.img_url}')`}} 
-                        />  
-                    </div>
-                    <div className='SolocardBottom' >
-                        <div className='Soloinfo'>  
-                            <p className='setting' >{post?.post?.caption}</p>
-                        </div>
-                        <div className='SolocardIcons'>  
-                        <p>{post?.likes?.length}</p>
-                        {post?.likes?.length > 0 && post?.likes?.find((p) => p.id === user?.id) !== undefined ? (
-                            <div className="SoloLikeIcon" onClick={() => like(post.post.id)}>
-                                <RiHeart2Fill/>
-                            </div>
-                            ) : (
-                            <div className="SoloLikeIcon" onClick={() => like(post.post.id)}>
-                                <RiHeart2Line/>  
-                            </div>
-                            )}
-                        </div>
-                    </div>
-                </div> 
-
-
-                <div className='SoloCardComments'>     
+                    <div className='SoloSplit'> 
+                                    <div className='SoloCardLeft'> 
+                                            <div>
+                                                <div className='SoloPhoto' 
+                                                    style={{backgroundImage: `url('${post?.post?.img_url}')`}} 
+                                                />  
+                                            </div>
+                                            <div className='SolocardBottom' >
+                                                <div className='Soloinfo'>  
+                                                    <p className='setting' >{post?.post?.caption}</p>
+                                                </div>
+                                                <div className='SolocardIcons'>  
+                                                <p>{post?.likes?.length}</p>
+                                                {post?.likes?.length > 0 && post?.likes?.find((p) => p.id === user?.id) !== undefined ? (
+                                                    <div className="SoloLikeIcon" onClick={() => like(post.post.id)}>
+                                                        <RiHeart2Fill/>
+                                                    </div>
+                                                    ) : (
+                                                    <div className="SoloLikeIcon" onClick={() => like(post.post.id)}>
+                                                        <RiHeart2Line/>  
+                                                    </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div className='SoloCardRight'>
+                                    <div className='SoloCardComments'>     
                     <div className='CommentZone'>
                         {post?.comments?.map((p, i) => (
                         <span >
@@ -189,11 +190,14 @@ function PostPage() {
                                     { commentError &&   
                                         <p className="message-error">{commentError}</p> 
                                     }
-                                </label> 
+                                </label>  
                             </form>
                         </div>
                     </div>
                 </div>
+                </div>
+                </div> 
+                </div> 
         </div>
     )
 }

@@ -7,7 +7,7 @@
     flex-direction: column;
     align-items: center; 
     row-gap: 40px;
-    background-color: #F2F2F2; 
+    background-color: #F2F2F2;  
 }
 
 .Solocard {
@@ -43,10 +43,22 @@
 }
 
 
+.SoloCardRight {
+    display: flex;
+    justify-content: flex-start;
+}
 
 
+.SoloCardComments {
+    display: flex;
+    flex-direction: column;
+}
 
 
+.SoloSplit {
+ display: flex;
+ flex-direction: row; 
+}
 
 
 .activity {
