@@ -10,7 +10,7 @@ function DeleteComment ({comment, onClose}) {
         onClose();
     }
 
-
+  
     return (
 
         <form onSubmit={submitDelete} className="delete-message-form">
@@ -18,7 +18,7 @@ function DeleteComment ({comment, onClose}) {
         <div className="deleteContent">
             <p className="deleteAsk">Are you sure you want to delete this message?</p>
             <div className="deleteCard">  
-                    <div className="CommentToDelete">{message.body}</div>  
+                    <div className="CommentToDelete">{comment.body}</div>  
             </div>
         </div>
         <div className="deleteCommentButtonContainer">

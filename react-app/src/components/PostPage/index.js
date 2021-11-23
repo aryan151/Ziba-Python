@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams, useHistory } from "react-router";
 import { Link } from 'react-router-dom'; 
+import { Modal } from '../../context/Modal' 
 import { useDispatch, useSelector } from "react-redux";  
 import { findFollows, followUser } from "../../store/follow";  
 import { master, findDiscoverPosts, findSinglePost, toggleLikePost, newComment} from "../../store/post" 
@@ -9,6 +10,9 @@ import { RiHeart2Line } from "react-icons/ri";
 import data from 'emoji-mart/data/google.json'
 import 'emoji-mart/css/emoji-mart.css' 
 import { NimblePicker  } from 'emoji-mart' 
+import DeleteComment from './DeleteComment'
+import EditComment from './EditComment'
+import CommentHover from './CommentHover' 
 
 
 import './PostPage.css' 
@@ -21,18 +25,19 @@ function PostPage() {
     const dispatch = useDispatch()     
     const { postId } = useParams();   
 
-    const user = useSelector((state) => state.session.user);
+    const user = useSelector((state) => state.session?.user);
     const post = useSelector((state) => state.post?.single); 
     const f_posts = useSelector((state) => state.post?.master); 
     const d_posts = useSelector(state => state.post?.discover)   
     const u_posts = ''  
-
+ 
     const [showEmojiPicker, setShowEmojiPicker] = useState('');
     const [comment, setComment] = useState(''); 
     const [commentCharacterCounter, setCommentCharacterCounter] = useState(0);
     const [commentError, setCommentError] = useState(''); 
-    const [messageBeingEdited, setMessageBeingEdited] = useState(false);
-    const [showDeleteMessageModal, setShowDeleteMessageModal] = useState(false);  
+    const [showCommentHover, setShowCommentHover] = useState(false);  
+    const [commentBeingEdited, setCommentBeingEdited] = useState(false);
+    const [showDeleteCommentModal, setShowDeleteCommentModal] = useState(false);  
  
 
     useEffect(() => {  
@@ -133,34 +138,40 @@ function PostPage() {
                                     <div className='SoloCardRight'>
                                     <div className='SoloCardComments'>     
                     <div className='CommentZone'>
-                        {post?.comments?.map((p, i) => (
-                        <span >
-                        <div className="pp-com-info">
-                        {/* <img
-                            className="pp-user-img"
-                            src={p.user?.avatar}
-                            onClick={() => history.push(`/users/${p?.user?.id}`)}
-                        /> */}
-                        <div className="pp-user-desc">
-                            <p className="pp-p">
-                            <span
-                                className="pp-user"
-                                onClick={() =>
-                                history.push(`/users/${p?.user?.id}`)
-                                }
-                            >
-                                {p?.user?.username}
-                            </span>
-                            <span className="pp-desc">
-                                {p?.comment?.body}
-                            </span>
-                            </p>
-                        </div>
-                        </div>  
-                        <div className="pp-date">
-                        {p?.comment?.createdAt.split(" ").slice(1, 4).join(" ")}
-                        </div>
-                    </span>
+                        {post?.comments?.map((comment, i) => (
+                        <div key={comment?.comment?.id}>
+                            { showDeleteCommentModal === comment?.comment?.id && 
+                                <Modal onClose={() => setShowDeleteCommentModal(false)} comment={comment?.comment}>
+                                    <DeleteComment onClose={() => setShowDeleteCommentModal(false)} comment={comment?.comment} />
+                                </Modal>
+                            }
+                            <div className="message-with-profile-pic-container" >
+                                {/* <div className="message-profile-pic-container"> 
+                                    <img className="message-profile-pic" src={comment?.user?.avatar} alt="" />
+                                </div> */}
+                                <div className="username-message-container"> 
+                                    <div className="message-username">{comment?.user?.username}
+                                        <span className="message-date-time">{comment?.comment?.createdAt.split(" ").slice(1, 4).join(" ")}</span>
+                                    </div> 
+                                     
+                                    <EditComment 
+                                        setCommentBeingEdited={setCommentBeingEdited} 
+                                        comment={comment?.comment} 
+                                        commentBeingEdited={commentBeingEdited}
+                                        setShowDeleteCommentModal={setShowDeleteCommentModal}
+                                    />
+                                </div> 
+                                { showCommentHover === comment?.comment?.id && user.id === comment?.comment?.user_id && 
+                                <CommentHover     
+                                 comment={comment?.comment} 
+                                 setCommentBeingEdited={setCommentBeingEdited}
+                                 setShowCommentHover={setShowCommentHover} 
+                                 setShowDeleteCommentModal={setShowDeleteCommentModal}
+                                 />}
+                            </div>
+
+                        
+                    </div>
                     ))}
                     </div>
                     <div className='MakeComment'>   
