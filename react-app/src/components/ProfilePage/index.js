@@ -13,8 +13,8 @@ function Profile () {
 
     const sessionUser = useSelector((state) => state.session.user); 
     const thisPageUser = useSelector((state)=> state?.session?.allUsers?.filter((user) => user.id === +userId)[0])
-    console.log(sessionUser)
-    console.log(thisPageUser)  
+    const follows = useSelector((state) => state.follow)
+    console.log(follows) 
    
 
 
@@ -22,20 +22,75 @@ function Profile () {
         dispatch(getAllUsers());   
       }, [dispatch]);
 
-
-    return (     
-
-        <div> 
-            <p> Profile Page {userId}</p>
-            <p> {sessionUser?.id} |||| {thisPageUser?.username}</p>
-            
-            {sessionUser.id == userId && <p> welcome</p>} 
-            <div className='prof-main' >
-            
+      useEffect(() => {
+        dispatch(findFollows(+userId)); 
+      }, [userId]);
 
 
-            </div>
+
+    return (         
+ 
+    <div className="profileContainer">   
+        <div className="profileTop">
+        <div className="profileAvatarBox">
+          <div className="profileAvatarContainer">
+            <img src={thisPageUser?.avatar} alt="User Avatar" />  
+          </div>
         </div>
+        <div className="profileBox">
+          <div className="profileNameAndButtons">
+            <div className="profileUserName">
+              {thisPageUser?.username}
+            </div>
+            {thisPageUser && thisPageUser?.id !== sessionUser?.id ?
+              <div className="profileButtonBox">
+                <div>
+                  {thisPageUser?.followers?.includes(sessionUser.id) ?
+                    <button className="unfollow followingButton profileButton button">Followed</button> :
+                    <button className="follow followingButton profileButton blueButton button">Follow</button>}
+                </div>
+              </div> :
+              <div className="profileButtonBox">
+                <button  className="editProfile profileButton button">Edit Profile</button>
+                <button  className="editProfileModalButton button">Icon</button>
+              </div> 
+            }
+          </div>
+          <div className="profileDetails">
+            <div className="profileCounts">
+              <div className="profilePosts"><div className="profileCountsNumber">XX</div> posts</div>
+              <div className="profileFollowers"><div className="profileCountsNumber">{follows[+userId]?.followers.length}</div> followers</div>
+              <div className="profileFollowing"><div className="profileCountsNumber">{follows[+userId]?.following.length}</div> following</div>
+            </div>
+            <div className="profileUsernameAndPronoun"> 
+              <div className="profileName">{thisPageUser?.f_name} {thisPageUser?.l_name}</div>
+            </div>
+            <div className="profileBio">
+              {thisPageUser?.bio} 
+            </div>
+            {/* <div className="profileFollowedBy">Followed By <span className="profileFollowedByEmph">PEOPLE YOU KNOW</span> GOES HERE</div> */}
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+        
     )
 }
 
