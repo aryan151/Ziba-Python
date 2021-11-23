@@ -65,10 +65,10 @@ export const findUserPosts = (userId) => async (dispatch) => {
 
 
 
-//Comments: 
+//Comments:  
 
 
-export const submitComment = (obj) => async (dispatch) => {
+export const newComment = (obj) => async (dispatch) => {
   const res = await fetch(`/api/comments`, {
     method: "POST",
     headers: {

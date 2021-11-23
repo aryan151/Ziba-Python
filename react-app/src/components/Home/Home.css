@@ -55,7 +55,7 @@
 }
 
 .text:hover {
-    color: #026670
+    color: maroon; 
 }
 
 .info {
@@ -76,7 +76,7 @@
 }
 
 .comment:hover {
-    color: #026670;
+    color: maroon;
 }
 
 .cardIcons {
