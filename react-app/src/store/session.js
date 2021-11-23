@@ -119,6 +119,47 @@ export const signUp = (username, email, password) => async (dispatch) => {
   }
 }
 
+export const addSave = (user_id, post_id) => async (dispatch) => {
+  const response = await fetch(`/api/posts/saved/${user_id}/${post_id}/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+
+    dispatch(setUser(data));        
+  } 
+};
+
+export const deleteSave = (user_id, post_id) => async (dispatch) => {
+  const response = await fetch(`/api/posts/saved/${user_id}/${post_id}/`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+
+    dispatch(setUser(data));
+  } 
+};
+
+export const updateUser = (user_id) => async (dispatch) => {
+  const response = await fetch(`/api/users/${user_id}`);
+
+  if (response.ok) {
+    const data = await response.json();
+
+    dispatch(setUser(data));
+  }
+};
+
+
+
+
+
+ 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:

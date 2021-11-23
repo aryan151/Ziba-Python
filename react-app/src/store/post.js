@@ -53,7 +53,9 @@ export const findSinglePost = (postId) => async (dispatch) => {
     dispatch(getSingle(data));  
   }
 }; 
- 
+
+
+
 //Comments: 
 
 
