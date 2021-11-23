@@ -12,7 +12,7 @@ import { NimblePicker  } from 'emoji-mart'
 
 
 import './PostPage.css' 
-//ellipses 
+//ellipses   
 
 
 function PostPage() {    
