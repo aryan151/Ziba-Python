@@ -119,7 +119,7 @@ function PostPage() {
                         style={{backgroundImage: `url('${post?.user?.avatar}')`}} 
                     />
                         <p className='Solotext'> {post?.user?.f_name} {post?.user?.l_name}</p>
-                    </div> 
+                    </div>  
                     <div className='SoloSplit'> 
                                     <div className='SoloCardLeft'> 
                                             <div>

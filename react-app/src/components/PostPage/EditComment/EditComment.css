@@ -1,0 +1,93 @@
+.commentEditModule{
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+    position: relative;  
+}
+
+.commentEditText{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    color: maroon;
+    resize: none;
+    padding: 10px;
+    padding-left: 70px;
+    padding-right: 50px;
+    padding-top: 30px;
+    box-sizing: border-box;
+}
+
+.commentEditText::-webkit-scrollbar {
+    width: 0; 
+}
+ 
+.commentEditOptions {
+    display: flex; 
+    align-items: center;
+    margin-bottom: 3px;
+}
+
+.commentEditCancel,
+.commentEditSave { 
+    color: black;
+    font-size: 12px;
+}
+ 
+.commentOptionsBreaker { 
+    color: black;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.commentEditButtonCancel,
+.commentEditButtonSave{
+    color: maroon;
+}
+
+.commentEditButtonCancel:hover,
+.commentEditButtonSave:hover {
+    cursor: pointer;
+    text-decoration: underline; 
+}
+
+.commentEditButtonSave {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.message-edited-true {
+    font-size: 11px;
+    color: #6B6F75;
+    margin-left: 3px;
+}
+
+.commentErrors{ 
+    color: #fd5f5f;
+    font-size: 13px;
+    margin-left: 20px;
+}
+
+.commentEditCounter {
+    color: #9B979A;
+    position: absolute;
+    right: 40px;
+    bottom: 0px;
+    font-size: 12px;
+}
+
+
+.EditCommentEmoji { 
+    position: absolute;
+    left: 30px; 
+    z-index: 3;
+    font-size: 24px;
+    filter: grayscale();
+    transition: .1s;
+}
+
+.EditCommentEmoji:hover { 
+    cursor: pointer;
+    transform: scale(1.2);
+    filter: grayscale(0);
+}

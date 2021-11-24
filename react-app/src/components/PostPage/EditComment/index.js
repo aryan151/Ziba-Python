@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import data from 'emoji-mart/data/google.json'
 import 'emoji-mart/css/emoji-mart.css'
 import { NimblePicker  } from 'emoji-mart' 
-
+import './EditComment.css'  
 
 function EditComment ({ comment, setCommentBeingEdited, commentBeingEdited, setShowDeleteCommentModal }) {
     const editCommentRef = useRef();
@@ -100,9 +100,9 @@ function EditComment ({ comment, setCommentBeingEdited, commentBeingEdited, setS
         }
     }
 
-    return ( 
-        commentBeingEdited === comment.id ? (
-            <>
+    return (   
+        commentBeingEdited === comment.id ? (  
+            <> 
                 <form className="commentEditModule">
                     { showEmojiPicker && 
                         <NimblePicker 
@@ -114,21 +114,21 @@ function EditComment ({ comment, setCommentBeingEdited, commentBeingEdited, setS
                         />
                     }
 
-                    <p onClick={handleEmojiPicker} className="emoji-selector-edit">🤗</p>  
+                    <p onClick={handleEmojiPicker} className="EditCommentEmoji">🤗</p>  
                         
                     <textarea 
                         ref={editCommentRef}
-                        className="commentEditInput" 
+                        className="commentEditText"  
                         value={editedComment} 
                         onChange={handleChange}
-                        onKeyDown={handleEscEnter}
-                        rows={(editedComment.length / 200) + 3}  
+                        onKeyDown={handleEscEnter}  
+                        rows={(editedComment.length / 200) + 3}   
                     ></textarea> 
-                </form>
-                        <div className="commentEditOptions">    
+                </form>    
+                        <div className="commentEditOptions">     
                             <p className="commentEditCancel">escape to <span onClick={handleCancel} className="commentEditButtonCancel">cancel</span></p>
                             <span className="commentOptionsBreaker">•</span>
-                            <span className="commentEditSave">enter to <button onClick={handleSubmit} className="commentSaveButtonCancel">save</button></span>
+                            <p className="commentEditSave">enter to <span onClick={handleSubmit} className="commentEditButtonSave">save</span></p>
                             { editCommentError && 
                                 <p className="commentErrors">{editCommentError}</p>  
                             }
