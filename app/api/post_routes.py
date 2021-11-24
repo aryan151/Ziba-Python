@@ -111,7 +111,7 @@ def one_post(id):
     return {'single': {'post': post.to_dict(), 'likes': likes_comp, 'comments': comment_comp, 'user': user.to_dict()}}
 
 
-#All Posts of a single User   
+#All Posts of a single User      
 @post_routes.route('/<int:id>')
 @login_required
 def posts(id):

@@ -159,9 +159,11 @@ function PostPage() {
                                                 onMouseOver={() => handleHoverOn(comment?.comment?.id)}
                                                 onMouseLeave={handleHoverOff} 
                                                 >
+                                                    {/* { comment?.comment?.user_id != comment[i - 1]?.comment?.user_id ? */}
                                                     <div className="CommentProfileContainer"> 
                                                         <img className="CommentImg" src={comment?.user?.avatar} alt="" />
                                                     </div>
+                                                    {/* // : null}   */}
                                                     <div className="OneCommentInfo">  
                                                         <div className="commentUserName">{comment?.user?.username}  
                                                             <span className="commentDate">{comment?.comment?.createdAt.split(" ").slice(1, 4).join(" ")}</span>

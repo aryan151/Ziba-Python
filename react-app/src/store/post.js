@@ -53,7 +53,7 @@ export const findSinglePost = (postId) => async (dispatch) => {
   if (res.ok) {
     dispatch(getSingle(data));  
   }
-}; 
+};  
 
 export const findUserPosts = (userId) => async (dispatch) => {
   const res = await fetch(`/api/posts/${userId}`);
@@ -65,7 +65,7 @@ export const findUserPosts = (userId) => async (dispatch) => {
 
 
 
-//Comments:  
+//Comments:   
 
 
 export const newComment = (obj) => async (dispatch) => {

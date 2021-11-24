@@ -22,7 +22,7 @@ function Profile () {
     const dispatch = useDispatch();
     const history = useHistory();
     const { userId } = useParams();  
-
+ 
     const [toggle, setToggle] = useState(2)  
     const sessionUser = useSelector((state) => state.session.user); 
     const thisPageUser = useSelector((state)=> state?.session?.allUsers?.filter((user) => user.id === +userId)[0])

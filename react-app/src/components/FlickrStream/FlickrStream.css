@@ -1,0 +1,61 @@
+.flickrContainer {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F2F2F2;
+}
+ 
+.flickrWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 6px;
+    column-gap: 6px;
+    width: 80%;
+    background-color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
+    padding: 1.275%;
+}
+
+.onePhotoContainer {
+    height: 40vh;
+    min-width: 25%;
+    flex-grow: 1;
+} 
+
+.onePhotoContainer:hover .options {
+    opacity: .6;
+    transition: .5s cubic-bezier(1, 0, 0, 1);
+}
+
+  
+.flickrPost {
+    height: 40vh;
+    min-width: 25%;
+    flex-grow: 1;
+    list-style-type: none;
+}
+
+.postOnStream {
+    height: 100%;
+    min-width: 100%;
+    object-fit: cover; 
+    vertical-align: bottom;
+}
+
+
+.hovertxt {
+    position: absolute;
+    color: white;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, .4);
+    padding: 5px;
+}
+
+.FKloc {
+    transform: translate(20px, 27vh);
+}
+
+.FKtime { 
+    transform: translate(20px, 30.5vh);
+}
