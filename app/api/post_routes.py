@@ -231,7 +231,7 @@ def edit_post(post_id):
     post.caption = request.json['caption']
 
     db.session.commit()
-
+ 
     return master()          
 
 
@@ -240,7 +240,6 @@ def edit_post(post_id):
 @post_routes.route('/saved/<int:user_id>/<int:post_id>/', methods=["POST"])
 def add_saved(user_id, post_id):
 
-    
     user = User.query.get(user_id)
 
     new_saved_posts = [post for post in user.saved]

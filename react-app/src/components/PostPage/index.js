@@ -5,6 +5,7 @@ import { Modal } from '../../context/Modal'
 import { useDispatch, useSelector } from "react-redux";  
 import { findFollows, followUser } from "../../store/follow";  
 import { master, findDiscoverPosts, findSinglePost, toggleLikePost, newComment} from "../../store/post" 
+import { deleteSave, addSave, updateUser } from "../../store/session";
 import { RiHeart2Fill } from "react-icons/ri";
 import { RiHeart2Line } from "react-icons/ri"; 
 import { AiOutlineTablet } from "react-icons/ai";
@@ -47,6 +48,10 @@ function PostPage() {
         dispatch(findFollows(user?.id)); 
       }, [postId, user, f_posts, d_posts]);
   
+
+      useEffect(() => {
+          dispatch(updateUser(user?.id))
+      },[dispatch])   
 
 
     const keydownEnter = (e) => {
@@ -106,13 +111,19 @@ function PostPage() {
         }
     }
 
-
-
     const like = (id) => { 
         dispatch(toggleLikePost(id)).then(() => dispatch(master(user?.id)));
       }; 
-    
 
+    const Save = (userId, postId, toggle) => { 
+
+        if (toggle === 'add') dispatch(addSave(userId, postId)) 
+
+        if (toggle === 'rem') dispatch(deleteSave(userId, postId))   
+
+    }
+    
+ 
     return (
         <div className='SoloWrapper'>     
             <div className='Solocard' key={post?.id}> 
@@ -143,14 +154,13 @@ function PostPage() {
                                                     <div className="SoloLikeIcon" onClick={() => like(post?.post?.id)}>
                                                         <RiHeart2Line/>  
                                                     </div>
-                                                    )}
-                                                <p>{user?.saved?.length}</p>  
+                                                    )} 
                                                 {user?.saved?.length > 0 && user?.saved?.find((S) => S === post?.post?.id) !== undefined ? (
-                                                    <div className="SoloLikeIcon" >
+                                                    <div className="SoloLikeIcon" onClick={() => Save(user?.id, post?.post.id, 'rem')}>
                                                         <AiFillTablet/> 
                                                     </div>
                                                     ) : (
-                                                    <div className="SoloLikeIcon" >
+                                                    <div className="SoloLikeIcon" onClick={() => Save(user?.id, post?.post.id, 'add')}>
                                                         <AiOutlineTablet/>   
                                                     </div> 
                                                     )}

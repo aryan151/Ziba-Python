@@ -110,9 +110,12 @@ export const toggleLikePost = (postId) => async (dispatch) => {
       "Content-Type": "application/json",
     },
   });
-  const data = await res.json();
+  const data = await res.json(); 
   dispatch(getMaster(data));  
 };
+
+
+
 
 
 
