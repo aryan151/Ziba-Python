@@ -90,11 +90,11 @@ def discover_posts():
 #Get posts from array of postIds   
 @post_routes.route('/saved/<int:id>') 
 @login_required     
-def saved_posts(id):   
+def saved_posts(id):      
     
+    user = User.query.filter_by(id=id).first()   
   
-  
-    posts = Post.query.order_by(Post.id.desc()).all() 
+    posts = Post.query.filter(Post.id.in_(user.saved)).order_by(Post.id.desc()).all() 
     likes_comp = []
     comment_comp = [] 
     res = []
