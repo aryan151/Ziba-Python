@@ -1,3 +1,4 @@
+import re
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Post, Follow, User, Comment, Like
@@ -85,6 +86,35 @@ def discover_posts():
     sort = sorted(all_posts, key=lambda x:x['post']['id'], reverse=True)
 
     return {'discover': [post for post in sort]} 
+
+#Get posts from array of postIds   
+@post_routes.route('/saved/<int:id>') 
+@login_required     
+def saved_posts(id):   
+    
+  
+  
+    posts = Post.query.order_by(Post.id.desc()).all() 
+    likes_comp = []
+    comment_comp = [] 
+    res = []
+
+    for post in posts:
+        likes = Like.query.filter_by(post_id=post.id).all()
+        for like in likes:
+            user = User.query.filter_by(id=like.user_id).first()
+            likes_comp.append(user.to_dict())
+
+        comments = Comment.query.filter_by(post_id=post.id).all()
+        for comment in comments:
+            user2 = User.query.filter_by(id=comment.user_id).first()
+            comment_comp.append(user2.to_dict())
+
+        res.append({'post': post.to_dict(), 'likes': likes_comp, 'comments': comment_comp})
+        likes_comp = []
+        comment_comp = []
+
+    return {'saved': [x for x in res]}  
 
 
 #Find Info on a Single Post  

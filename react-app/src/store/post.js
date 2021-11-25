@@ -2,6 +2,7 @@ const GET_MASTER = "post/GET_MASTER";
 const GET_DISCOVER_POSTS = "post/GET_DISCOVER_POSTS";
 const GET_SINGLE_POST = "post/GET_SINGLE_POST"; 
 const GET_POSTS = "post/GET_POSTS"   
+const GET_ARRAY_POSTS = "post/GET_ARRAY_POSTS"          
 
  
 const getAllUserPosts = (posts, userId) => ({
@@ -12,7 +13,7 @@ const getAllUserPosts = (posts, userId) => ({
 
 const getMaster = (posts) => ({
   type: GET_MASTER,
-  payload: posts,
+  payload: posts,  
 });  
 
 const getSingle = (posts) => ({
@@ -26,7 +27,11 @@ const getDiscoverPosts = (posts) => ({
   payload: posts, 
 });    
 
-
+const getArrayPosts = (posts, userId) => ({
+  type: GET_ARRAY_POSTS,  
+  payload: posts,  
+  userId 
+});    
   
 
 
@@ -61,9 +66,15 @@ export const findUserPosts = (userId) => async (dispatch) => {
   if (res.ok) {
     dispatch(getAllUserPosts(data, userId));  
   }
-};
-
-
+};    
+  
+export const findUserSaved = (userId) => async (dispatch) => {  
+  const res = await fetch(`/api/posts/saved/${userId}`)
+  const data = await res.json();
+  if (res.ok) { 
+    dispatch(getArrayPosts(data, userId));      
+  }  
+};  
 
 //Comments:   
 
@@ -108,7 +119,7 @@ export const toggleLikePost = (postId) => async (dispatch) => {
 
 
 
-const initialState = {};  
+const initialState = {};   
 
 export default function reducer(state = initialState, action) {
   let newState
@@ -117,10 +128,12 @@ export default function reducer(state = initialState, action) {
       return { ...state, discover: action.payload.discover }
     case GET_MASTER: 
       return { ...state, master: action.payload.master }
+    case GET_ARRAY_POSTS:  
+      return { ...state, saved: action.payload.saved }   
     case GET_SINGLE_POST:
         return { ...state, ...action.payload} 
-        case GET_POSTS:
-          return { ...state, [action.userId]: action.payload }
+    case GET_POSTS:  
+        return { ...state, [action.userId]: action.payload }
     default:
       return state;
   }

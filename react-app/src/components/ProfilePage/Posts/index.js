@@ -6,10 +6,9 @@ import FlickrStream from '../../FlickrStream'
 
        
    
-function ProfilePosts ({profileId}) {
+function ProfilePosts ({profileId}) { 
   
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.session?.user);    
     const posts = useSelector((state) => state.post[+profileId]?.posts); 
  
 
@@ -18,13 +17,7 @@ function ProfilePosts ({profileId}) {
       }, [profileId]); 
 
     return (
-<>
-        <div>
-            Posts {profileId}  |||      
-    
-        {console.log((posts))}   
- 
-        </div>
+        <>
         <FlickrStream posts={posts} /> 
         </>
     )
