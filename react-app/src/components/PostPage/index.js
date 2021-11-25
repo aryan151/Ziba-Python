@@ -7,6 +7,8 @@ import { findFollows, followUser } from "../../store/follow";
 import { master, findDiscoverPosts, findSinglePost, toggleLikePost, newComment} from "../../store/post" 
 import { RiHeart2Fill } from "react-icons/ri";
 import { RiHeart2Line } from "react-icons/ri"; 
+import { AiOutlineTablet } from "react-icons/ai";
+import { AiFillTablet } from "react-icons/ai";
 import data from 'emoji-mart/data/google.json'
 import 'emoji-mart/css/emoji-mart.css' 
 import { NimblePicker  } from 'emoji-mart' 
@@ -112,7 +114,7 @@ function PostPage() {
     
 
     return (
-        <div className='SoloWrapper'>    
+        <div className='SoloWrapper'>     
             <div className='Solocard' key={post?.id}> 
                 <div className='SoloCardInfo'>
                     <div className='SoloAvatar' 
@@ -133,14 +135,24 @@ function PostPage() {
                                                 </div>
                                                 <div className='SolocardIcons'>  
                                                 <p>{post?.likes?.length}</p>
-                                                {post?.likes?.length > 0 && post?.likes?.find((p) => p.id === user?.id) !== undefined ? (
-                                                    <div className="SoloLikeIcon" onClick={() => like(post.post.id)}>
-                                                        <RiHeart2Fill/>
+                                                {post?.likes?.length > 0 && post?.likes?.find((L) => L.id === user?.id) !== undefined ? (
+                                                    <div className="SoloLikeIcon" onClick={() => like(post?.post?.id)}>
+                                                        <RiHeart2Fill/> 
                                                     </div>
                                                     ) : (
-                                                    <div className="SoloLikeIcon" onClick={() => like(post.post.id)}>
+                                                    <div className="SoloLikeIcon" onClick={() => like(post?.post?.id)}>
                                                         <RiHeart2Line/>  
                                                     </div>
+                                                    )}
+                                                <p>{user?.saved?.length}</p>  
+                                                {user?.saved?.length > 0 && user?.saved?.find((S) => S === post?.post?.id) !== undefined ? (
+                                                    <div className="SoloLikeIcon" >
+                                                        <AiFillTablet/> 
+                                                    </div>
+                                                    ) : (
+                                                    <div className="SoloLikeIcon" >
+                                                        <AiOutlineTablet/>   
+                                                    </div> 
                                                     )}
                                                 </div>
                                             </div>  

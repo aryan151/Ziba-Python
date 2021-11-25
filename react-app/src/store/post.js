@@ -66,15 +66,24 @@ export const findUserPosts = (userId) => async (dispatch) => {
   if (res.ok) {
     dispatch(getAllUserPosts(data, userId));  
   }
-};    
+};       
   
-export const findUserSaved = (userId) => async (dispatch) => {  
-  const res = await fetch(`/api/posts/saved/${userId}`)
+export const findSavedPosts = (userId) => async (dispatch) => {  
+  const res = await fetch(`/api/posts/array/${userId}`)
   const data = await res.json();
   if (res.ok) { 
     dispatch(getArrayPosts(data, userId));      
   }  
 };  
+
+export const findTaggedPosts = (userId) => async (dispatch) => {  
+  const res = await fetch(`/api/posts/tagged/${userId}`) 
+  const data = await res.json();
+  if (res.ok) { 
+    dispatch(getArrayPosts(data, userId));      
+  }  
+};  
+
 
 //Comments:   
 
@@ -107,18 +116,6 @@ export const toggleLikePost = (postId) => async (dispatch) => {
 
 
 
-
-
-
-
-
-
-
-    
-
-
-
-
 const initialState = {};   
 
 export default function reducer(state = initialState, action) {
@@ -129,7 +126,7 @@ export default function reducer(state = initialState, action) {
     case GET_MASTER: 
       return { ...state, master: action.payload.master }
     case GET_ARRAY_POSTS:  
-      return { ...state, saved: action.payload.saved }   
+      return { ...state, arr: action.payload.arr }   
     case GET_SINGLE_POST:
         return { ...state, ...action.payload} 
     case GET_POSTS:  

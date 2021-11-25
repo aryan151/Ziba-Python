@@ -1,30 +1,21 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router"; 
-import { findUserSaved, master } from '../../../store/post'
+import { findSavedPosts, master } from '../../../store/post' 
 import FlickrStream from '../../FlickrStream'      
- 
-function ProfileSaved ({profileId, profile}) {    
+   
+function ProfileSaved ({profileId}) {    
 
-    const dispatch = useDispatch();  
-    const discoverPosts = useSelector(state => state.post.saved)
-    const SavedIds = profile.saved        
-
-
+    const dispatch = useDispatch();   
+    const savedPosts = useSelector(state => state.post.arr)
+          
     useEffect(() => {
-        dispatch(findUserSaved(+profileId));     
+        dispatch(findSavedPosts(+profileId)) ;       
       }, [profileId]); 
 
     return ( 
-        <>
-            <div>
-                Saved!   
-                {SavedIds[0]}
-          
-
-                {console.log(SavedIds)}
-            </div>
-        {/* <FlickrStream posts={posts} />  */}
+        <>   
+        <FlickrStream posts={savedPosts} /> 
         </>
     )
 }

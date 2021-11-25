@@ -113,8 +113,8 @@ function Profile () {
         {toggle === 1 && <ProfileAbout/> }   
         {toggle === 2 && <ProfilePosts profileId={thisPageUser?.id}/>  } 
         {toggle === 3 && <ProfileAlbums/> }  
-        {toggle === 4 && <ProfileTagged/> }  
-        {toggle === 5 && <ProfileSaved profileId={thisPageUser?.id} profile={thisPageUser}/>  }    
+        {toggle === 4 && <ProfileTagged profileId={thisPageUser?.id}/> }    
+        {toggle === 5 && <ProfileSaved profileId={thisPageUser?.id}/>  }    
 
         </div>
     </div>
