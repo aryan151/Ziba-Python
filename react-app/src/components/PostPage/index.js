@@ -10,6 +10,7 @@ import { RiHeart2Fill } from "react-icons/ri";
 import { RiHeart2Line } from "react-icons/ri"; 
 import { AiOutlineTablet } from "react-icons/ai";
 import { AiFillTablet } from "react-icons/ai";
+import { BiCommentDetail } from "react-icons/bi";
 import data from 'emoji-mart/data/google.json'
 import 'emoji-mart/css/emoji-mart.css' 
 import { NimblePicker  } from 'emoji-mart' 
@@ -155,6 +156,10 @@ function PostPage() {
                                                         <RiHeart2Line/>  
                                                     </div>
                                                     )} 
+                                                <p>{post?.comments?.length}</p> 
+                                                <div className="SoloLikeIcon">
+                                                <BiCommentDetail />
+                                                </div>  
                                                 {user?.saved?.length > 0 && user?.saved?.find((S) => S === post?.post?.id) !== undefined ? (
                                                     <div className="SoloLikeIcon" onClick={() => Save(user?.id, post?.post.id, 'rem')}>
                                                         <AiFillTablet/> 
