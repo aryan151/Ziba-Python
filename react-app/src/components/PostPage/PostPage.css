@@ -6,8 +6,11 @@
     display: flex;
     flex-direction: column;
     align-items: center; 
-    row-gap: 40px;
+    justify-content: center;
     background-color: #F2F2F2;  
+
+    height: 70em; 
+    
 }
 
 .Solocard {
@@ -17,15 +20,28 @@
     background-color: white;
     padding: 15px;
     border-radius: 5px;
-    margin-top: 5em;
+    width: 80em;
+    height: 51em; 
 }
 
+.solotop {
+    display: flex;
+    flex-direction: row;
+}
 .SoloCardInfo { 
     display: flex;
     column-gap: 30px;
     width: 100%;
+    z-index: 5;
 } 
 
+.SoloControl {
+    font-size: 30px;
+    padding-left: 14em;
+}
+.SoloLocation { 
+    padding-right: 35em;
+}
 .SoloAvatar {
     width: 3em;
     height: 3em;
@@ -36,8 +52,8 @@
 }
 
 .SoloPhoto {
-    width:50em;
-    height:50em;
+    width:40em; 
+    height:40em;
     background-size: cover;
     background-position: center;
 }
@@ -82,6 +98,7 @@
 .Soloinfo {
     display: flex;
     justify-content: space-between;
+    width: 200%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
 
@@ -123,8 +140,8 @@
 /* Comment Container  */
 
 .CommentZone {
-width:50em;
-height:50em;
+width:38em;
+height:36em;
 overflow-y: scroll;
 margin-left: 30px;
 }
@@ -189,19 +206,6 @@ margin-left: 30px;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 .link {
     background-color: maroon;
     color: black;
@@ -215,29 +219,9 @@ margin-left: 30px;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* New Comment  */
 
 
-.commentInputContainer {
-    height: 100px;
-    width: 100%;
-    flex: 0 0 auto;
-}
 
 .addCommentForm {
     width: 100%;
@@ -247,7 +231,7 @@ margin-left: 30px;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    position: relative;
+    position:relative;
 }
 
 .addCommentLabel {
