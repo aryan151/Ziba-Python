@@ -2,6 +2,8 @@
  CREATE USER zibapython WITH PASSWORD 'password' CREATEDB;
   CREATE DATABASE zibapythondb WITH OWNER zibapython;
 
+aws access AKIARR4WF254FPB754XZ 
+AWS secret access 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 
   
 This is the starter for the Flask React project.
 
