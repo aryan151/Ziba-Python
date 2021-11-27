@@ -3,8 +3,14 @@ const GET_DISCOVER_POSTS = "post/GET_DISCOVER_POSTS";
 const GET_SINGLE_POST = "post/GET_SINGLE_POST"; 
 const GET_POSTS = "post/GET_POSTS"   
 const GET_ARRAY_POSTS = "post/GET_ARRAY_POSTS"          
+const SET_POST = "post/SET_POST"
 
- 
+
+const load = (posts) => ({
+    type: SET_POST,
+    payload: posts
+})
+
 const getAllUserPosts = (posts, userId) => ({
   type: GET_POSTS,
   payload: posts,
@@ -33,6 +39,16 @@ const getArrayPosts = (posts, userId) => ({
   userId 
 });    
   
+       
+
+export const addPost = (post) => async (dispatch) => {
+  await fetch("/api/posts/",
+      {
+          method: "POST",
+          body: post
+      }
+  )
+}
 
 
 //Master that gets back all user related information   
@@ -114,7 +130,7 @@ export const toggleLikePost = (postId) => async (dispatch) => {
   dispatch(getMaster(data));  
 };
 
-
+  
 
 
 
