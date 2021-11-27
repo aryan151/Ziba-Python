@@ -56,7 +56,7 @@ function Splash() {
 
   
     return (
-    <>
+    <> 
         <div className='SplashPageWrapper'>  
             <div className='footer'>     
                 <div className='FooterContent'>

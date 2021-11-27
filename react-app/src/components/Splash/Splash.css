@@ -31,20 +31,24 @@
   animation: animright 400s linear infinite; 
   white-space: nowrap; 
 }
+
+@keyframes animright {
+  0%{transform: translate3d(0,0,0);}
+  100%{transform: translate3d(-50%,0,0);}
+}
+
+
 .FootPart2Anim {
-  animation: animright 400s linear infinite;
+  animation: animleft 400s linear infinite;
   white-space: nowrap;
 } 
 
 
 @keyframes animleft {
-  0%{transform: translateX(30%);}
-  100%{transform: translateX(-100%);}
-}
-@keyframes animright {
   0%{transform: translateX(0);}
-  100%{transform: translateX(-100%);}
+  100%{transform: translateX(50%);}
 }
+
 
 
 .topbox {
