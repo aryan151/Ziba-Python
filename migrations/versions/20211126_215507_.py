@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: c62e8d45c16c
+Revision ID: 117d0a22fdf5
 Revises: 
-Create Date: 2021-11-21 17:13:36.848200
+Create Date: 2021-11-26 21:55:07.242429
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c62e8d45c16c'
+revision = '117d0a22fdf5'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,7 +23,6 @@ def upgrade():
     sa.Column('f_name', sa.String(length=100), nullable=False),
     sa.Column('l_name', sa.String(length=100), nullable=False),
     sa.Column('avatar', sa.String(length=3000), nullable=True),
-    sa.Column('banner', sa.String(length=3000), nullable=True),
     sa.Column('username', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('bio', sa.String(length=750), nullable=True),
@@ -48,8 +47,9 @@ def upgrade():
     op.create_table('posts',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('album_id', sa.Integer(), nullable=True),
     sa.Column('img_url', sa.String(length=255), nullable=False),
-    sa.Column('caption', sa.String(length=500), nullable=True),
+    sa.Column('caption', sa.String(length=500), nullable=False),
     sa.Column('lat', sa.Float(), nullable=True),
     sa.Column('long', sa.Float(), nullable=True),
     sa.Column('tags', sa.ARRAY(sa.String(length=100)), nullable=True),

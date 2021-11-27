@@ -9,11 +9,10 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)  
     f_name = db.Column(db.String(100), nullable=False,)
     l_name = db.Column(db.String(100), nullable=False,)    
-    avatar = db.Column(db.String(3000), nullable=True, default='https://img.favpng.com/19/19/7/computer-icons-user-account-user-profile-clip-art-png-favpng-F7qMuJxJ2eJUW6VwM05A6ZEXR.jpg')
-    banner = db.Column(db.String(3000), nullable=True, default='https://mcdn.wallpapersafari.com/medium/49/62/ZRxm8D.jpg')
+    avatar = db.Column(db.String(3000), nullable=True, default='https://lh3.googleusercontent.com/proxy/Ixnvznf8qytejesCqIBuJBKKa9Mm8O9n60a-Cw2aouKvO3JXZlxz8tT2WxU18ruiHVuOItl1oDguCib88uD-WKJUGLgFS762ERJsdTbZYk3Ai113jA')
     username = db.Column(db.String(40), nullable=False, unique=True)  
     email = db.Column(db.String(255), nullable=False, unique=True)
-    bio = db.Column(db.String(750), nullable=True)
+    bio = db.Column(db.String(750), nullable=True)    
     hashed_password = db.Column(db.String(255), nullable=False) 
     saved = db.Column(db.ARRAY(db.Integer), default=[])   
     user_tags = db.Column(db.ARRAY(db.Integer), default=[])   
@@ -49,8 +48,7 @@ class User(db.Model, UserMixin):
             'avatar': self.avatar,
             'username': self.username,
             'email': self.email,
-            'bio': self.bio,
-            'banner': self.banner,
+            'bio': self.bio, 
             'saved': self.saved,
             'user_tags': self.user_tags,
             'lat': self.lat,

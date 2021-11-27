@@ -6,8 +6,9 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    album_id = db.Column(db.Integer, nullable=True)  
     img_url = db.Column(db.String(255), nullable=False)
-    caption = db.Column(db.String(500), nullable=True)
+    caption = db.Column(db.String(500), nullable=False)
     lat = db.Column(db.Float, nullable=True, default=40.7128)  
     long = db.Column(db.Float, nullable=True, default=74.0060)    
     tags = db.Column(db.ARRAY(db.String(100)), nullable=True)
@@ -23,6 +24,7 @@ class Post(db.Model):
         return {
             'id': self.id,  
             'user_id': self.user_id,
+            'album_id': self.album_id,
             'img_url': self.img_url,
             'caption': self.caption,
             'lat': self.lat,
