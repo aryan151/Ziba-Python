@@ -2,9 +2,58 @@ import re
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Post, Follow, User, Comment, Like
-from datetime import datetime   
+from datetime import datetime     
+from app.aws_s3 import (upload_file_to_s3, allowed_file, get_unique_filename)
+from app.forms.post_form import createPost, deletePost, editPost
   
 post_routes = Blueprint('posts', __name__)     
+
+@post_routes.route('/', methods=["POST"])
+def add_post():
+    form = createPost() 
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if "img_url" not in form.data:
+        return {"errors": "image required"}, 400
+
+    image = form.data['img_url']
+
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+
+    if "url" not in upload:
+        return upload, 400 
+
+    url = upload["url"]
+
+
+    if form.validate_on_submit():
+        tags = form.data["tags"].split()  
+        user_tags = form.data["user_tags"].split() 
+
+        new_post = Post(
+            caption=form.data["caption"],
+            img_url=url,
+            user_id=form.data["user_id"],
+            tags=tags
+        )  
+
+        for one_tag in user_tags:
+            user = User.query.filter(User.username == one_tag).first() 
+            user.user_tags.append(new_post.id)       
+
+
+
+        db.session.add(new_post) 
+        db.session.commit()
+
+        return 'Good Data'
+    else:
+        return "Bad Data"
+
 
 
 #Route for all posts associated with user (following & owned)
