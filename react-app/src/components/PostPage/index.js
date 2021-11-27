@@ -11,6 +11,7 @@ import { RiHeart2Line } from "react-icons/ri";
 import { AiOutlineTablet } from "react-icons/ai";
 import { AiFillTablet } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
+import { BsThreeDots } from "react-icons/bs";
 import data from 'emoji-mart/data/google.json'
 import 'emoji-mart/css/emoji-mart.css' 
 import { NimblePicker  } from 'emoji-mart' 
@@ -110,8 +111,8 @@ function PostPage() {
         } else {
             setShowEmojiPicker(true);
         }
-    }
-
+    } 
+ 
     const like = (id) => { 
         dispatch(toggleLikePost(id)).then(() => dispatch(master(user?.id)));
       }; 
@@ -126,14 +127,21 @@ function PostPage() {
     
  
     return (
-        <div className='SoloWrapper'>     
+        <div className='SoloWrapper'>       
             <div className='Solocard' key={post?.id}> 
-                <div className='SoloCardInfo'>
+
+            <div className="solotop">
+                <p className='SoloLocation'> New York New YorkNew York</p>  
+                <div className='SoloCardInfo'> 
                     <div className='SoloAvatar' 
                         style={{backgroundImage: `url('${post?.user?.avatar}')`}} 
                     />
                         <p className='Solotext'> {post?.user?.f_name} {post?.user?.l_name}</p>
-                    </div>  
+                </div>  
+                <BsThreeDots className='SoloControl'/>
+             </div>
+
+
                     <div className='SoloSplit'> 
                                     <div className='SoloCardLeft'> 
                                             <div>
