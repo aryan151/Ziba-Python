@@ -18,6 +18,7 @@ import { NimblePicker  } from 'emoji-mart'
 import DeleteComment from './DeleteComment'
 import EditComment from './EditComment'
 import CommentHover from './CommentHover' 
+import PostNav from "./PostNav/PostNav";
 
 
 import './PostPage.css' 
@@ -138,8 +139,8 @@ function PostPage() {
                     />
                         <p className='Solotext'> {post?.user?.f_name} {post?.user?.l_name}</p> 
                 </div>   
-                <BsThreeDots className='SoloControl'/>  
-             </div>
+                {(post?.user?.id === user?.id) && <PostNav className='SoloControl'/> } 
+             </div> 
                     <div className='SoloSplit'> 
                                     <div className='SoloCardLeft'> 
                                             <div> 
