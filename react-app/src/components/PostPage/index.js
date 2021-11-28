@@ -130,16 +130,16 @@ function PostPage() {
     return (
         <div className='SoloWrapper'>       
             <div className='Solocard' key={post?.id}> 
-
+  
             <div className="solotop">
                 <p className='SoloLocation'> New York New YorkNew York</p>  
                 <div className='SoloCardInfo'> 
                     <div className='SoloAvatar' 
                         style={{backgroundImage: `url('${post?.user?.avatar}')`}} 
                     />
-                        <p className='Solotext'> {post?.user?.f_name} {post?.user?.l_name}</p> 
+                        <p className='Solotext'> {post?.user?.f_name} {post?.user?.l_name}</p>   
                 </div>   
-                {(post?.user?.id === user?.id) && <PostNav className='SoloControl'/> } 
+                {(post?.user?.id === user?.id) && <PostNav postId={post?.post.id} post={post?.post} user={user} className='SoloControl'/> } 
              </div> 
                     <div className='SoloSplit'> 
                                     <div className='SoloCardLeft'> 
