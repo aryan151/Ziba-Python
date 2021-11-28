@@ -54,6 +54,20 @@ def add_post():
     else:
         return "Bad Data"
 
+@post_routes.route('/', methods=["DELETE"])
+def delete_image():
+    form = deletePost() 
+    data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    deleted_post= Post.query.filter(Post.id == data["id"]).first()
+    db.session.delete(deleted_post)    
+    db.session.commit()
+
+    posts = Post.query.all()
+    return {"posts": [post.to_dict() for post in posts]}
+
+
 
 
 #Route for all posts associated with user (following & owned)

@@ -50,6 +50,21 @@ export const addPost = (post) => async (dispatch) => {
   )
 }
 
+export const deletePost = (id) => async (dispatch) => {
+  const response = await fetch("/api/posts/",
+      {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: id })   
+      }
+  )
+  if (response.ok) {
+      const data = await response.json()
+      dispatch(load(data))
+  } else return "DELETE THUNK ERROR: BAD REQUEST"
+}
+
+
 
 //Master that gets back all user related information   
 export const master = () => async (dispatch) => {
@@ -148,8 +163,11 @@ export default function reducer(state = initialState, action) {
       return { ...state, arr: action.payload.arr }   
     case GET_SINGLE_POST:
         return { ...state, ...action.payload} 
-    case GET_POSTS:  
+    case GET_POSTS:   
         return { ...state, [action.userId]: action.payload }
+    case SET_POST:
+        newState = action.payload.posts 
+        return newState
     default:
       return state;
   }
