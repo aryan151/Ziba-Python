@@ -58,7 +58,12 @@
     background-position: center;
 }
 
+.SoloMap {
+    width:40em; 
+    height:40em;
+    background-color: red;
 
+}
 .SoloCardRight {
     display: flex;
     justify-content: flex-start;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import NewPost from '../NewPost/';  
 import NavMenu from './NavMenu';
@@ -11,35 +11,39 @@ import { BiMessage } from "react-icons/bi";
 import './Navigation.css';
       
 
-function Navigation({ isLoaded }){  
+function Navigation({ isLoaded }){    
 
+  const history = useHistory();  
   const sessionUser = useSelector(state => state.session.user);  
 
-  return (   
-    <nav className='Navmain'>  
+  return (    
+    <nav className='Navmain'>   
         <div className='Navcontainer'>
             <NavLink exact to='/'>Ziba</NavLink> 
             {isLoaded && ( 
                 <div className='Navbuttons'>  
                     <button  className='Navprofile' >  
-                      <BsSearch/> 
+                      <BsSearch/>   
                     </button>  
-                    <NavLink  className='Navprofile' exact to={`/Home`}>  
+                    <button  className='Navprofile' onClick={() => history.push('/Home')} >  
                       <AiOutlineHome/> 
-                    </NavLink>  
-                    <NavLink  className='Navprofile' exact to={`/Messages`}>  
+                    </button>  
+                    <button  className='Navprofile' onClick={() => history.push('/Messages')}>  
                       <BiMessage/> 
-                    </NavLink>  
+                    </button>  
                     <button  className='Navprofile'>  
                     <NewPost/> 
                     </button>  
-                    <NavLink  className='Navprofile' exact to={`/Discover`}>  
+                    <button  className='Navprofile' onClick={() => history.push('/Discover')}>  
                       <AiOutlineCompass/> 
-                    </NavLink>    
+                    </button>    
                     <button  className='Navprofile'>  
                     <AiOutlineNotification/> 
                     </button >   
+                    <button  className='Navprofile'>  
                     <NavMenu user={sessionUser} /> 
+                    </button >   
+                  
                 </div> 
             )}
         </div>
