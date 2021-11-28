@@ -6,7 +6,7 @@ import './PostNav.css'
 import DeletePost from "./DeletePost/DeletePost";   
 import EditPost from "./EditPost/EditPost"
 
-function PostNav() { 
+function PostNav({postId, post, user}) {    
 
     const [showModalDelete, setShowModalDelete] = useState(false); 
     const [showModalEdit, setShowModalEdit] = useState(false);   
@@ -36,12 +36,12 @@ function PostNav() {
             <p className="avatarReroute">
               Delete Post  
             </p>
-          </li>  
+          </li>   
         </ul>
       </div>  
       {showModalDelete && (
         <Modal onClose={() => setShowModalDelete(false)}>
-            <DeletePost /> 
+            <DeletePost postId={postId} user={user} />       
         </Modal>
       )}    
       {showModalEdit&& (
