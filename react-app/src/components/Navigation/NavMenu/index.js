@@ -24,11 +24,9 @@ function NavMenu({ user }) {
         ref={dropdownRef}
         className={`menu ${isActive ? "active" : "inactive"}`}
       >
-        <div className="bubbleArrow"></div>
-
         <ul>
-          <li>
-            <a className="avatarReroute" href={`/users/1`}>
+          <li> 
+            <a className="avatarReroute" href={`/users/${user.id}`}>
             <IoMdPerson/> 
               Profile
             </a>

@@ -136,12 +136,10 @@ function PostPage() {
                     <div className='SoloAvatar' 
                         style={{backgroundImage: `url('${post?.user?.avatar}')`}} 
                     />
-                        <p className='Solotext'> {post?.user?.f_name} {post?.user?.l_name}</p>
-                </div>  
-                <BsThreeDots className='SoloControl'/>
+                        <p className='Solotext'> {post?.user?.f_name} {post?.user?.l_name}</p> 
+                </div>   
+                <BsThreeDots className='SoloControl'/>  
              </div>
-
-
                     <div className='SoloSplit'> 
                                     <div className='SoloCardLeft'> 
                                             <div> 
@@ -155,8 +153,9 @@ function PostPage() {
                                                 </div> } 
                                             </div>
                                             <div className='SolocardBottom' >
+                                            <p className='setting' >{post?.post?.caption}</p>
                                                 <div className='Soloinfo'>  
-                                                    <p className='setting' >{post?.post?.caption}</p>
+                                                 
                                                 </div>
                                                 <div className='SolocardIcons'>  
                                                 <p>{post?.likes?.length}</p>

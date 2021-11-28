@@ -3,19 +3,7 @@
     display: grid;
     place-items: center;
 }
-
-.bubbleArrow {
-  position: absolute;
-  height: 15px;
-  width: 15px;
-  background-color: #FFFFFF;
-  transform: rotate(45deg);
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-}
-.dropdown_menu .bubbleArrow {
-  top: -8px;
-  right: 72px;
-}
+ 
 .menu {
     background: #ffffff;
     border-radius: 5px;
@@ -38,10 +26,6 @@
     transform: translateY(0);
 }
 
-.menu .bubbleArrow {
-  top: -7px;
-  right: 20px;
-}
 .menu ul {
     position: relative;
     list-style: none;
@@ -74,7 +58,7 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-
+ 
 .menu li a,
 .menu li p {
   display: flex;
