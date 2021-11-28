@@ -43,7 +43,7 @@ function PostPage() {
     const [showCommentHover, setShowCommentHover] = useState(false);  
     const [commentBeingEdited, setCommentBeingEdited] = useState(false);
     const [showDeleteCommentModal, setShowDeleteCommentModal] = useState(false);  
- 
+    const [showmap, setShowmap ] = useState(false)
 
     useEffect(() => {  
         dispatch(findSinglePost(+postId));
@@ -144,10 +144,15 @@ function PostPage() {
 
                     <div className='SoloSplit'> 
                                     <div className='SoloCardLeft'> 
-                                            <div>
-                                                <div className='SoloPhoto' 
+                                            <div> 
+                                                {(showmap === false) ? <div className='SoloPhoto' 
                                                     style={{backgroundImage: `url('${post?.post?.img_url}')`}} 
-                                                />  
+                                                    onClick={() => setShowmap(!showmap)} 
+                                                /> 
+                                                : 
+                                                <div className='SoloMap' onClick={() => setShowmap(!showmap)}>
+
+                                                </div> } 
                                             </div>
                                             <div className='SolocardBottom' >
                                                 <div className='Soloinfo'>  
