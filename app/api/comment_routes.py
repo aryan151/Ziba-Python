@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import Comment, User, Post, db
+from app.forms.comment_form import DeleteComment, EditComment, AddComment
 from .post_routes import master 
 from datetime import datetime
 
@@ -30,25 +31,32 @@ def post_comment():
 @login_required
 def edit_comment(comment_id):
 
-    data = request.json
+    form = EditComment()
+    data = form.data 
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
 
-    comment = Comment.query.get(comment_id)
+        comment = Comment.query.get(comment_id)
 
-    comment.body = request.json['body']
+        comment.body = data["body"]
 
-    db.session.commit()
+        db.session.commit()
+    
+        return master()  
 
-    return master()  
-
-
-
-@comment_routes.route('/<int:comment_id>', methods=['DELETE'])  
+ 
+     
+@comment_routes.route('/', methods=['DELETE'])  
 @login_required
-def delete_comment(comment_id):
+def delete_comment():
 
-    comment = Comment.query.get(comment_id)
+    form = DeleteComment()
+    data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
 
-    db.session.delete(comment)
+    comment_to_delete = Comment.query.filter(Comment.id == data["comment_id"]).first()
+    db.session.delete(comment_to_delete)
     db.session.commit()
 
-    return master()      
+    posts = Post.query.all()
+    return {"posts": [post.to_dict() for post in posts]}                

@@ -136,8 +136,8 @@ export const findTaggedPosts = (userId) => async (dispatch) => {
 };  
 
 
-//Comments:   
-
+//Comments:          
+    
 
 export const newComment = (obj) => async (dispatch) => {
   const res = await fetch(`/api/comments`, {
@@ -150,6 +150,38 @@ export const newComment = (obj) => async (dispatch) => {
   const data = await res.json();
   dispatch(getMaster(data));  
 };  
+   
+export const editComment = (editedComment, id) => async (dispatch) => {
+  const response = await fetch(`/api/comments/${id}`, 
+      {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(editedComment)
+      }
+  )
+  if (response.ok) {
+      const data = await response.json()
+      dispatch(load(data))
+  } 
+}
+
+ 
+export const deleteComment = (id) => async (dispatch) => {
+  const response = await fetch(`/api/comments/`, 
+      {  
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ comment_id: id })
+      }
+  )    
+
+  if (response.ok) {
+      const data = await response.json()
+      dispatch(load(data))
+  } 
+}
+
+
 
 
 //Likes         
@@ -186,8 +218,7 @@ export default function reducer(state = initialState, action) {
     case GET_POSTS:   
         return { ...state, [action.userId]: action.payload }
     case SET_POST:
-        newState = action.payload.posts 
-        return newState
+        return action.payload.posts  
     default:
       return state;
   }
