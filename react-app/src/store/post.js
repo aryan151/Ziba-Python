@@ -183,24 +183,8 @@ export const deleteComment = (id) => async (dispatch) => {
 
 
 
-export const deleteComment = (id) => async (dispatch) => {
-  const response = await fetch("/api/comments/",
-      {
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ comment_id: id })     
-      }
-  )
-  if (response.ok) {
-      const data = await response.json()
-      dispatch(load(data))
-  } else return "DELETE THUNK ERROR: BAD REQUEST"
-}
 
-
-
-
-
+  
 
 //Likes         
 
