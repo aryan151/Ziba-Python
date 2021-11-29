@@ -21,8 +21,7 @@ import CommentHover from './CommentHover'
 import PostNav from "./PostNav/PostNav";
 
 
-import './PostPage.css' 
-//ellipses       
+import './PostPage.css'   
 
 
 function PostPage() {    
@@ -35,7 +34,6 @@ function PostPage() {
     const post = useSelector((state) => state.post?.single); 
     const f_posts = useSelector((state) => state.post?.master); 
     const d_posts = useSelector(state => state.post?.discover)   
-    const u_posts = ''  
  
     const [showEmojiPicker, setShowEmojiPicker] = useState('');
     const [comment, setComment] = useState(''); 
@@ -47,14 +45,12 @@ function PostPage() {
     const [showmap, setShowmap ] = useState(false)
 
     useEffect(() => {  
-        dispatch(findSinglePost(+postId));
+        if (postId) {         
+        dispatch(findSinglePost(+postId)); 
+        }
         dispatch(findFollows(user?.id)); 
       }, [postId, user, f_posts, d_posts]);
   
-
-      useEffect(() => {
-          dispatch(updateUser(user?.id))
-      },[dispatch])   
 
 
     const keydownEnter = (e) => {
@@ -81,9 +77,12 @@ function PostPage() {
             post_id: +postId,
             body: comment
         }
-        dispatch(newComment(addComment));    
+        dispatch(newComment(addComment)); 
+        dispatch(updateUser(user?.id))     
         setComment('');
         setCommentCharacterCounter(0)
+
+
     }
 
     const handleHoverOn = (commentId) => {

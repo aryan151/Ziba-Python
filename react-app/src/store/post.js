@@ -74,7 +74,7 @@ export const editOnePost = (postToEdit) => async (dispatch) => {
   )
   if (response.ok) {
       const data = await response.json()
-      dispatch(load(data))
+      dispatch(load(data))  
   } else return "EDIT THUNK ERROR: BAD REQUEST"  
 }
 
