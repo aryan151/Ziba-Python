@@ -7,8 +7,10 @@ function DeletePost ({postId, user}) {
     const dispatch = useDispatch()
     const history = useHistory()
     const handleDelete = () => {
-        dispatch(deletePost(postId)) 
-        dispatch(findUserPosts(user.id))   
+        dispatch(deletePost(postId)).then(() => 
+        dispatch(findUserPosts(user.id))
+        )  
+        
         history.push(`/users/${user.id}`)
       } 
 

@@ -41,19 +41,34 @@ def add_post():
             user_id=form.data["user_id"],
             tags=tags
         )    
-          
+        
         db.session.add(new_post) 
-        db.session.commit()
+        db.session.flush()
+        db.session.refresh(new_post)  
+    
+
         for one_tag in user_tags:
             user = User.query.filter(User.username == one_tag).first() 
-            newest = Post.query.order_by(Post.id.desc()).first() 
-            user.user_tags.append(newest.id)      
-            db.session.commit()   
+            # newest = Post.query.order_by(Post.id.desc()).first() 
+            if (user):
+                user.user_tags.append(new_post.id)            
+    
+
+
+        db.session.commit()     
   
         return 'Good Data'
     else:
         return "Bad Data"
 
+    user = User.query.get(user_id)
+
+    new_saved_posts = [post for post in user.saved]
+    new_saved_posts.append(post_id)
+
+    user.saved = new_saved_posts   
+
+    db.session.commit()
 
 @post_routes.route('/', methods=["PUT"])
 @login_required

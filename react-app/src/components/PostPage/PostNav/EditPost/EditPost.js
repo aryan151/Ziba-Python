@@ -23,8 +23,8 @@ function EditPost ({postId, post, user, close}) {
           tags,    
         };     
     
-        dispatch(editOnePost(editedPost)).then(   
-        dispatch(findSinglePost(+postId))); 
+        dispatch(editOnePost(editedPost)).then( () =>  
+        dispatch(findSinglePost(+postId)));  
         // window.location.reload();
         // history.push(`/posts/${+postId}`)
         close(false) 
