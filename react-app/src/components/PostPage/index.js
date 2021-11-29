@@ -211,7 +211,8 @@ function PostPage() {
                                                         
                                                         <EditComment 
                                                             setCommentBeingEdited={setCommentBeingEdited} 
-                                                            comment={comment?.comment} 
+                                                            comment={comment?.comment}  
+                                                            postId={post?.post?.id}
                                                             commentBeingEdited={commentBeingEdited}
                                                             setShowDeleteCommentModal={setShowDeleteCommentModal}
                                                         />

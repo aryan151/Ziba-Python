@@ -1,10 +1,13 @@
 import { useState, useRef } from 'react';
+import { editComment, findSinglePost} from '../../../store/post';
+import { useDispatch, useSelector,  } from "react-redux" 
 import data from 'emoji-mart/data/google.json'
 import 'emoji-mart/css/emoji-mart.css'
 import { NimblePicker  } from 'emoji-mart' 
 import './EditComment.css'  
 
-function EditComment ({ comment, setCommentBeingEdited, commentBeingEdited, setShowDeleteCommentModal }) {
+function EditComment ({ comment, setCommentBeingEdited, commentBeingEdited, setShowDeleteCommentModal, postId }) {
+    const dispatch = useDispatch()
     const editCommentRef = useRef();
     const [editedComment, setEditedComment] = useState(comment.body);
     const [editCommentError, setEditCommentError] = useState('');
@@ -58,8 +61,8 @@ function EditComment ({ comment, setCommentBeingEdited, commentBeingEdited, setS
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (commentCharacterCounter === 0) {
-            setShowDeleteCommentModal(comment.id);
+        if (commentCharacterCounter === 0) {         
+            setShowDeleteCommentModal(comment?.id);
             setCommentBeingEdited(false);  
             setEditedComment(comment.body);
             return
@@ -79,11 +82,12 @@ function EditComment ({ comment, setCommentBeingEdited, commentBeingEdited, setS
         setShowEmojiPicker(false);
 
         const newComment = {
-            id: comment.id,
+            id: comment?.id, 
             body: editedComment 
         } 
-    
-        setCommentBeingEdited(false);
+        dispatch(editComment(newComment)) 
+        dispatch(findSinglePost(postId))
+        setCommentBeingEdited(false);  
     }    
 
     const handleEmoji = (emoji) => {
@@ -109,7 +113,7 @@ function EditComment ({ comment, setCommentBeingEdited, commentBeingEdited, setS
                             set='google'
                             data={data}
                             theme={"dark"} 
-                            style={{position: 'absolute', zIndex: 3, right: "60px", bottom: "100px"}} 
+                            style={{position: 'absolute', zIndex: 30, right: "60px", bottom: "100px"}} 
                             onSelect={(emoji) => handleEmoji(emoji)}
                         />
                     }

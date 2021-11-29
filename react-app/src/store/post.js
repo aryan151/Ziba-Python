@@ -151,12 +151,12 @@ export const newComment = (obj) => async (dispatch) => {
   dispatch(getMaster(data));  
 };  
    
-export const editComment = (editedComment, id) => async (dispatch) => {
-  const response = await fetch(`/api/comments/${id}`, 
+export const editComment = (editComment) => async (dispatch) => {
+  const response = await fetch(`/api/comments/`,   
       {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(editedComment)
+          body: JSON.stringify(editComment)   
       }
   )
   if (response.ok) {

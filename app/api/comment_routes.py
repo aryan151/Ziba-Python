@@ -28,22 +28,23 @@ def post_comment():
     return master()
 
 
-@comment_routes.route('/<int:comment_id>', methods=['PUT'])
-@login_required
-def edit_comment(comment_id):
+@comment_routes.route('/', methods=["PUT"])
+def edit_comment():
 
     form = EditComment()
-    data = form.data 
+    data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
+
+
     if form.validate_on_submit():
-
-        comment = Comment.query.get(comment_id)
-
+        comment = Comment.query.filter(Comment.id == data["id"]).first()
         comment.body = data["body"]
 
         db.session.commit()
-    
-        return master()  
+        posts = Post.query.all()    
+        return {"posts": [post.to_dict() for post in posts]}
+    else:
+        return "Bad Data"
 
  
      
