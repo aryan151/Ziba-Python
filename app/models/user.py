@@ -4,7 +4,7 @@ from flask_login import UserMixin
 
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'users'      
+    __tablename__ = 'users'        
  
     id = db.Column(db.Integer, primary_key=True)  
     f_name = db.Column(db.String(100), nullable=False,)

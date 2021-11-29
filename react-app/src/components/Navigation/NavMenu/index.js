@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom'; 
 import { NavLink } from 'react-router-dom'
 import { IoMdPerson } from "react-icons/io";    
-import * as sessionActions from '../../../store/session';
+import {logout} from '../../../store/session';
 import {useDetectOutsideClick} from './NavBarClick'  
 import './NavMenu.css'  
 
@@ -11,7 +11,11 @@ function NavMenu({ user }) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = () => setIsActive(!isActive);
-      
+  const dispatch = useDispatch()
+  const logoutUser = async (e) => {
+    await dispatch(logout());
+  }   
+
   return (
     <> 
       
@@ -38,7 +42,7 @@ function NavMenu({ user }) {
               Settings
             </NavLink>
           </li>
-          <li className='borderTop'>
+          <li className='borderTop' onClick={logoutUser}>
           <IoMdPerson/> 
           LogOut
           </li>

@@ -1,0 +1,337 @@
+.outerContainer {
+    height: 825px;
+    margin: 0 auto;
+    width: 350px;
+    margin-top: 50px;
+    margin-bottom: 125px;
+    z-index: 1000;
+  }
+  
+  .topInnerContainer {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    background-color: rgb(255, 255, 255);
+    height: 530px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .title1 {
+    background-color: rgb(255, 255, 255);
+    height: 90px;
+    width: 350px;
+    color: rgb(38, 38, 38);
+    font-size: 45px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .subtitle {
+    background-color: rgb(255, 255, 255);
+    height: 60px;
+    font-weight: 500;
+    font-size: 15px;
+    color: rgb(142, 142, 142);
+    width: 270px;
+  }
+  
+  .btnContainer {
+    border-bottom: rgba(0, 0, 0, 0.2) 0.5px solid;
+    background-color: rgb(255, 255, 255);
+    height: 50px;
+    width: 270px;
+    padding-bottom: 10px;
+  }
+  
+  .btnContainer2 {
+    background-color: rgb(255, 255, 255);
+    height: 50px;
+    width: 350px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .demoBtn {
+    width: 270px;
+    height: 30px;
+    outline: none;
+    border: none;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+  }
+  
+  .divisorContainer {
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    height: 30px;
+    width: 100%;
+    text-align: center;
+    line-height: 0em;
+  }
+  
+  .middleDivisor {
+    position: relative;
+    color: rgb(142, 142, 142);
+    font-size: 12.5px;
+    font-weight: 600;
+    top: -2px;
+    height: 30px;
+    width: 55px;
+    background: #fff;
+    padding: 0 7.5px;
+  }
+  
+  .inputsContainer {
+    background-color: rgb(255, 255, 255);
+    height: 250px;
+    width: 350px;
+  }
+  
+  .inputContainer {
+    box-sizing: border-box;
+    background-color: rgb(250, 250, 250);
+    border: 0.75px solid rgba(0, 0, 0, 0.2);
+    height: 40px;
+    font-size: 12.5px;
+    border-radius: 3px;
+    width: 270px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .signUpBtn {
+    width: 270px;
+    height: 30px;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+  }
+  
+  .demoBtn:active,
+  .signUpBtn:active {
+    opacity: 0.75;
+  }
+  
+  .signUpBtn.disabled {
+    cursor: not-allowed;
+  }
+  
+  .policyContainer {
+    width: 270px;
+    height: 80px;
+    font-size: 11px;
+  }
+  
+  .em {
+    font-size: 12px;
+    font-weight: 700;
+  }
+  
+  .lowerInnerContainer {
+    margin-top: 12.5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: white;
+    height: 70px;
+    width: 350px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .link {
+    color: rgb(0, 149, 246);
+    margin-left: 5px;
+  }
+  
+  div.fileinputs {
+    display: flex;
+    justify-content: center;
+  }
+  
+  div.fakefile {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  input.file {
+    cursor: pointer;
+    opacity: 0;
+    z-index: 2;
+  }
+  
+  .fakefile {
+    white-space: normal;
+    overflow: hidden;
+  }
+  
+  .uploadLabel {
+    margin-right: 12.5px;
+    cursor: pointer;
+    position: absolute;
+  }
+  
+  .uploadPic {
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    /* margin-left: 95px; */
+    position: absolute;
+    right: 10px;
+  }
+  
+  .errorsContainer {
+    width: 350px;
+    min-height: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .errors {
+    color: rgb(0, 149, 246);
+  }
+  
+  .loadingModal {
+    position: absolute;
+    opacity: 0.85;
+    /* opacity: 0; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(0, 149, 246);
+  }
+  
+  .innerModal {
+    box-sizing: border-box;
+    position: relative;
+    width: 350px;
+    border-radius: 5px;
+    height: 175px;
+    background-color: rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    padding-left: 15px;
+    color: rgb(0, 149, 246);
+    font-size: 80px;
+  }
+  
+  .dot-elastic {
+    position: absolute;
+    right: 50px;
+    top: 100px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: rgb(0, 149, 246);
+    color: rgb(0, 149, 246);
+    animation: dotElastic 1s infinite linear;
+  }
+  
+  .dot-elastic::before,
+  .dot-elastic::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+  
+  .dot-elastic::before {
+    left: -15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: rgb(0, 149, 246);
+    color: rgb(0, 149, 246);
+    animation: dotElasticBefore 1s infinite linear;
+  }
+  
+  .dot-elastic::after {
+    left: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: rgb(0, 149, 246);
+    color: rgb(0, 149, 246);
+    animation: dotElasticAfter 1s infinite linear;
+  }
+  
+  @keyframes dotElasticBefore {
+    0% {
+      transform: scale(1, 1);
+    }
+    25% {
+      transform: scale(1, 1.5);
+    }
+    50% {
+      transform: scale(1, 0.67);
+    }
+    75% {
+      transform: scale(1, 1);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+  
+  @keyframes dotElastic {
+    0% {
+      transform: scale(1, 1);
+    }
+    25% {
+      transform: scale(1, 1);
+    }
+    50% {
+      transform: scale(1, 1.5);
+    }
+    75% {
+      transform: scale(1, 1);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+  
+  @keyframes dotElasticAfter {
+    0% {
+      transform: scale(1, 1);
+    }
+    25% {
+      transform: scale(1, 1);
+    }
+    50% {
+      transform: scale(1, 0.67);
+    }
+    75% {
+      transform: scale(1, 1.5);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
