@@ -1,0 +1,10 @@
+.EditPostContainer {
+    width: 400px;
+    height: 400px;  
+    display: flex;
+    flex-direction: column;
+}
+
+.editpostbtn {
+    background-color: blue;
+}

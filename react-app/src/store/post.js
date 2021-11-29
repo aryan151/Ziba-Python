@@ -63,6 +63,26 @@ export const deletePost = (id) => async (dispatch) => {
       dispatch(load(data))
   } else return "DELETE THUNK ERROR: BAD REQUEST"
 }
+      
+export const editOnePost = (postToEdit) => async (dispatch) => {
+  const response = await fetch("/api/posts/",  
+      {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(postToEdit)    
+      }
+  )
+  if (response.ok) {
+      const data = await response.json()
+      dispatch(load(data))
+  } else return "EDIT THUNK ERROR: BAD REQUEST"  
+}
+
+
+
+
+
+
 
 
 

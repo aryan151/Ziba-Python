@@ -12,7 +12,7 @@ function NewPostModal() {
             < BsCloudPlus onClick={() => setShowModal(true)}/>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <NewPost />
+                    <NewPost close={setShowModal}/>    
                 </Modal>
             )}    
         </>

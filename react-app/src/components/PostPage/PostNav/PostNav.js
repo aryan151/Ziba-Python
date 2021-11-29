@@ -44,9 +44,9 @@ function PostNav({postId, post, user}) {
             <DeletePost postId={postId} user={user} />       
         </Modal>
       )}    
-      {showModalEdit&& (
+      {showModalEdit&& (    
         <Modal onClose={() => setShowModalEdit(false)}>
-            <EditPost /> 
+            <EditPost postId={postId} post={post} user={user} close={setShowModalEdit}/> 
         </Modal>
     )}    
     </div>

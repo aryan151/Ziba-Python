@@ -127,7 +127,7 @@ function PostPage() {
     }
     
  
-    return (
+    return ( 
         <div className='SoloWrapper'>       
             <div className='Solocard' key={post?.id}> 
   
