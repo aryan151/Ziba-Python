@@ -10,23 +10,24 @@ function EditPost ({postId, post, user, close}) {
     const [tags, setTags] = useState(post?.tags?.join(" "));  
 
     useEffect(() => {
-        dispatch(findSinglePost(postId));
+        dispatch(findSinglePost(postId)); 
       }, [dispatch]);
 
       const handleSubmit = (e) => {
         e.preventDefault();
     
-        const editedPost = { 
-          post_id: postId,  
+        const editedPost = {   
+          post_id: postId,   
           caption,
           user_id: user?.id,    
-          tags,
-        };
+          tags,    
+        };     
     
-        dispatch(editOnePost(editedPost));   
-        dispatch(findSinglePost(postId)); 
-        close(false)
-        history.push(`/posts/${postId}`)
+        dispatch(editOnePost(editedPost)).then(   
+        dispatch(findSinglePost(+postId))); 
+        // window.location.reload();
+        // history.push(`/posts/${+postId}`)
+        close(false) 
        
       };
 

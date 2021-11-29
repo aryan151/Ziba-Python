@@ -1,11 +1,11 @@
 .outerContainer {
-    height: 825px;
+    height: 525px;
     margin: 0 auto;
+    margin-right: 3px;
     width: 350px;
-    margin-top: 50px;
-    margin-bottom: 125px;
+    margin-top: 20px;  
     z-index: 1000;
-  }
+  }    
   
   .topInnerContainer {
     border: 1px solid rgba(0, 0, 0, 0.2);

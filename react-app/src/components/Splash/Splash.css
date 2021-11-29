@@ -14,13 +14,19 @@
   position: absolute;
   left: 5%;
   bottom:  1em;
+  z-index: 2;
 }
 .FooterText {
+  position: absolute;
+  left: 5%;
+  bottom:  3em;
+  z-index: 2;
   color: white; 
   font-family: 'Crimson Pro', serif;
-  font-size: 72px;
+  font-size: 100px;
   font-weight: 500;
   line-height: 1.45em;
+  width: 30px;
 }
 
 .FooterCarText { 
@@ -81,6 +87,7 @@
     margin-top: 10px;
     border: 1px solid rgba(0, 0, 0, .2);
     float: right;
+    z-index: 10;
 }
 
 .redirectContainer {  

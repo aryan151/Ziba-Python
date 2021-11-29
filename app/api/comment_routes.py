@@ -29,6 +29,7 @@ def post_comment():
 
 
 @comment_routes.route('/', methods=["PUT"])
+@login_required
 def edit_comment():
 
     form = EditComment()

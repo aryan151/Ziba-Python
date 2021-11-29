@@ -57,11 +57,10 @@ function Splash() {
   
     return (
     <> 
-        <div className='SplashPageWrapper'>  
+        <div className='SplashPageWrapper'>    
+
+            <div className='FooterText'>Ziba</div>    
             <div className='footer'>     
-                <div className='FooterContent'>
-                    <div className='FooterText'>Ziba</div>    
-                </div>
                 <div className='FooterCarText'>
                     <h1 className='FootPart1Anim'>A moment of inspiration. A moment of inspiration. A moment of inspiration. A moment of inspiration. A moment of inspiration. A moment of inspiration. A moment of inspiration. A moment of inspiration. </h1>
                     <h1 className='FootPart2Anim'>A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. </h1>

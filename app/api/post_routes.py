@@ -9,6 +9,7 @@ from app.forms.post_form import createPost, deletePost, editPost
 post_routes = Blueprint('posts', __name__)     
 
 @post_routes.route('/', methods=["POST"])
+@login_required
 def add_post():
     form = createPost() 
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -55,6 +56,7 @@ def add_post():
 
 
 @post_routes.route('/', methods=["PUT"])
+@login_required
 def edit_post(): 
     form = editPost()  
     data = form.data        
@@ -75,6 +77,7 @@ def edit_post():
 
 
 @post_routes.route('/', methods=["DELETE"])
+@login_required
 def delete_post():
     form = deletePost() 
     data = form.data
@@ -284,6 +287,7 @@ def posts(id):
 
 ##Saved Routes 
 @post_routes.route('/saved/<int:user_id>/<int:post_id>/', methods=["POST"])
+@login_required
 def add_saved(user_id, post_id):
 
     user = User.query.get(user_id)
@@ -299,6 +303,7 @@ def add_saved(user_id, post_id):
 
 
 @post_routes.route('/saved/<int:user_id>/<int:post_id>/', methods=["DELETE"])
+@login_required
 def delete_saved(user_id, post_id):
 
 

@@ -19,7 +19,7 @@ const getAll = (users) => ({
 
 
 
-const initialState = { user: null, allUsers: null }; 
+
 
 
 export const getAllUsers = () => async (dispatch) => {
@@ -148,15 +148,15 @@ export const updateUser = (user_id) => async (dispatch) => {
   }
 };
 
+ 
 
 
-
-
+const initialState = { user: null, allUsers: null }; 
  
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
-      return { user: action.payload} 
+      return { user: action.payload, allUsers: state.allUsers} 
     case GET_ALL: 
       return { user: state.user, allUsers: action.payload.users };
     case REMOVE_USER:
