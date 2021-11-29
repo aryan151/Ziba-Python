@@ -2,11 +2,12 @@ from flask import Blueprint, jsonify, session, request
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
+from app.aws_s3 import (upload_file_to_s3, allowed_file, get_unique_filename)
 from flask_login import current_user, login_user, logout_user, login_required
 
 auth_routes = Blueprint('auth', __name__)
 
-
+  
 def validation_errors_to_error_messages(validation_errors):
     """
     Simple function that turns the WTForms validation errors into a simple list
@@ -51,7 +52,7 @@ def logout():
     Logs a user out
     """
     logout_user()
-    return {'message': 'User logged out'}
+    return {'message': 'User logged out'}   
 
 
 @auth_routes.route('/signup', methods=['POST'])
@@ -60,17 +61,43 @@ def sign_up():
     Creates a new user and logs them in
     """
     form = SignUpForm()
+    data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
+
+
+    if form.data['avatar'] == None:
+        url = 'https://zibapython.s3.amazonaws.com/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'
+    else:
+        image = form.data['avatar']
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
+
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+
+        if "url" not in upload:
+            return upload, 400
+
+        url = upload["url"]
+
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            avatar=url,
+            bio=form.data['bio'],
+            f_name=form.data['f_name'],  
+            l_name=form.data['l_name'],
         )
-        db.session.add(user)
+
+
+        db.session.add(user)  
         db.session.commit()
         login_user(user)
+
         return user.to_dict()
+
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
