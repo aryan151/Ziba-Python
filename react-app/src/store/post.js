@@ -137,7 +137,7 @@ export const findTaggedPosts = (userId) => async (dispatch) => {
 
 
 //Comments:   
-
+  
 
 export const newComment = (obj) => async (dispatch) => {
   const res = await fetch(`/api/comments`, {
@@ -150,6 +150,24 @@ export const newComment = (obj) => async (dispatch) => {
   const data = await res.json();
   dispatch(getMaster(data));  
 };  
+
+export const deleteComment = (id) => async (dispatch) => {
+  const response = await fetch("/api/comments/",
+      {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ comment_id: id })     
+      }
+  )
+  if (response.ok) {
+      const data = await response.json()
+      dispatch(load(data))
+  } else return "DELETE THUNK ERROR: BAD REQUEST"
+}
+
+
+
+
 
 
 //Likes         

@@ -126,7 +126,7 @@ function PostPage() {
 
     }
     
- 
+   
     return ( 
         <div className='SoloWrapper'>       
             <div className='Solocard' key={post?.id}> 
@@ -174,11 +174,11 @@ function PostPage() {
                                                 <BiCommentDetail />
                                                 </div>  
                                                 {user?.saved?.length > 0 && user?.saved?.find((S) => S === post?.post?.id) !== undefined ? (
-                                                    <div className="SoloLikeIcon" onClick={() => Save(user?.id, post?.post.id, 'rem')}>
+                                                    <div className="SoloLikeIcon" onClick={() => Save(user?.id, post?.post?.id, 'rem')}>
                                                         <AiFillTablet/> 
                                                     </div>
-                                                    ) : (
-                                                    <div className="SoloLikeIcon" onClick={() => Save(user?.id, post?.post.id, 'add')}>
+                                                    ) : (  
+                                                    <div className="SoloLikeIcon" onClick={() => Save(user?.id, post?.post?.id, 'add')}>
                                                         <AiOutlineTablet/>   
                                                     </div> 
                                                     )}
@@ -192,7 +192,7 @@ function PostPage() {
                                             <div key={comment?.comment?.id}>
                                                 { showDeleteCommentModal === comment?.comment?.id && 
                                                     <Modal onClose={() => setShowDeleteCommentModal(false)} comment={comment?.comment}>
-                                                        <DeleteComment onClose={() => setShowDeleteCommentModal(false)} comment={comment?.comment} />
+                                                        <DeleteComment onClose={() => setShowDeleteCommentModal(false)} comment={comment?.comment} postId={post?.post?.id} />
                                                     </Modal>
                                                 }
                                                 <div className="OneCommentContainer"  

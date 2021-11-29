@@ -1,14 +1,15 @@
 import './DeleteComment.css'
- 
-    
-function DeleteComment ({comment, onClose}) {
-
+import { useDispatch, useSelector } from "react-redux";    
+import {deleteComment, findSinglePost} from '../../../store/post'
+function DeleteComment ({comment, onClose, postId}) {
+    const dispatch = useDispatch() 
 
     const submitDelete = (e) => {
         e.preventDefault();  
-
+        dispatch(deleteComment(comment?.id))
+        dispatch(findSinglePost(postId))
         onClose();
-    }
+    }  
 
   
     return (

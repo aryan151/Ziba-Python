@@ -3,6 +3,7 @@ from flask_login import login_required
 from app.models import Comment, User, Post, db
 from .post_routes import master 
 from datetime import datetime
+from app.forms.comment_form import DeleteComment, EditComment, AddComment 
 
 comment_routes = Blueprint('comments', __name__)
 
@@ -42,13 +43,19 @@ def edit_comment(comment_id):
 
 
 
-@comment_routes.route('/<int:comment_id>', methods=['DELETE'])  
+@comment_routes.route('/', methods=['DELETE'])  
 @login_required
-def delete_comment(comment_id):
+def delete_comment():
 
-    comment = Comment.query.get(comment_id)
+    form = DeleteComment()        
+    data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
 
-    db.session.delete(comment)
+    deleted_comment = Comment.query.filter(Comment.id == data["comment_id"]).first()
+    db.session.delete(deleted_comment)      
     db.session.commit()
 
-    return master()      
+    posts = Post.query.all()
+    return {"posts": [post.to_dict() for post in posts]}
+
+    # return master()      
