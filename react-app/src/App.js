@@ -30,7 +30,7 @@ function App() {
   
     <BrowserRouter>
         <Switch>
-        <Route exact path='/'>
+        <Route exact path='/login'>
           <Splash/>
         </Route> 
           <ProtectedRoute path='/posts/:postId' exact={true} >

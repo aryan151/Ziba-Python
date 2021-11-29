@@ -3,19 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import {addPost, findUserPosts} from '../../store/post';   
 import './NewPost.css'
-function NewPost() {
+
+function NewPost({close}) {
 
     const dispatch = useDispatch();
-    const history = useHistory();
+    const history = useHistory();  
     const user = useSelector((state) => state?.session?.user);
 
     const [caption, setCaption] = useState("");  
-    const [image, setImage] = useState(null);
-    const [imageLoading, setImageLoading] = useState(false);
+    const [image, setImage] = useState(null);  
     const [tags, settags] = useState("");
     const [usertags, setUsertags] = useState("");   
     const [selectedFile, setSelectedFile] = useState();
     const [preview, setPreview] = useState();
+
+
 
     const updateImage = (e) => {
     const file = e.target.files[0];
@@ -25,29 +27,45 @@ function NewPost() {
     setImage(file);
     };    
 
+    useEffect(() => {
+      if (!selectedFile) {
+        setPreview(undefined);
+        return;
+      }
+  
+      const objectUrl = URL.createObjectURL(selectedFile);
+  
+      setPreview(objectUrl);
+  
+      // free memory when ever this component is unmounted
+      return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedFile]);
+
     const resetFields = () => {
         setCaption("");
-        // setImageUrl("")
+        settags("")
+        setUsertags("")
+        setImage(null)
       };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        const formData = new FormData();
-    
+        const formData = new FormData();  
         formData.append("caption", caption);
         formData.append("img_url", image);
         formData.append("user_id", user.id);
         formData.append("tags", tags); 
         formData.append("user_tags", usertags) 
     
-        setImageLoading(true);
+
         await dispatch(addPost(formData)); 
-        setImageLoading(false);
         dispatch(findUserPosts(user?.id)); 
     
-        history.push("/");
+        history.push(`/users/${user?.id}`);
     
         resetFields();
+        close(false) 
       };
 
 
@@ -55,7 +73,7 @@ function NewPost() {
         <>
         <div className="outerContainer1">
           <div className="topContainer"> 
-            <p className="header">Compose</p>
+            <p className="header">Create New Post</p> 
           </div>
   
           <div className="bottomContainer">
@@ -103,7 +121,16 @@ function NewPost() {
                 />
                 <p>seperate tag names by spaces</p>
               </div>
-  
+              <div className="rightFour">
+                <input
+                  placeholder="Tag Users..."
+                  type="text"
+                  value={usertags}
+                  onChange={(e) => setUsertags(e.target.value)}
+                  className="hashtags"
+                />  
+                <p>seperate tag names by spaces</p>
+              </div>
               <div className="emptyDiv divisor" />
   
               <div className="rightBtnContainer">
@@ -116,14 +143,6 @@ function NewPost() {
               </div>
             </div>
           </div>
-  
-          {imageLoading && (
-            <div className="loadingModal">
-              <div className="logo innerModal">
-                Uploading <span class="dot-elastic2"></span>
-              </div>
-            </div>
-          )}
         </div>
       </>
     );

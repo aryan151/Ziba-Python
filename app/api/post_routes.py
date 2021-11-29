@@ -34,28 +34,48 @@ def add_post():
         tags = form.data["tags"].split()  
         user_tags = form.data["user_tags"].split() 
 
-        new_post = Post(
+        new_post = Post(  
             caption=form.data["caption"],
             img_url=url,
             user_id=form.data["user_id"],
             tags=tags
-        )  
-
-        for one_tag in user_tags:
-            user = User.query.filter(User.username == one_tag).first() 
-            user.user_tags.append(new_post.id)       
-
-
-
+        )    
+          
         db.session.add(new_post) 
         db.session.commit()
-
+        for one_tag in user_tags:
+            user = User.query.filter(User.username == one_tag).first() 
+            newest = Post.query.order_by(Post.id.desc()).first() 
+            user.user_tags.append(newest.id)      
+            db.session.commit()   
+  
         return 'Good Data'
     else:
         return "Bad Data"
 
+
+@post_routes.route('/', methods=["PUT"])
+def edit_post(): 
+    form = editPost()  
+    data = form.data        
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    post = Post.query.filter(Post.id == data["post_id"]).first()
+
+    post.caption = data["caption"]  
+    post.tags = data["tags"].split()  
+
+    db.session.commit()    
+
+    posts = Post.query.all()
+    return {"posts": [post.to_dict() for post in posts]}
+
+
+
+
+
 @post_routes.route('/', methods=["DELETE"])
-def delete_image():
+def delete_post():
     form = deletePost() 
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -259,43 +279,6 @@ def posts(id):
 
     return {'posts': [x for x in res]}    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-@post_routes.route('/<int:post_id>', methods=['DELETE'])
-@login_required
-def delete_posts(post_id):
-
-    post = Post.query.get(post_id)
-
-    db.session.delete(post)
-    db.session.commit()
-
-    return master()
-
-@post_routes.route('/<int:post_id>', methods=['PUT'])
-@login_required
-def edit_post(post_id):
-
-    data = request.json
-
-    post = Post.query.get(post_id)
-
-    post.caption = request.json['caption']
-
-    db.session.commit()
- 
-    return master()          
 
 
 

@@ -11,8 +11,7 @@
   }
   
   .outerContainer1 {
-    max-width: 1365px;
-    width: calc(100% - 40px);
+    width: 1300px;
     height: 695px;
     display: flex;
     flex-direction: column;
