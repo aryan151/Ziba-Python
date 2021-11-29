@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router";
-import { findFollows, followUser } from "../../store/follow"; 
+import { findFollows, followUser, unFollowUser } from "../../store/follow"; 
 import { getAllUsers } from "../../store/session";
 import ProfileAbout from './About' 
 import ProfileAlbums from './Albums' 
@@ -24,7 +24,7 @@ function Profile () {
     const { userId } = useParams();  
  
     const [toggle, setToggle] = useState(2)  
-    const sessionUser = useSelector((state) => state.session.user); 
+    const sessionUser = useSelector((state) => state?.session?.user); 
     const thisPageUser = useSelector((state)=> state?.session?.allUsers?.filter((user) => user.id === +userId)[0])
     const follows = useSelector((state) => state.follow)   
    
@@ -36,8 +36,13 @@ function Profile () {
 
       useEffect(() => {
         dispatch(findFollows(+userId)); 
-      }, [userId]);
-
+      }, [userId]);  
+  
+     const handlefollow = (userId, toggle) => {
+        // if (toggle === 'add') dispatch(followUser(+userId))
+        // if (toggle === 'rem') dispatch(unFollowUser(+userId))
+      
+     }  
 
 
     return (         
@@ -54,17 +59,16 @@ function Profile () {
             <div className="profileUserName">
               {thisPageUser?.username}
             </div>
-            {thisPageUser && thisPageUser?.id !== sessionUser?.id ?
+            {thisPageUser && thisPageUser?.id !== sessionUser?.id ? 
               <div className="profileButtonBox">
-                <div>
-                  {thisPageUser?.followers?.includes(sessionUser.id) ?
-                    <button className="unfollow followingButton profileButton button">Followed</button> :
-                    <button className="follow followingButton profileButton blueButton button">Follow</button>}
+                <div>  
+                  {follows[+userId]?.followers?.length > 0 && follows[+userId]?.followers?.map((follow) => {if (follow?.id === sessionUser?.id) return true}) ?  
+                    <button onClick={handlefollow(+userId, 'rem')} className="unfollow followingButton profileButton button">Followed</button> :
+                    <button onClick={handlefollow(+userId, 'add')} className="follow followingButton profileButton blueButton button">Follow</button>}
                 </div>
               </div> :
               <div className="profileButtonBox">
                 <button  className="editProfile profileButton button">Edit Profile</button>
-                <button  className="editProfileModalButton button">Icon</button>
               </div> 
             }
           </div>  
