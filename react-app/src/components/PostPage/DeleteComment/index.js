@@ -8,8 +8,10 @@ function DeleteComment ({comment, onClose, postId}) {
 
     const submitDelete = (e) => {
         e.preventDefault();  
-        dispatch(deleteComment(comment?.id)) 
-        dispatch(findSinglePost(postId))  
+        dispatch(deleteComment(comment?.id)).then(() => 
+        dispatch(findSinglePost(postId))   
+        )
+        
         onClose(); 
     }
 

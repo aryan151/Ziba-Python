@@ -83,10 +83,12 @@ function EditComment ({ comment, setCommentBeingEdited, commentBeingEdited, setS
 
         const newComment = {
             id: comment?.id, 
-            body: editedComment 
+            body: editedComment  
         } 
-        dispatch(editComment(newComment)) 
-        dispatch(findSinglePost(postId))
+        dispatch(editComment(newComment)).then(() =>{ 
+            dispatch(findSinglePost(postId))  
+        }) 
+       
         setCommentBeingEdited(false);  
     }    
 
