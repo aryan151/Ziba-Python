@@ -177,11 +177,11 @@ function PostPage() {
                                                     <div className="SoloLikeIcon" onClick={() => Save(user?.id, post?.post?.id, 'rem')}>
                                                         <AiFillTablet/> 
                                                     </div>
-                                                    ) : (  
+                                                    ) : (
                                                     <div className="SoloLikeIcon" onClick={() => Save(user?.id, post?.post?.id, 'add')}>
                                                         <AiOutlineTablet/>   
                                                     </div> 
-                                                    )}
+                                                    )}      
                                                 </div>
                                             </div>  
                                     </div>     
@@ -191,8 +191,8 @@ function PostPage() {
                                             {post?.comments?.map((comment, i) => (
                                             <div key={comment?.comment?.id}>
                                                 { showDeleteCommentModal === comment?.comment?.id && 
-                                                    <Modal onClose={() => setShowDeleteCommentModal(false)} comment={comment?.comment}>
-                                                        <DeleteComment onClose={() => setShowDeleteCommentModal(false)} comment={comment?.comment} postId={post?.post?.id} />
+                                                    <Modal onClose={() => setShowDeleteCommentModal(false)} comment={comment?.comment} postId={post?.post?.id}>
+                                                        <DeleteComment onClose={() => setShowDeleteCommentModal(false)} comment={comment?.comment} postId={post?.post?.id}/>
                                                     </Modal>
                                                 }
                                                 <div className="OneCommentContainer"  

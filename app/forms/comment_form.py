@@ -13,4 +13,4 @@ class EditComment(FlaskForm):
     body = StringField("Caption", [DataRequired()])
 
 class DeleteComment(FlaskForm):
-    comment_id = IntegerField("Id")       
+    comment_id = IntegerField("Id")     
