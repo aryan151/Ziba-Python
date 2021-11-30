@@ -9,15 +9,16 @@ like_routes = Blueprint('likes', __name__)
 @login_required
 def like_post(id):
 
-    like = Like.query.filter_by(user_id=current_user.id, post_id=id).first()
+    likeduser = current_user.id 
+    like = Like.query.filter_by(user_id=likeduser, post_id=id).first()
 
     #Boolean value -> check true, else false 
     if like is None:
-        create_like = Like(user_id=current_user.id, post_id=id)
+        create_like = Like(user_id=likeduser, post_id=id)
         db.session.add(create_like)
         db.session.commit()   
 
-    else:
+    else:  
         db.session.delete(like)
         db.session.commit()
 

@@ -11,7 +11,9 @@ import { RiHeart2Line } from "react-icons/ri";
 import { AiOutlineTablet } from "react-icons/ai";
 import { AiFillTablet } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
-import { BsThreeDots } from "react-icons/bs";
+import { BsGoogle, BsThreeDots } from "react-icons/bs";
+import { BsToggle2Off } from "react-icons/bs"; 
+import { BsToggle2On } from "react-icons/bs";   
 import data from 'emoji-mart/data/google.json'
 import 'emoji-mart/css/emoji-mart.css' 
 import { NimblePicker  } from 'emoji-mart' 
@@ -112,9 +114,9 @@ function PostPage() {
             setShowEmojiPicker(true);
         }
     } 
- 
+   
     const like = (id) => { 
-        dispatch(toggleLikePost(id)).then(() => dispatch(master(user?.id)));
+        dispatch(toggleLikePost(id)).then(() => dispatch(findSinglePost(post?.post?.id))); 
       }; 
 
     const Save = (userId, postId, toggle) => { 
@@ -124,10 +126,10 @@ function PostPage() {
         if (toggle === 'rem') dispatch(deleteSave(userId, postId))   
 
     }
-    
+       
    
     return ( 
-        <div className='SoloWrapper'>       
+        <div className='SoloWrapper'>         
             <div className='Solocard' key={post?.id}> 
   
             <div className="solotop">
@@ -140,15 +142,15 @@ function PostPage() {
                 </div>   
                 {(post?.user?.id === user?.id) && <PostNav postId={post?.post.id} post={post?.post} user={user} className='SoloControl'/> } 
              </div> 
-                    <div className='SoloSplit'> 
+                    <div className='SoloSplit'>  
                                     <div className='SoloCardLeft'> 
                                             <div> 
                                                 {(showmap === false) ? <div className='SoloPhoto' 
                                                     style={{backgroundImage: `url('${post?.post?.img_url}')`}} 
-                                                    onClick={() => setShowmap(!showmap)} 
+                                                    
                                                 /> 
                                                 : 
-                                                <div className='SoloMap' onClick={() => setShowmap(!showmap)}>
+                                                <div className='SoloMap'  >
 
                                                 </div> } 
                                             </div>
@@ -157,21 +159,28 @@ function PostPage() {
                                                 <div className='Soloinfo'>  
                                                  
                                                 </div>
-                                                <div className='SolocardIcons'>  
-                                                <p>{post?.likes?.length}</p>
-                                                {post?.likes?.length > 0 && post?.likes?.find((L) => L.id === user?.id) !== undefined ? (
+                                                <div className='SoloCardBotBot'>      
+                                                    <div className='SolocardTags'> 
+                                                    { post?.post?.tags?.length > 0 && post?.post?.tags.map((tag) =>  (
+                                                       <p className='tagtext' >#{tag}    </p>    
+                                                    ))}   
+                                                    </div>
+                                                    <div className='SolocardIcons'>  
+                                                {/* <p>{post?.likes?.length}</p> */}
+                                                {/* {post?.likes?.length > 0 && post?.likes?.find((L) => L.id === user?.id) !== undefined ? (
                                                     <div className="SoloLikeIcon" onClick={() => like(post?.post?.id)}>
                                                         <RiHeart2Fill/> 
                                                     </div>
-                                                    ) : (
+                                                    ) : ( 
                                                     <div className="SoloLikeIcon" onClick={() => like(post?.post?.id)}>
                                                         <RiHeart2Line/>  
                                                     </div>
-                                                    )} 
-                                                <p>{post?.comments?.length}</p> 
+                                                    )}  */}
+                    
+                                                {/* <p>{post?.comments?.length}</p> 
                                                 <div className="SoloLikeIcon">
                                                 <BiCommentDetail />
-                                                </div>  
+                                                </div>   */}
                                                 {user?.saved?.length > 0 && user?.saved?.find((S) => S === post?.post?.id) !== undefined ? (
                                                     <div className="SoloLikeIcon" onClick={() => Save(user?.id, post?.post?.id, 'rem')}>
                                                         <AiFillTablet/> 
@@ -181,7 +190,16 @@ function PostPage() {
                                                         <AiOutlineTablet/>   
                                                     </div> 
                                                     )}      
+                                                 {(showmap === false) ? <div>
+                                                    <BsToggle2Off className="SoloLikeIcon" onClick={() => setShowmap(!showmap)} /> 
+                                                </div> :
+                                                <div> 
+                                                    <BsToggle2On className="SoloLikeIcon" onClick={() => setShowmap(!showmap)} /> 
+                                                </div> }
                                                 </div>
+                                                </div>
+                                                
+
                                             </div>  
                                     </div>     
                                     <div className='SoloCardRight'>

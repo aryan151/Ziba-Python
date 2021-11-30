@@ -19,10 +19,15 @@ function Home() {
     useEffect(() => {
     dispatch(master());
     }, [dispatch, user]);
- 
+  
+    let postIds = []
+    let dupecheck = followersPosts?.map((post) => {
+        postIds.push(post?.post?.id)
+    })
     return (
         <div className='wrapper'>    
-            <p className='actP' >Feed</p>   
+        {console.log(dupecheck)}
+            <p className='actP' >Feed</p>    
             {followersPosts?.map((post) => ( 
                 <div className='Homecard' key={post.id}> 
                     <div className='user'>
@@ -44,13 +49,13 @@ function Home() {
                             />
                         </Link>
                     </div>
-
+ 
                     <div className='cardBottom' >
                         <div className='info'>  
                             <p className='setting' >{post?.post?.caption}</p>
                         </div>
                         <div className='cardIcons'>
-                            {/* <FavoriteButton photoId={photo.id} favorites={favorites}/> */}
+                            
                             <p>{post.post.tags}</p>
                         </div>
                     </div>

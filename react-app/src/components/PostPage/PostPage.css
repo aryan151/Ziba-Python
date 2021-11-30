@@ -137,14 +137,44 @@
     color: #026670;
 }
 
+.SoloCardBotBot {
+    display: flex; 
+}
+
 .SolocardIcons {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
     column-gap: 10px;
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 20px;    
 }
+
+.SolocardTags {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    column-gap: 10px;
+    margin-top: 10px;
+    font-size: 20px;
+    width: 30rem;
+}
+
+.tagtext {
+   display: flex; 
+   justify-content: center;
+   align-items: center;
+   text-decoration: none;
+}
+.tagtext:hover {
+    color: maroon;
+    cursor: pointer;
+    overflow-x: auto;
+}
+
+
+
+
 
 .SoloLikeIcon {
     color: maroon;

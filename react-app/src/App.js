@@ -9,6 +9,7 @@ import Home from './components/Home';
 import PostPage from './components/PostPage';
 import Discover from './components/Discover';
 import Profile from './components/ProfilePage';
+import SearchTags from './components/SearchTags';
 
 function App() { 
   const sessionUser = useSelector(state => state.session.user);
@@ -44,6 +45,10 @@ function App() {
           <ProtectedRoute path='/Home' exact={true} >
           <Navigation isLoaded={loaded} /> 
               <Home/> 
+          </ProtectedRoute>
+          <ProtectedRoute path='/SearchTags/:name' exact={true} > 
+          <Navigation isLoaded={loaded} /> 
+              <SearchTags/>  
           </ProtectedRoute>
           <ProtectedRoute path='/Discover' exact={true} >
           <Navigation isLoaded={loaded} /> 
