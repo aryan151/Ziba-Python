@@ -5,7 +5,7 @@ import { findFollows, followUser, unFollowUser } from "../../store/follow";
 import { getAllUsers } from "../../store/session";
 import ProfileAbout from './About' 
 import ProfileAlbums from './Albums' 
-import ProfilePosts from './Posts'   
+import ProfilePosts from './Posts'     
 import ProfileSaved from './Saved'
 import ProfileTagged from "./Tagged"; 
 import { BsGrid3X3Gap } from "react-icons/bs";
