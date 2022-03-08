@@ -4,3 +4,6 @@ from .follow import Follow
 from .post import Post
 from .comment import Comment
 from .like import Like 
+from .channel import Channel
+from .message import Message
+from .notification import Notification
