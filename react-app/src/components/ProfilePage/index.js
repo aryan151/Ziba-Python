@@ -24,14 +24,10 @@ function Profile () {
  
     const [toggle, setToggle] = useState(2)  
     const sessionUser = useSelector((state) => state?.session?.user); 
+    const user = useSelector((state) => state.user.user);
     const thisPageUser = useSelector((state)=> state?.session?.allUsers?.filter((user) => user.id === +userId)[0])
-    const follows = useSelector((state) => state.follow)   
-    const numberofposts = useSelector((state) => state.post[thisPageUser?.id]?.posts);  
-
-
-    useEffect(() => {
-      dispatch(findUserPosts(+thisPageUser?.id));   
-    }, [+thisPageUser?.id]); 
+    const follows = useSelector((state) => state.follow)  
+    const [following, setFollowing] = useState(false);
 
     useEffect(() => {  
         dispatch(getAllUsers());   
@@ -41,16 +37,29 @@ function Profile () {
         dispatch(findFollows(+userId)); 
       }, [userId]);  
   
-     const handlefollow = (userId, toggle) => {
-        // if (toggle === 'add') dispatch(followUser(+userId)) 
-        // if (toggle === 'rem') dispatch(unFollowUser(+userId))
-      
-     }  
+      useEffect(() => {
+        const followers = follows[+userId]?.followers;
+        const result = followers?.find((f) => f.id === sessionUser?.id);
+        if (result) {
+          setFollowing(true);
+        } else {
+          setFollowing(false);
+        }
+      }, [userId, user, follows]); 
 
+  
+      const followUser = () => {
+        dispatch(followUser(+userId));
+      };
+
+      const unfollowUser = () => { 
+        dispatch(unFollowUser(+userId))
+      }
 
     return (         
     <>
     <div className="profileContainer">    
+    {console.log(user)}
         <div className="profileTop">
         <div className="profileAvatarBox">
           <div className="profileAvatarContainer">
@@ -65,9 +74,9 @@ function Profile () {
             {thisPageUser && thisPageUser?.id !== sessionUser?.id ? 
               <div className="profileButtonBox">
                 <div>  
-                  {follows[+userId]?.followers?.length > 0 && follows[+userId]?.followers?.map((follow) => {if (follow?.id === sessionUser?.id) return true}) ?  
-                    <button onClick={handlefollow(+userId, 'rem')} className="unfollow followingButton profileButton button">Followed</button> :
-                    <button onClick={handlefollow(+userId, 'add')} className="follow followingButton profileButton blueButton button">Follow</button>}
+                  {(following === true) ?  
+                    <button className="unfollow followingButton profileButton button" onClick={unfollowUser}>Followed</button> :  
+                    <button  className="follow followingButton profileButton blueButton button" onClick={followUser}>Follow</button>} 
                 </div>
               </div> :
               <div className="profileButtonBox">
@@ -102,11 +111,10 @@ function Profile () {
                 <AiOutlineTag className={toggle === 4 ? 'imageActive' : null}  />  
                 TAGGED  
               </div>
-              {thisPageUser?.id === sessionUser?.id &&   
                 <div onClick={() => setToggle(5)} className={toggle === 5 ? 'listItem listItemActive' : 'listItem'}>
                     <AiOutlineSave className={toggle === 5 ? 'imageActive' : null}  />  
-                    SAVED    
-                </div>}   
+                    LIKES    
+                </div> 
             </div>
         </div>   
         {toggle === 1 && <ProfileAbout/> }   

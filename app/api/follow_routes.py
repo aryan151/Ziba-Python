@@ -39,8 +39,7 @@ def follow(id):
 
     return user(id)
 
-
-#Connection -> Unfollow a User 
+#Connection -> Unfollow a User  
 @follow_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def unfollow(id):
@@ -51,3 +50,14 @@ def unfollow(id):
     db.session.commit()
 
     return user(id) 
+
+#Delete A Followed User 
+@follow_routes.route('/remove/<int:id>', methods=['DELETE'])
+def remove_follower(id):
+
+    follower = Follow.query.filter_by(follower_id=id, following_id=current_user.id).first()
+
+    db.session.delete(follower)
+    db.session.commit()
+    return user(current_user.id)
+

@@ -40,7 +40,21 @@ export const unFollowUser = (userId) => async (dispatch) => {
   }
 }
 
-const initialState = { users: null };
+export const removeFollower = (id, userId) => async (dispatch) => {
+  const res = await fetch(`/api/follows/remove/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(findFollows(data, userId));
+  }
+};
+
+const initialState = { users: null };    
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
