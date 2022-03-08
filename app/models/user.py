@@ -10,7 +10,7 @@ class User(db.Model, UserMixin):
     f_name = db.Column(db.String(100), nullable=False,)
     l_name = db.Column(db.String(100), nullable=False,)    
     avatar = db.Column(db.String(3000), nullable=True, default='https://lh3.googleusercontent.com/proxy/Ixnvznf8qytejesCqIBuJBKKa9Mm8O9n60a-Cw2aouKvO3JXZlxz8tT2WxU18ruiHVuOItl1oDguCib88uD-WKJUGLgFS762ERJsdTbZYk3Ai113jA')
-    username = db.Column(db.String(40), nullable=False, unique=True)  
+    username = db.Column(db.String(40), nullable=False, unique=False)  
     email = db.Column(db.String(255), nullable=False, unique=True)
     bio = db.Column(db.String(750), nullable=True)    
     hashed_password = db.Column(db.String(255), nullable=False) 

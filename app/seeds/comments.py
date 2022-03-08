@@ -1,17 +1,31 @@
 from app.models import db, Comment
 from datetime import datetime
+from faker import Faker  
+fake = Faker()  
+from numpy.random import seed
+from numpy.random import randint 
+import numpy
+from psycopg2.extensions import register_adapter, AsIs
+def addapt_numpy_float64(numpy_float64):
+    return AsIs(numpy_float64)
+def addapt_numpy_int64(numpy_int64):
+    return AsIs(numpy_int64)
+register_adapter(numpy.float64, addapt_numpy_float64)
+register_adapter(numpy.int64, addapt_numpy_int64)
 
 def seed_comments():
 
-    comment1 = Comment(user_id=3, post_id=1, body="comment1", total_likes =4,createdAt=datetime.now())
-    comment2 = Comment(user_id=4, post_id=1, body="comment2", total_likes =2,createdAt=datetime.now())
-    comment3 = Comment(user_id=1, post_id=6, body="comment3", total_likes =12,createdAt=datetime.now())
+    for i in range(1,500):
+        newComment = Comment(
+            user_id = randint(1,28), 
+            post_id = randint(1,250), 
+            body = fake.text(max_nb_chars=20), 
+            createdAt=datetime.now() 
+        )
+        db.session.add(newComment)     
 
-    db.session.add(comment1)    
-    db.session.add(comment2)
-    db.session.add(comment3)
 
-    db.session.commit()
+    db.session.commit() 
    
 
 # Uses a raw SQL query to TRUNCATE the users table.

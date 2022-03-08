@@ -31,7 +31,7 @@ const LoginForm = () => {
   }, [email, password])
 
 
-  const updateEmail = (e) => {
+  const updateEmail = (e) => { 
     setEmail(e.target.value);
   };
 
@@ -45,7 +45,7 @@ const LoginForm = () => {
   }
 
   const demo2Login = (e) => {
-    setEmail('marnie@aa.io')
+    setEmail('ddemo2@aa.io')
     setPassword('password')
   }
  

@@ -1,11 +1,21 @@
 from app.models import db, User
-from faker import Faker
+from faker import Faker  
+from numpy.random import seed
+from numpy.random import randint 
+import numpy
+from psycopg2.extensions import register_adapter, AsIs
+def addapt_numpy_float64(numpy_float64):
+    return AsIs(numpy_float64)
+def addapt_numpy_int64(numpy_int64):
+    return AsIs(numpy_int64)
+register_adapter(numpy.float64, addapt_numpy_float64)
+register_adapter(numpy.int64, addapt_numpy_int64)
+
 
 fake = Faker() 
 
-Profiles = [
-'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
-'https://images.unsplash.com/photo-1639747280929-e84ef392c69a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+
+Profiles = [ 
 'https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80',
 'https://images.unsplash.com/photo-1613145997970-db84a7975fbb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80',
@@ -39,75 +49,48 @@ Profiles = [
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    demo = User(
-        username='Demo',
-        f_name = 'De',
-        l_name = 'Mo',
-        avatar=fake.image_url(),
-        bio = 'test bio',
-        user_tags = [5,7,8],
-        saved = [7,9,10],
-        email='demo@aa.io',  
+
+    addUser = User(
+    username='Demo',
+    f_name = 'Sarah',
+    l_name = 'Devlin', 
+    avatar= 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80', 
+    bio = 'Just Looking to Make Friends!',
+    user_tags = randint(1,250,25),
+    saved = randint(1,250,25),  
+    email='demo@aa.io',  
+    password='password') 
+
+    db.session.add(addUser) 
+
+    addUser = User(
+    username='Demo2',  
+    f_name = 'Chris',
+    l_name = 'Walker', 
+    avatar='https://images.unsplash.com/photo-1639747280929-e84ef392c69a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+    bio = 'Just Looking to Make Friends!', 
+    user_tags = randint(1,250,25),
+    saved = randint(1,250,25),
+    email='demo2@aa.io',    
+    password='password') 
+
+    db.session.add(addUser)
+
+    for profile in Profiles:
+ 
+        addUser = User(
+        username= fake.text(max_nb_chars=10), 
+        f_name = fake.first_name(),
+        l_name = fake.last_name(),
+        avatar=profile, 
+        bio = 'Hi!, Welcome to my Page :)',
+        user_tags = randint(1,250,25),
+        saved = randint(1,250,25), 
+        email=fake.email(),  
         password='password') 
 
- 
-    follow1 = User(
-        username='marnie',
-        f_name = 'follow1',
-        l_name = 'Nie',
-        avatar=fake.image_url(),
-        private = True,
-        saved = [5,6,7], 
-        user_tags = [2,3], 
-        email='marnie@aa.io', 
-        password='password')
-
-
-    follow2 = User(
-        username='bobbie1',
-        f_name = 'follow2',
-        avatar=fake.image_url(),
-        l_name = 'Bie',
-        email='bobbie@aa.io',
-        password='password')
-
-
-    Notfollow1 = User(
-        username='bobbie2',
-        f_name = 'Notfollow1',
-        avatar=fake.image_url(),
-        l_name = 'Bie',
-        email='bobbie11@aa.io',
-        password='password')
-
-
-    Notfollow2 = User(
-        username='bobbie3',
-        f_name = 'Notfollow2',
-        avatar=fake.image_url(),
-        l_name = 'Bie',
-        email='bobbie55@aa.io',
-        password='password')
-
-
-    Notfollow3 = User(
-        username='bobbie4', 
-        f_name = 'Notfollow3',
-        avatar=fake.image_url(),
-        l_name = 'Bie',
-        email='bobbie88@aa.io',
-        password='password')
-
-    db.session.add(demo)
-    db.session.add(follow1)
-    db.session.add(follow2) 
-    db.session.add(Notfollow1) 
-    db.session.add(Notfollow2) 
-    db.session.add(Notfollow3)    
-
-
-
-
+        db.session.add(addUser)
+        
 
     db.session.commit()
 
