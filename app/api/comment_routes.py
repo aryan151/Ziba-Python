@@ -19,7 +19,6 @@ def post_comment():
     user_id=new_comment['user_id'], 
     post_id=new_comment['post_id'],
     body=new_comment['body'],
-    total_likes=0,
     createdAt=datetime.now())      
 
     db.session.add(comment)
@@ -62,4 +61,4 @@ def delete_comment():
     db.session.commit()
 
     posts = Post.query.all()
-    return {"posts": [post.to_dict() for post in posts]}                
+    return {"posts": [post.to_dict() for post in posts]}                  

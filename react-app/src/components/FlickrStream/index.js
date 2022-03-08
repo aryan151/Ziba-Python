@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './FlickrStream.css'
   
-
+ 
 function FlickrStream ({posts}) {
  
     return (
