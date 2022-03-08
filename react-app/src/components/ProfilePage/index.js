@@ -49,7 +49,7 @@ function Profile () {
 
   
       const followUser = () => {
-        dispatch(followUser(+userId));
+        dispatch(followUser(+userId)).then(() => dispatch(findFollows(+userId))); 
       };
 
       const unfollowUser = () => { 
