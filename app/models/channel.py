@@ -5,20 +5,19 @@ class Channel(db.Model):
     __tablename__ = 'channels'
 
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    friendId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    friendAvatar = db.Column(db.String(1000))
-    friendUsername = db.Column(db.String(100), nullable=False)
-    createdAt = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    user1_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user2_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
+    user1 = db.relationship('User', back_populates="user_1", foreign_keys=[user1_id])
+    user2 = db.relationship('User', back_populates="user_2", foreign_keys=[user2_id])
 
+    messages = db.relationship('Message', back_populates="channel", cascade="all,delete-orphan")
 
     def to_dict(self):
         return {
             'id': self.id,
-            'userId': self.userId,
-            'friendId': self.friendId ,
-            'friendAvatar': self.friendAvatar,
-            'friendUsername': self.friendUsername,
-            'createdAt': self.createdAt.strftime("%Y/%m/%d %H:%M:%S")
+            'user1_id': self.user1_id,
+            'user2_id': self.user2_id,
+            "user1": self.user1.to_dict(),
+            'user2': self.user2.to_dict()
         } 

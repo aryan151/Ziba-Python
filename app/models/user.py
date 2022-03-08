@@ -27,8 +27,14 @@ class User(db.Model, UserMixin):
 
     follower = db.relationship("Follow", back_populates="follower_user", foreign_keys="Follow.follower_id", cascade="all,delete-orphan")
     following = db.relationship("Follow", back_populates="following_user", foreign_keys="Follow.following_id", cascade="all,delete-orphan")
+
+    sender = db.relationship("Message", back_populates="sender_user", foreign_keys="Message.sender_id", cascade="all,delete-orphan")
+    receiver = db.relationship("Message", back_populates="receiver_user", foreign_keys="Message.receiver_id", cascade="all,delete-orphan")
+    user_1 = db.relationship("Channel", back_populates="user1", foreign_keys="Channel.user1_id", cascade="all,delete-orphan") 
+    user_2 = db.relationship("Channel", back_populates="user2", foreign_keys="Channel.user2_id", cascade="all,delete-orphan")
+
     
-    
+
     @property
     def password(self):
         return self.hashed_password
@@ -55,3 +61,4 @@ class User(db.Model, UserMixin):
             'long': self.long, 
             'private': self.private
         }
+  

@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: f5f6decfe937
+Revision ID: 9c9ff794092b
 Revises: 
-Create Date: 2022-03-08 10:46:12.117129
+Create Date: 2022-03-08 15:46:46.181724
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f5f6decfe937'
+revision = '9c9ff794092b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -42,18 +42,14 @@ def upgrade():
     sa.Column('long', sa.Float(), nullable=True),
     sa.Column('private', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('username')
+    sa.UniqueConstraint('email')
     )
     op.create_table('channels',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('userId', sa.Integer(), nullable=False),
-    sa.Column('friendId', sa.Integer(), nullable=False),
-    sa.Column('friendAvatar', sa.String(length=1000), nullable=True),
-    sa.Column('friendUsername', sa.String(length=100), nullable=False),
-    sa.Column('createdAt', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
-    sa.ForeignKeyConstraint(['friendId'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
+    sa.Column('user1_id', sa.Integer(), nullable=False),
+    sa.Column('user2_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['user1_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['user2_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('follows',
@@ -81,7 +77,6 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('post_id', sa.Integer(), nullable=False),
-    sa.Column('total_likes', sa.Integer(), nullable=True),
     sa.Column('body', sa.String(length=300), nullable=False),
     sa.Column('createdAt', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['post_id'], ['posts.id'], ),
@@ -99,15 +94,13 @@ def upgrade():
     )
     op.create_table('messages',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('content', sa.String(length=1000), nullable=False),
-    sa.Column('userId', sa.Integer(), nullable=False),
-    sa.Column('userAvatar', sa.String(length=1000), nullable=False),
-    sa.Column('friendId', sa.Integer(), nullable=False),
-    sa.Column('channelId', sa.Integer(), nullable=False),
-    sa.Column('createdAt', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
-    sa.ForeignKeyConstraint(['channelId'], ['channels.id'], ),
-    sa.ForeignKeyConstraint(['friendId'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
+    sa.Column('sender_id', sa.Integer(), nullable=False),
+    sa.Column('receiver_id', sa.Integer(), nullable=False),
+    sa.Column('message', sa.Text(), nullable=False),
+    sa.Column('dm_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['dm_id'], ['channels.id'], ),
+    sa.ForeignKeyConstraint(['receiver_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['sender_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

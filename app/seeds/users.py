@@ -50,7 +50,7 @@ Profiles = [
 # Adds a demo user, you can add other users here if you want
 def seed_users():
 
-    addUser = User(
+    addUser1 = User(
     username='Demo',
     f_name = 'Sarah',
     l_name = 'Devlin', 
@@ -61,9 +61,9 @@ def seed_users():
     email='demo@aa.io',  
     password='password') 
 
-    db.session.add(addUser) 
+    db.session.add(addUser1) 
 
-    addUser = User(
+    addUser2 = User(
     username='Demo2',  
     f_name = 'Chris',
     l_name = 'Walker', 
@@ -74,7 +74,7 @@ def seed_users():
     email='demo2@aa.io',    
     password='password') 
 
-    db.session.add(addUser)
+    db.session.add(addUser2) 
 
     for profile in Profiles:
  

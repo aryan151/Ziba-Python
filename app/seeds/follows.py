@@ -35,6 +35,20 @@ def seed_follows():
             following_id = x +3
         )
         db.session.add(newfollow)
+
+    for x in range (13,25):
+        newfollow = Follow(
+            follower_id = 1,
+            following_id = x
+        )
+        db.session.add(newfollow)
+
+    for x in range (13,25):
+        newfollow = Follow(
+            follower_id = 2,
+            following_id = x
+        )
+        db.session.add(newfollow)
     db.session.commit()
 
 
