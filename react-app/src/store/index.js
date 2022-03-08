@@ -4,12 +4,16 @@ import session from './session';
 import post from './post';
 import follow from "./follow"; 
 import user from "./user"
+import channel from "./channel";
+import message from "./message"; 
 
 const rootReducer = combineReducers({
   session,
   post,  
   follow,
-  user 
+  user,
+  message,
+  channel 
 });
 
 

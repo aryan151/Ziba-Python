@@ -99,10 +99,10 @@ function Profile () {
       <div className="profileSwitchBox">
           <div className="imageListContainer">
             <div className="imageList">
-              <div onClick={() => setToggle(1)} className={toggle === 1 ? 'listItem listItemActive' : 'listItem'} >
+              {/* <div onClick={() => setToggle(1)} className={toggle === 1 ? 'listItem listItemActive' : 'listItem'} >
                 <BsInfoSquare className={toggle === 1 ? 'imageActive' : null}  /> 
                 ABOUT
-              </div>
+              </div> */}
               <div onClick={() => setToggle(2)} className={toggle === 2 ? 'listItem listItemActive' : 'listItem'}>
                 <BsGrid3X3Gap className={toggle === 2 ? 'imageActive' : null}  />  
                 POSTS  
@@ -117,7 +117,7 @@ function Profile () {
                 </div> 
             </div>
         </div>   
-        {toggle === 1 && <ProfileAbout/> }   
+        {/* {toggle === 1 && <ProfileAbout/> }    */}
         {toggle === 2 && <ProfilePosts profileId={thisPageUser?.id}/>  } 
         {toggle === 4 && <ProfileTagged profileId={thisPageUser?.id}/> }    
         {toggle === 5 && <ProfileSaved profileId={thisPageUser?.id}/>  }    
