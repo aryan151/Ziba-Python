@@ -3,15 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router";
 import { findFollows, followUser, unFollowUser } from "../../store/follow"; 
 import { getAllUsers } from "../../store/session";
-import ProfileAbout from './About' 
-import ProfileAlbums from './Albums' 
+import { findUserPosts } from "../../store/post"; 
+import ProfileAbout from './About'   
 import ProfilePosts from './Posts'     
 import ProfileSaved from './Saved'
 import ProfileTagged from "./Tagged"; 
 import { BsGrid3X3Gap } from "react-icons/bs";
 import { AiOutlineTag } from "react-icons/ai";
-import { BsInfoSquare } from "react-icons/bs";
-import { AiOutlineFolderOpen } from "react-icons/ai";
+import { BsInfoSquare } from "react-icons/bs";  
 import { AiOutlineSave } from "react-icons/ai";  
 
 
@@ -27,10 +26,14 @@ function Profile () {
     const sessionUser = useSelector((state) => state?.session?.user); 
     const thisPageUser = useSelector((state)=> state?.session?.allUsers?.filter((user) => user.id === +userId)[0])
     const follows = useSelector((state) => state.follow)   
-   
+    const numberofposts = useSelector((state) => state.post[thisPageUser?.id]?.posts);  
 
 
     useEffect(() => {
+      dispatch(findUserPosts(+thisPageUser?.id));   
+    }, [+thisPageUser?.id]); 
+
+    useEffect(() => {  
         dispatch(getAllUsers());   
       }, [dispatch]);
 
@@ -39,7 +42,7 @@ function Profile () {
       }, [userId]);  
   
      const handlefollow = (userId, toggle) => {
-        // if (toggle === 'add') dispatch(followUser(+userId))
+        // if (toggle === 'add') dispatch(followUser(+userId)) 
         // if (toggle === 'rem') dispatch(unFollowUser(+userId))
       
      }  
@@ -47,7 +50,7 @@ function Profile () {
 
     return (         
     <>
-    <div className="profileContainer">   
+    <div className="profileContainer">    
         <div className="profileTop">
         <div className="profileAvatarBox">
           <div className="profileAvatarContainer">
@@ -57,7 +60,7 @@ function Profile () {
         <div className="profileBox">
           <div className="profileNameAndButtons">
             <div className="profileUserName">
-              {thisPageUser?.username}
+            {thisPageUser?.f_name} {thisPageUser?.l_name}
             </div>
             {thisPageUser && thisPageUser?.id !== sessionUser?.id ? 
               <div className="profileButtonBox">
@@ -74,16 +77,12 @@ function Profile () {
           </div>  
           <div className="profileDetails">
             <div className="profileCounts">
-              <div className="profilePosts"><div className="profileCountsNumber">XX</div> posts</div>
               <div className="profileFollowers"><div className="profileCountsNumber">{follows[+userId]?.followers.length}</div> followers</div>
               <div className="profileFollowing"><div className="profileCountsNumber">{follows[+userId]?.following.length}</div> following</div>
             </div>
             <div className="profileUsername"> 
-              <div className="profileName">{thisPageUser?.f_name} {thisPageUser?.l_name}</div>
+              <div className="profileName"></div>
             </div>
-            <div className="profileBio">
-              {thisPageUser?.bio} 
-            </div> 
           </div>
         </div>
       </div>
@@ -99,10 +98,6 @@ function Profile () {
                 <BsGrid3X3Gap className={toggle === 2 ? 'imageActive' : null}  />  
                 POSTS  
               </div>
-              <div onClick={() => setToggle(3)} className={toggle === 3 ? 'listItem listItemActive' : 'listItem'}>
-                <AiOutlineFolderOpen className={toggle === 3 ? 'imageActive' : null}  />  
-                ALBUMS  
-              </div>
               <div onClick={() => setToggle(4)} className={toggle === 4 ? 'listItem listItemActive' : 'listItem'}>
                 <AiOutlineTag className={toggle === 4 ? 'imageActive' : null}  />  
                 TAGGED  
@@ -116,7 +111,6 @@ function Profile () {
         </div>   
         {toggle === 1 && <ProfileAbout/> }   
         {toggle === 2 && <ProfilePosts profileId={thisPageUser?.id}/>  } 
-        {toggle === 3 && <ProfileAlbums/> }  
         {toggle === 4 && <ProfileTagged profileId={thisPageUser?.id}/> }    
         {toggle === 5 && <ProfileSaved profileId={thisPageUser?.id}/>  }    
 

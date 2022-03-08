@@ -107,7 +107,11 @@
     transition: .5s cubic-bezier(1, 0, 0, 1);
     font-family: 'Crimson Pro', serif;
     font-size: 40px;
+    text-decoration: none; 
     margin:0%; 
+}
+.SoloCardInfo a {
+    text-decoration: none;
 }
 
 .Solotext:hover {

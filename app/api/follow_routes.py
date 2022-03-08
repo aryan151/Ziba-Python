@@ -5,7 +5,7 @@ from app.models import Follow, User, db
 follow_routes = Blueprint('follows', __name__)
 
 
-#Get Followers and Following of a User
+#Get Followers and Following of a User 
 @follow_routes.route('/<int:id>')
 @login_required
 def user(id):
@@ -32,7 +32,7 @@ def user(id):
 @login_required
 def follow(id):
 
-    follow = Follow(follower_id=current_user.id, following_id=id)
+    follow = Follow(follower_id=current_user.id, following_id=id)  
 
     db.session.add(follow)
     db.session.commit()

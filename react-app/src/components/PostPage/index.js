@@ -133,12 +133,14 @@ function PostPage() {
             <div className='Solocard' key={post?.id}> 
   
             <div className="solotop">
-                <p className='SoloLocation'> New York New YorkNew York</p>  
                 <div className='SoloCardInfo'> 
                     <div className='SoloAvatar' 
-                        style={{backgroundImage: `url('${post?.user?.avatar}')`}} 
+                        style={{backgroundImage: `url('${post?.user?.avatar}')`}}  
                     />
-                        <p className='Solotext'> {post?.user?.f_name} {post?.user?.l_name}</p>   
+                    <Link to={`/users/${post?.user?.id}`}>
+                    <p className='Solotext' > {post?.user?.f_name} {post?.user?.l_name}</p>   
+                    </Link>
+                       
                 </div>   
                 {(post?.user?.id === user?.id) && <PostNav postId={post?.post.id} post={post?.post} user={user} className='SoloControl'/> } 
              </div> 
