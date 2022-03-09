@@ -1,9 +1,15 @@
 const GET_FOLLOWS = "follow/GET_FOLLOWS";  
+const GET_SUGGESTIONS = "follow/GET_SUGGESTIONS";
 
 const getFollows = (users, userId) => ({
   type: GET_FOLLOWS,
   payload: users,
   userId,
+});
+
+const getSuggestions = (users) => ({
+  type: GET_SUGGESTIONS,
+  payload: users,
 });
 
 export const findFollows = (userId) => async (dispatch) => {
@@ -13,6 +19,7 @@ export const findFollows = (userId) => async (dispatch) => {
     dispatch(getFollows(data, userId));
   }
 };
+
 
 export const followUser = (userId) => async (dispatch) => {
   const res = await fetch(`/api/follows/${userId}`, {
@@ -40,19 +47,15 @@ export const unFollowUser = (userId) => async (dispatch) => {
   }
 }
 
-export const removeFollower = (id, userId) => async (dispatch) => {
-  const res = await fetch(`/api/follows/remove/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+export const findSuggestions = () => async (dispatch) => {
+  const res = await fetch("/api/follows/suggestions");
 
   if (res.ok) {
     const data = await res.json();
-    dispatch(findFollows(data, userId));
+    dispatch(getSuggestions(data));
   }
 };
+
 
 const initialState = { users: null };    
 
@@ -60,6 +63,8 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_FOLLOWS:
       return { ...state, [action.userId]: action.payload };
+    case GET_SUGGESTIONS:
+        return { ...state, users: action.payload.final };  
     default:
       return state;
   }
