@@ -107,43 +107,43 @@ function EditComment ({ comment, setCommentBeingEdited, commentBeingEdited, setS
     }
 
     return (   
-        commentBeingEdited === comment.id ? (  
-            <> 
-                <form className="commentEditModule">
-                    { showEmojiPicker && 
-                        <NimblePicker 
-                            set='google'
-                            data={data}
-                            theme={"dark"} 
-                            style={{position: 'absolute', zIndex: 30, right: "60px", bottom: "100px"}} 
-                            onSelect={(emoji) => handleEmoji(emoji)}
-                        />
-                    }
+        // commentBeingEdited === comment.id ? (  
+        //     <> 
+        //         <form className="commentEditModule">
+        //             { showEmojiPicker && 
+        //                 <NimblePicker 
+        //                     set='google'
+        //                     data={data}
+        //                     theme={"dark"} 
+        //                     style={{position: 'absolute', zIndex: 30, right: "60px", bottom: "100px"}} 
+        //                     onSelect={(emoji) => handleEmoji(emoji)}
+        //                 />
+        //             }
 
-                    <p onClick={handleEmojiPicker} className="EditCommentEmoji">🤗</p>  
+        //             <p onClick={handleEmojiPicker} className="EditCommentEmoji">🤗</p>  
                         
-                    <textarea 
-                        ref={editCommentRef}
-                        className="commentEditText"  
-                        value={editedComment} 
-                        onChange={handleChange}
-                        onKeyDown={handleEscEnter}  
-                        rows={(editedComment.length / 200) + 3}   
-                    ></textarea> 
-                </form>    
-                        <div className="commentEditOptions">     
-                            <p className="commentEditCancel">escape to <span onClick={handleCancel} className="commentEditButtonCancel">cancel</span></p>
-                            <span className="commentOptionsBreaker">•</span>
-                            <p className="commentEditSave">enter to <span onClick={handleSubmit} className="commentEditButtonSave">save</span></p>
-                            { editCommentError && 
-                                <p className="commentErrors">{editCommentError}</p>  
-                            }
-                        </div>
-                        <p className={`commentEditCounter`}>{commentCharacterCounter}/300</p>  
-            </>
-        ):(
+        //             <textarea 
+        //                 ref={editCommentRef}
+        //                 className="commentEditText"  
+        //                 value={editedComment} 
+        //                 onChange={handleChange}
+        //                 onKeyDown={handleEscEnter}  
+        //                 rows={(editedComment.length / 200) + 3}   
+        //             ></textarea> 
+        //         </form>    
+        //                 <div className="commentEditOptions">     
+        //                     <p className="commentEditCancel">escape to <span onClick={handleCancel} className="commentEditButtonCancel">cancel</span></p>
+        //                     <span className="commentOptionsBreaker">•</span>
+        //                     <p className="commentEditSave">enter to <span onClick={handleSubmit} className="commentEditButtonSave">save</span></p>
+        //                     { editCommentError && 
+        //                         <p className="commentErrors">{editCommentError}</p>  
+        //                     }
+        //                 </div>
+        //                 <p className={`commentEditCounter`}>{commentCharacterCounter}/300</p>  
+        //     </>
+        // ):(
             <div className="CommentContentText">{comment.body}</div>   
-        )
+        // )
     );
 }
 

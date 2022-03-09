@@ -102,11 +102,11 @@ export const findDiscoverPosts = () => async (dispatch) => {
     dispatch(getDiscoverPosts(data)); 
   }
 };   
-
+ 
 export const findSinglePost = (postId) => async (dispatch) => {
   const res = await fetch(`/api/posts/single/${postId}`);
   const data = await res.json();
-  if (res.ok) {
+  if (res.ok) { 
     dispatch(getSingle(data));  
   }
 };  

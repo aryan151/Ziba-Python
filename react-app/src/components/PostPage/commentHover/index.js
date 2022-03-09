@@ -1,4 +1,4 @@
-
+import { TiDeleteOutline } from "react-icons/ti"; 
 
 function CommentHover({ comment, setCommentBeingEdited, setShowCommentHover, setShowDeleteCommentModal }) {
 
@@ -12,12 +12,12 @@ function CommentHover({ comment, setCommentBeingEdited, setShowCommentHover, set
         <>
             <div className="HoverCommentControl">  
                 <div className="message-popup-container">
-                    <span className="iconCommentEdit" onClick={() => setCommentBeingEdited(comment.id)}>edit</span>
-                    <span className="iconCommentDelete" onClick={handleDelete}>delete</span>
+                    {/* <span className="iconCommentEdit" onClick={() => setCommentBeingEdited(comment.id)}>edit</span> */} 
+                    <span className="iconCommentDelete" onClick={handleDelete}><TiDeleteOutline/></span>
                 </div>
             </div>
         </>
      );
 }
-
+  
 export default CommentHover; 

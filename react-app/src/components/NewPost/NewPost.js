@@ -121,16 +121,7 @@ function NewPost({close}) {
                 />
                 <p>seperate tag names by spaces</p>
               </div>
-              <div className="rightFour">
-                <input
-                  placeholder="Tag Users..."
-                  type="text"
-                  value={usertags}
-                  onChange={(e) => setUsertags(e.target.value)}
-                  className="hashtags"
-                />  
-                <p>seperate tag names by spaces</p>
-              </div>
+              
               <div className="emptyDiv divisor" />
   
               <div className="rightBtnContainer">

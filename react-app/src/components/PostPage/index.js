@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import { Modal } from '../../context/Modal' 
 import { useDispatch, useSelector } from "react-redux";  
 import { findFollows, followUser } from "../../store/follow";  
-import { master, findDiscoverPosts, findSinglePost, toggleLikePost, newComment} from "../../store/post" 
+import { master, findDiscoverPosts, findSinglePost, toggleLikePost, newComment,findUserPosts} from "../../store/post" 
 import { deleteSave, addSave, updateUser } from "../../store/session";
-import { RiHeart2Fill } from "react-icons/ri";
+import { RiHeart2Fill } from "react-icons/ri";  
 import { RiHeart2Line } from "react-icons/ri"; 
 import { AiOutlineTablet } from "react-icons/ai";
-import { AiFillTablet } from "react-icons/ai";
-import { BiCommentDetail } from "react-icons/bi";
+import { AiFillTablet } from "react-icons/ai"; 
+import { BiCommentDetail } from "react-icons/bi"; 
 import { BsGoogle, BsThreeDots } from "react-icons/bs";
 import { BsToggle2Off } from "react-icons/bs"; 
 import { BsToggle2On } from "react-icons/bs";   
@@ -32,11 +32,13 @@ function PostPage() {
     const dispatch = useDispatch()     
     const { postId } = useParams();   
 
-    const user = useSelector((state) => state.session?.user);
-    const post = useSelector((state) => state.post?.single); 
-    const f_posts = useSelector((state) => state.post?.master); 
-    const d_posts = useSelector(state => state.post?.discover)   
- 
+    const user = useSelector((state) => state?.session?.user);
+    const post = useSelector((state) => state?.post?.single); 
+    const f_posts = useSelector((state) => state?.post?.master); 
+    const d_posts = useSelector(state => state?.post?.discover)   
+    const postuserPosts = useSelector((state) => state?.post);  
+    const userPosts = useSelector((state) => state.post[post?.user?.id]?.posts);  
+
     const [showEmojiPicker, setShowEmojiPicker] = useState('');
     const [comment, setComment] = useState(''); 
     const [commentCharacterCounter, setCommentCharacterCounter] = useState(0);
@@ -45,6 +47,8 @@ function PostPage() {
     const [commentBeingEdited, setCommentBeingEdited] = useState(false);
     const [showDeleteCommentModal, setShowDeleteCommentModal] = useState(false);  
     const [showmap, setShowmap ] = useState(false)
+    const [filteredPosts, setFilteredPosts] = useState([]); 
+
 
     useEffect(() => {  
         if (postId) {         
@@ -53,7 +57,14 @@ function PostPage() {
         dispatch(findFollows(user?.id)); 
       }, [postId, user, f_posts, d_posts]);
   
-
+      useEffect(() => {
+        dispatch(findUserPosts(post?.user?.id));
+      }, [post, post?.user?.id]);  
+ 
+      useEffect(() => {
+        const filtered = userPosts?.filter((post) => post?.post?.id !== +postId);
+        setFilteredPosts(filtered); 
+      }, [userPosts]); 
 
     const keydownEnter = (e) => {
         if (commentCharacterCounter > 300 && e.key === "Enter") {
@@ -127,11 +138,11 @@ function PostPage() {
 
     }
        
-   
+    
     return ( 
-        <div className='SoloWrapper'>         
+        <div className='SoloWrapper'>   
+        {console.log(filteredPosts)}        
             <div className='Solocard' key={post?.id}> 
-  
             <div className="solotop">
                 <div className='SoloCardInfo'> 
                     <div className='SoloAvatar' 
@@ -175,7 +186,7 @@ function PostPage() {
                                                     </div>
                                                     ) : ( 
                                                     <div className="SoloLikeIcon" onClick={() => like(post?.post?.id)}>
-                                                        <RiHeart2Line/>  
+                                                        <RiHeart2Line/>   
                                                     </div>
                                                     )}  */}
                     
@@ -192,12 +203,6 @@ function PostPage() {
                                                         <AiOutlineTablet/>   
                                                     </div> 
                                                     )}      
-                                                 {(showmap === false) ? <div>
-                                                    <BsToggle2Off className="SoloLikeIcon" onClick={() => setShowmap(!showmap)} /> 
-                                                </div> :
-                                                <div> 
-                                                    <BsToggle2On className="SoloLikeIcon" onClick={() => setShowmap(!showmap)} /> 
-                                                </div> }
                                                 </div>
                                                 </div>
                                                 
@@ -281,6 +286,60 @@ function PostPage() {
                 </div>
                 </div>
                 </div> 
+                <div>
+                {post?.user?.id !== user?.id ? (
+        <div className="p-bot">
+          <div className="p-bot-desc">
+            {filteredPosts?.length > 0
+              ? "More posts from "
+              : "No additional posts from "}
+            <span
+              className="pp-like-me"
+              onClick={() => history.push(`/users/${post.user.id}`)}
+            >
+              {post?.user?.f_name} {post?.user?.l_name}
+            </span>
+          </div>
+          <div className="pp-prof-bot">
+            {filteredPosts?.length > 0
+              ? filteredPosts?.slice(0, 6).map((post, i) => (
+                  <>
+                    {post.post.id !== +postId ? (
+                      <div
+                        className="post-c"
+                        onClick={() => history.push(`/posts/${post?.post?.id}`)}
+                      >
+                        <img
+                          className={`p-img p-img-${i} hidden`}  
+                          src={post.post.img_url}
+                        />
+                        <div className="p-hover">
+                          <div className="p-likes"> 
+                            <img 
+                              className="p-icons"
+                              src="https://img.icons8.com/fluency-systems-filled/48/ffffff/like.png"
+                            />
+                            <div className="p-like-ct">{post.likes.length}</div>
+                          </div>
+                          <div className="p-comments">
+                            <img
+                              className="p-icons"
+                              src="https://img.icons8.com/ios-filled/48/ffffff/speech-bubble.png"
+                            />
+                            <div className="p-like-ct">
+                              {post.comments.length}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : null}
+                  </>
+                ))
+              : null}
+          </div>
+        </div>
+      ) : null}
+                </div>
                 </div> 
         </div>
     )
