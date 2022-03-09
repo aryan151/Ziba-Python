@@ -10,7 +10,7 @@ import PostPage from './components/PostPage';
 import Discover from './components/Discover';
 import Profile from './components/ProfilePage';
 import SearchTags from './components/SearchTags';
-
+import MainDM from './components/MessagesPage/MainDM';
 function App() { 
   const sessionUser = useSelector(state => state.session.user);
   const [loaded, setLoaded] = useState(false);
@@ -56,7 +56,7 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path='/Messages' exact={true} >
           <Navigation isLoaded={loaded} /> 
-              <h1>Direct Messages</h1>
+             <MainDM/> 
           </ProtectedRoute>
           <ProtectedRoute path='/Analytics' exact={true} >
             <Navigation isLoaded={loaded} /> 
