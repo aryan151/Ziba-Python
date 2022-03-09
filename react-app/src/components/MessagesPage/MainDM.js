@@ -18,9 +18,6 @@ const MainDM = () => {
     const [chan, setChan] = useState();
     const { msgCount, setMsgCount, acct, pick, setActive, setCurrUser } = useModal();
   
-    useEffect(() => {
-      document.title = "Inbox • Chats";
-    }, []);
   
     useEffect(() => {
       dispatch(findChannels()).then(() => {

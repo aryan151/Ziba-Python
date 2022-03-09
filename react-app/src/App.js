@@ -11,6 +11,11 @@ import Discover from './components/Discover';
 import Profile from './components/ProfilePage';
 import SearchTags from './components/SearchTags';
 import MainDM from './components/MessagesPage/MainDM';
+import { InfinitySpin } from  'react-loader-spinner'
+
+
+
+
 function App() { 
   const sessionUser = useSelector(state => state.session.user);
   const [loaded, setLoaded] = useState(false);
@@ -24,9 +29,10 @@ function App() {
   }, [dispatch]); 
 
   if (!loaded) {
-    return null;
-  }
-
+    return (
+      <InfinitySpin color="grey" />
+    );
+  } 
   return (
   
     <BrowserRouter>

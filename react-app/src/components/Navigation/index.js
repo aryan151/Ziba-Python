@@ -19,14 +19,11 @@ function Navigation({ isLoaded }){
   return (    
     <nav className='Navmain'>   
         <div className='Navcontainer'>
-            <NavLink exact to='/'>Ziba</NavLink> 
-            {isLoaded && ( 
+            <NavLink className='navtitle' exact to='/Home'>Ziba</NavLink> 
+            {isLoaded && (  
                 <div className='Navbuttons'>  
                     <button  className='Navprofile' >  
                       <BsSearch/>   
-                    </button>  
-                    <button  className='Navprofile' onClick={() => history.push('/Home')} >  
-                      <AiOutlineHome/> 
                     </button>  
                     <button  className='Navprofile' onClick={() => history.push('/Messages')}>  
                       <BiMessage/> 
@@ -37,9 +34,6 @@ function Navigation({ isLoaded }){
                     <button  className='Navprofile' onClick={() => history.push('/Discover')}>  
                       <AiOutlineCompass/> 
                     </button>    
-                    <button  className='Navprofile'>  
-                    <AiOutlineNotification/> 
-                    </button >   
                     <button  className='Navprofile'>  
                     <NavMenu user={sessionUser} /> 
                     </button >   
