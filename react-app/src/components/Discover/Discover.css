@@ -52,10 +52,11 @@
 .text {
     color: rgba(0, 0, 0, .5);
     transition: .5s cubic-bezier(1, 0, 0, 1);
+    text-decoration: none;
 }
 
 .text:hover {
-    color: #026670
+    color: maroon; 
 }
 
 .info {
@@ -73,11 +74,9 @@
     color: rgba(0, 0, 0, .4);
     transition: .5s cubic-bezier(1, 0, 0, 1);
     cursor: pointer;
-}
+} 
 
-.comment:hover {
-    color: #026670;
-}
+
 
 .cardIcons {
     display: flex;

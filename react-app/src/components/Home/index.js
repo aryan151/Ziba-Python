@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { findFollows, findSuggestions } from "../../store/follow";  
 import { master } from '../../store/post'   
 import { logout } from "../../store/session";
-import './Home.css'   
+import './Home.css'    
         
 function Home() {             
     const dispatch = useDispatch()  
@@ -48,7 +48,7 @@ function Home() {
                                         />
                                     </Link>
                                     <Link to={`/users/${post?.user?.id}`}>
-                                        <p className='text'> {post?.user?.f_name} {post?.user?.l_name}</p>
+                                        <p className='htext'> {post?.user?.f_name} {post?.user?.l_name}</p>
                                     </Link>
                                 </div> 
                                 <div>

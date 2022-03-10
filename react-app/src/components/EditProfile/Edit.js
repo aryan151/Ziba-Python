@@ -84,7 +84,7 @@ const EditProfileForm = () => {
   return (
     <>
     <div className="editProfilePage">
-      <div className="editProfileContainer">
+      <div className="editProfileContainer"> 
         <div className="editLeftPanel">
           <ul>
             <li className="editPanelTab">Edit Profile</li>
