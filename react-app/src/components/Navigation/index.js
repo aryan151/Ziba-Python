@@ -16,7 +16,7 @@ import { TiSocialInstagram } from "react-icons/ti";
 function Navigation({ isLoaded }){    
 
   const history = useHistory();  
-  const sessionUser = useSelector(state => state.session.user);  
+  const sessionUser = useSelector(state => state?.session?.user);   
 
   return (    
     <nav className='Navmain'>   

@@ -6,7 +6,11 @@ import { IoMdPerson } from "react-icons/io";
 import {logout} from '../../../store/session';
 import {useDetectOutsideClick} from './NavBarClick'  
 import './NavMenu.css'  
-
+import profile from './profile.svg'
+import settings from './settings.svg' 
+import logouts from './logout.svg' 
+import LogoutButton from '../../auth/LogoutButton'
+ 
 function NavMenu({ user }) { 
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
@@ -29,22 +33,21 @@ function NavMenu({ user }) {
         className={`menu ${isActive ? "active" : "inactive"}`}
       >
         <ul>
-          <li> 
+          <li>
             <a className="avatarReroute" href={`/users/${user.id}`}>
-            <IoMdPerson/> 
+              <img src={profile} alt="Profile Icon" draggable="false" />
               Profile
             </a>
           </li>
 
           <li>
-            <NavLink className='avatarReroute' to={`/users/2`}>
-            <IoMdPerson/> 
+            <NavLink className='avatarReroute' to={`/users/${user.id}/edit_profile`}>
+              <img src={settings} alt="Settings Icon" draggable="false" /> 
               Settings
             </NavLink>
-          </li>
-          <li className='borderTop' onClick={logoutUser}>
-          <IoMdPerson/> 
-          LogOut
+          </li>  
+          <li className='borderTop' >  
+          <LogoutButton/> 
           </li>
         </ul>
       </div>
