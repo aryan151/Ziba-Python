@@ -5,7 +5,7 @@ import './Splash.css'
 import LoginForm from '../auth/LoginForm' 
 import SignUpForm from '../auth/SignUpForm'  
 import { FiPlay } from "react-icons/fi";
-    
+import SplashIcon from './splashmodalicon'
 function Splash() {     
     const [toggleLogin, setToggleLogin ] = useState(true)   
     const [currentBGImage, setCurrentBGImage] = useState(0);
@@ -13,14 +13,14 @@ function Splash() {
     const [formtoggle, setFormToggle] = useState(false)  
     const splashPhotos = [
         'https://ziba-aa.s3.amazonaws.com/splash4.jpg',
+        'https://images.unsplash.com/photo-1543253464-213ff7db5ce7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1455&q=80',
         'https://ziba-aa.s3.amazonaws.com/splash5.jpg',
-        'https://ziba-aa.s3.amazonaws.com/splash6.jpg',
-        'https://ziba-aa.s3.amazonaws.com/splash3.jpg',
-        'https://ziba-aa.s3.amazonaws.com/splash1.jpg',
+        'https://images.unsplash.com/photo-1587220387658-ff627d631be2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
         'https://ziba-aa.s3.amazonaws.com/splash7.jpg',
-        'https://ziba-aa.s3.amazonaws.com/splash2.jpg'
-    ]
-
+        'https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+        'https://images.unsplash.com/photo-1534982841079-afde227ada8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',  
+    ] 
+ 
     const splashHeader = [
         'Discover Beauty', 
         'Explore Memories',
@@ -63,9 +63,9 @@ function Splash() {
             <div className='footer'>     
                 <div className='FooterCarText'>
                     <h1 className='FootPart1Anim'>A moment of inspiration. A moment of inspiration. A moment of inspiration. A moment of inspiration. A moment of inspiration. A moment of inspiration. A moment of inspiration. A moment of inspiration. </h1>
-                    <h1 className='FootPart2Anim'>A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. </h1>
+                    <h1 className='FootPart1Anim'>A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. A chance encounter. </h1>
                     <h1 className='FootPart1Anim'>A touch of beauty. A touch of beauty. A touch of beauty. A touch of beauty. A touch of beauty. A touch of beauty. A touch of beauty. A touch of beauty. A touch of beauty. A touch of beauty. A touch of beauty. </h1>
-                    <h1 className='FootPart2Anim'>A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. </h1>
+                    <h1 className='FootPart1Anim'>A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. A fleeting memory. </h1>
                     <h1 className='FootPart1Anim'>A dose of reality. A dose of reality. A dose of reality. A dose of reality. A dose of reality. A dose of reality. A dose of reality. A dose of reality. A dose of reality. A dose of reality. A dose of reality.  </h1>  
                 </div>
             </div>
@@ -80,29 +80,9 @@ function Splash() {
                 alt='splash'
                 />  
             ))}   
-            <div>
-
-
-
-
-                
+ 
+        <SplashIcon/>
         </div>
-        {(formtoggle == false) ? <div className='SplashTopRight'>
-            <FiPlay onClick={() => setFormToggle(true)}/> 
-            
-        </div> :   
-                    <div className='topbox'>  
-                    <div>
-                    {(toggleLogin === true) ? <LoginForm/>  :  <SignUpForm/> }      
-                    </div>     
-                    <div className="redirectContainer">    
-                        <div className="redirectText">   
-                            {(toggleLogin === true) ? "Don't have an account?" :  "Already Have an Account?" }   
-                            <button onClick={() => setToggleLogin(!toggleLogin)}className='redirectSignUp'>Click Here</button>
-                        </div>    
-                        </div>
-                    </div>  }
-                </div>
      
          
 
