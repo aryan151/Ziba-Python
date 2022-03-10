@@ -286,61 +286,47 @@ function PostPage() {
                 </div>
                 </div>
                 </div> 
-                <div>
-                {post?.user?.id !== user?.id ? (
-        <div className="p-bot">
-          <div className="p-bot-desc">
-            {filteredPosts?.length > 0
-              ? "More posts from "
-              : "No additional posts from "}
-            <span
-              className="pp-like-me"
-              onClick={() => history.push(`/users/${post.user.id}`)}
-            >
-              {post?.user?.f_name} {post?.user?.l_name}
-            </span>
-          </div>
-          <div className="pp-prof-bot">
-            {filteredPosts?.length > 0
-              ? filteredPosts?.slice(0, 6).map((post, i) => (
-                  <>
-                    {post.post.id !== +postId ? (
-                      <div
-                        className="post-c"
-                        onClick={() => history.push(`/posts/${post?.post?.id}`)}
-                      >
-                        <img
-                          className={`p-img p-img-${i} hidden`}  
-                          src={post.post.img_url}
-                        />
-                        <div className="p-hover">
-                          <div className="p-likes"> 
-                            <img 
-                              className="p-icons"
-                              src="https://img.icons8.com/fluency-systems-filled/48/ffffff/like.png"
-                            />
-                            <div className="p-like-ct">{post.likes.length}</div>
-                          </div>
-                          <div className="p-comments">
-                            <img
-                              className="p-icons"
-                              src="https://img.icons8.com/ios-filled/48/ffffff/speech-bubble.png"
-                            />
-                            <div className="p-like-ct">
-                              {post.comments.length}
-                            </div>
-                          </div>
+        
+        <div className="bottombackground">
+
+             
+        <div className="BottomOther">
+            {post?.user?.id !== user?.id ? (
+            <div className="p-bot">
+            <div className="p-bot-desc">
+                {filteredPosts?.length > 0
+                ? "More posts from "
+                : "No additional posts from "}
+                <span
+                className="pp-like-me"
+                onClick={() => history.push(`/users/${post?.user?.id}`)}  
+                >
+                {post?.user?.f_name} {post?.user?.l_name}
+                </span>
+            </div>
+            <div className="pp-prof-bot">
+                {filteredPosts?.length > 0
+                ? filteredPosts?.slice(0, 6).map((post, i) => (
+                    <>
+                        {post?.post?.id !== +postId ? ( 
+                        <div
+                            className="post-c"
+                            onClick={() => history.push(`/posts/${post?.post?.id}`)}
+                        >
+                            <img  
+                            src={post.post.img_url}
+                            /> 
                         </div>
-                      </div>
-                    ) : null}
-                  </>
-                ))
-              : null}
-          </div>
-        </div>
-      ) : null}
+                        ) : null}
+                    </>
+                    ))
+                : null}
+                </div>
+                </div>) 
+                : null}
                 </div>
                 </div> 
+                </div>
         </div>
     )
 }
