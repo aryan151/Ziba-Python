@@ -41,7 +41,7 @@ function Home() {
                         {followersPosts?.map((post) => ( 
                             <div className='Homecard' key={post.id}> 
                                 <div className='user'>
-                                    <Link to={`/users/${post?.user?.id}`}> 
+                                    <Link to={`/users/${post?.user?.id}`}>   
                                         <div 
                                             className='Homeavatar'
                                             style={{backgroundImage: `url('${post?.user?.avatar}')`}} 
@@ -66,7 +66,9 @@ function Home() {
                                     </div>
                                     <div className='cardIcons'>
                                         
-                                        <p>{post.post.tags}</p>
+                                        {post?.post?.tags.map((tag) =>  (
+                                                       <p className='tagtext' onClick={() => history.push(`/SearchTags/${tag}`)}>#{tag}    </p>      
+                                                    ))}   
                                     </div>
                                 </div>
                             </div>

@@ -5,16 +5,16 @@ import { useParams } from "react-router"
 
 function SearchTags () {
     const dispatch = useDispatch()
-    const {name} = useParams()
+    const {tag} = useParams()
     
-    useEffect(() => {
-        dispatch(getAllSearchposts(String(name)))
-    }, [dispatch])
-
+    // useEffect(() => {
+    //     dispatch(getAllSearchposts(String(tag)))  
+    // }, [dispatch])
+  
     return (
         <div>
-            <p> test </p>
-        </div>
+            <p> {tag} </p>
+        </div> 
     )
 
 }

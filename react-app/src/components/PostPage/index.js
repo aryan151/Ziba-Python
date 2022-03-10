@@ -173,9 +173,9 @@ function PostPage() {
                                                  
                                                 </div>
                                                 <div className='SoloCardBotBot'>      
-                                                    <div className='SolocardTags'> 
+                                                    <div className='SolocardTags'>   
                                                     { post?.post?.tags?.length > 0 && post?.post?.tags.map((tag) =>  (
-                                                       <p className='tagtext' >#{tag}    </p>    
+                                                       <p className='tagtext' onClick={() => history.push(`/SearchTags/${tag}`)}>#{tag}    </p>      
                                                     ))}   
                                                     </div>
                                                     <div className='SolocardIcons'>  

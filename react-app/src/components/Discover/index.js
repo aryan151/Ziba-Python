@@ -5,10 +5,10 @@ import {findDiscoverPosts } from '../../store/post'
 import FlickrStream from '../FlickrStream';
 import './Discover.css'    
 
-function Discover () { 
+function Discover () {  
     const dispatch = useDispatch();       
  
-    const discoverPosts = useSelector(state => state.post.discover)
+    const discoverPosts = useSelector(state => state?.post?.discover)
 
   
     useEffect(() => {

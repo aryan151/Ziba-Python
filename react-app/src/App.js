@@ -11,6 +11,7 @@ import Discover from './components/Discover';
 import Profile from './components/ProfilePage';
 import SearchTags from './components/SearchTags';
 import MainDM from './components/MessagesPage/MainDM';
+import BackUp from './components/backtotop/BackUp' 
 import { InfinitySpin } from  'react-loader-spinner'
 
 
@@ -43,22 +44,27 @@ function App() {
           <ProtectedRoute path='/posts/:postId' exact={true} >
           <Navigation isLoaded={loaded} /> 
             <PostPage/> 
+            <BackUp/> 
           </ProtectedRoute> 
           <ProtectedRoute path='/users/:userId' exact={true} >
           <Navigation isLoaded={loaded} /> 
             <Profile/> 
+            <BackUp/> 
           </ProtectedRoute>
           <ProtectedRoute path='/Home' exact={true} >
           <Navigation isLoaded={loaded} /> 
               <Home/> 
+              <BackUp/> 
           </ProtectedRoute>
-          <ProtectedRoute path='/SearchTags/:name' exact={true} > 
+          <ProtectedRoute path='/SearchTags/:tag' exact={true} > 
           <Navigation isLoaded={loaded} /> 
               <SearchTags/>  
+              <BackUp/> 
           </ProtectedRoute>
           <ProtectedRoute path='/Discover' exact={true} >
           <Navigation isLoaded={loaded} /> 
               <Discover/> 
+              <BackUp/> 
           </ProtectedRoute>
           <ProtectedRoute path='/Messages' exact={true} >
           <Navigation isLoaded={loaded} /> 
@@ -66,7 +72,7 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path='/Analytics' exact={true} >
             <Navigation isLoaded={loaded} /> 
-              <h1>Analytics Feed</h1>    
+              <h1>Analytics Feed</h1>     
           </ProtectedRoute>
         </Switch> 
 

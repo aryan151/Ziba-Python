@@ -1,0 +1,16 @@
+.scrollTop {
+    position:fixed;
+    bottom: 1.5em;
+    left: 3.5em;
+    background-color: transparent; 
+    scroll-behavior: smooth;
+}
+
+.arrow {
+    font-size: 50px;
+    color: black; 
+}
+
+.arrow:hover {
+    color: maroon; 
+}  
