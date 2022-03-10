@@ -5,6 +5,8 @@ from app.models import db, Post, Follow, User, Comment, Like
 from datetime import datetime     
 from app.aws_s3 import (upload_file_to_s3, allowed_file, get_unique_filename)
 from app.forms.post_form import createPost, deletePost, editPost
+from sqlalchemy.dialects.postgresql import ARRAY 
+
 
 post_routes = Blueprint('posts', __name__)     
 
@@ -244,32 +246,15 @@ def tagged_posts(id):
     return {'arr': [x for x in res]}  
 
    
-# @post_routes.route('/search/<name>')  
-# @login_required     
-# def get_search_tag(name):         
+@post_routes.route('/search/')  
+@login_required     
+def get_search_tag():          
       
   
-#     posts = Post.query.filter(name.notin_(Post.tags)).order_by(Post.id.desc()).all() 
-#     likes_comp = []
-#     comment_comp = [] 
-#     res = []
+    posts = Post.query.all()  
 
-#     for post in posts:
-#         likes = Like.query.filter_by(post_id=post.id).all()
-#         for like in likes:
-#             user = User.query.filter_by(id=like.user_id).first()
-#             likes_comp.append(user.to_dict())
-
-#         comments = Comment.query.filter_by(post_id=post.id).all()
-#         for comment in comments:
-#             user2 = User.query.filter_by(id=comment.user_id).first()
-#             comment_comp.append(user2.to_dict())
-
-#         res.append({'post': post.to_dict(), 'likes': likes_comp, 'comments': comment_comp})
-#         likes_comp = []
-#         comment_comp = []
            
-#     return {"posts": [post.to_dict() for post in res]}
+    return {"posts": [post.to_dict() for post in posts]}
 
 
 

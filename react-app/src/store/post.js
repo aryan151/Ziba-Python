@@ -184,8 +184,8 @@ export const deleteComment = (id) => async (dispatch) => {
 
 // Get All Tagged Posts - Search 
 
-export const getAllSearchposts= (name) => async dispatch => {
-  const response = await fetch(`/api/posts/search/${name}`)
+export const getAllSearchposts= () => async dispatch => {
+  const response = await fetch(`/api/posts/search/`) 
   if (response.ok) {
       const posts = await response.json()
 
