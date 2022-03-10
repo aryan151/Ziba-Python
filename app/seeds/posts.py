@@ -268,14 +268,29 @@ RandomImages = [
         'https://images.unsplash.com/photo-1534614971-6be99a7a3ffd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
         'https://images.unsplash.com/photo-1517677129300-07b130802f46?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
         ] 
+Alltags = [
+    'love',
+    'fashion',
+    'photooftheday',
+    'art',
+    'beautiful',
+    'happy',
+    'photography',
+    'wow',
+    'instagood',
+    'travel',
+    'fun',
+    'instalike',
+    'smile' 
+]
 def seed_posts():     
 
     for image in RandomImages:
         newPost = Post(
             user_id = randint(1,28), 
             img_url = image,
-            caption = fake.text(max_nb_chars=25),
-            tags = [],
+            caption = fake.text(max_nb_chars=25),  
+            tags = [Alltags[randint(1,13)], Alltags[randint(1,13)]],
             createdAt=datetime.now())  
 
         db.session.add(newPost)

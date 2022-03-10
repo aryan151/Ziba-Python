@@ -15,7 +15,7 @@ register_adapter(numpy.int64, addapt_numpy_int64)
 
 def seed_comments():
 
-    for i in range(1,500):
+    for i in range(1,600):
         newComment = Comment(
             user_id = randint(1,28), 
             post_id = randint(1,250), 
