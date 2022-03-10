@@ -18,8 +18,7 @@ import data from 'emoji-mart/data/google.json'
 import 'emoji-mart/css/emoji-mart.css' 
 import { NimblePicker  } from 'emoji-mart' 
 import DeleteComment from './DeleteComment/index'
-import EditComment from './EditComment/index' 
-import CommentHover from './CommentHover/index'   
+import EditComment from './EditComment/index'  
 import PostNav from "./PostNav/PostNav"; 
 import { TiDeleteOutline } from "react-icons/ti"; 
  
