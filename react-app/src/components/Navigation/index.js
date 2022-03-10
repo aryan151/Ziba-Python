@@ -9,6 +9,8 @@ import { AiOutlineNotification } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import { BiMessage } from "react-icons/bi";  
 import './Navigation.css';
+import { TiSocialInstagram } from "react-icons/ti";
+
       
 
 function Navigation({ isLoaded }){    
@@ -19,12 +21,14 @@ function Navigation({ isLoaded }){
   return (    
     <nav className='Navmain'>   
         <div className='Navcontainer'>
-            <NavLink className='navtitle' exact to='/Home'>Ziba</NavLink> 
+                    <button  className='Navprofile' onClick={() => history.push('/Home')}>  
+                      <TiSocialInstagram/>  
+                    </button>   
             {isLoaded && (  
                 <div className='Navbuttons'>  
-                    <button  className='Navprofile' >  
+                    {/* <button  className='Navprofile' >  
                       <BsSearch/>   
-                    </button>  
+                    </button>   */}
                     <button  className='Navprofile' onClick={() => history.push('/Messages')}>  
                       <BiMessage/> 
                     </button>  

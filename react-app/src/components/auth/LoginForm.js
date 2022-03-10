@@ -45,7 +45,7 @@ const LoginForm = () => {
   }
 
   const demo2Login = (e) => {
-    setEmail('ddemo2@aa.io')
+    setEmail('demo2@aa.io')
     setPassword('password')
   }
  
