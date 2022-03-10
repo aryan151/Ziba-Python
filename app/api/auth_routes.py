@@ -2,6 +2,8 @@ from flask import Blueprint, jsonify, session, request
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
+from app.forms import ProfileEditForm
+from app.forms import EditAvatar 
 from app.aws_s3 import (upload_file_to_s3, allowed_file, get_unique_filename)
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -99,6 +101,102 @@ def sign_up():
         return user.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@auth_routes.route('/signup', methods=['PUT'])
+def edit_profile():
+    """
+    Edits existing user
+    """
+    form = ProfileEditForm()
+    data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
+    
+
+    user = User.query.filter(User.id == data["id"]).first()
+    user_avatar = user.avatar
+
+    if form.data['avatar'] == None:
+        url = user_avatar
+    else:
+        image = form.data['avatar']
+
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
+
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+
+        if "url" not in upload:
+            return upload, 400
+
+        url = upload["url"]
+
+    if form.validate_on_submit():
+        user.username=form.data['username'] 
+        user.email=form.data['email']
+
+        # Checks to see if password changed versus the validated "oldpassword"
+        if not data["old_password"] == data["password"] and not data["password"] == "":
+          user.password=form.data['password']
+
+        user.avatar=url
+        user.bio=form.data['bio']
+  
+        user.f_name=form.data['fname']
+        user.l_name=form.data['lname']
+
+
+        db.session.commit()
+
+        return user.to_dict(), {'errors': validation_errors_to_error_messages(form.errors)}
+
+   
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@auth_routes.route('/signup/avatar', methods=['PUT'])
+def edit_avatar():
+    """
+    Edits existing user
+    """
+
+    form = EditAvatar()
+    data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+
+    user = User.query.filter(User.id == data["id"]).first()
+    user_avatar = user.avatar
+
+    if form.data['avatar'] == None:
+        url = user_avatar
+    else:
+        image = form.data['avatar']
+
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
+
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+
+        if "url" not in upload:
+            return upload, 400
+
+        url = upload["url"]
+
+    if form.validate_on_submit():
+        user.avatar=url
+       
+        db.session.commit()
+
+        return user.to_dict(), {'errors': validation_errors_to_error_messages(form.errors)}
+
+    
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
 
 
 @auth_routes.route('/unauthorized')

@@ -148,7 +148,44 @@ export const updateUser = (user_id) => async (dispatch) => {
   }
 };
 
- 
+export const profileEdit = (editProfileData) => async (dispatch) => {
+  const response = await fetch("/api/auth/signup", {
+    method: "PUT",
+    body: editProfileData,
+  });  
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data))
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
+export const avatarEdit = (avatarEditData) => async (dispatch) => {
+  const response = await fetch("/api/auth/signup/avatar", {
+    method: "PUT",
+    body: avatarEditData,
+  });
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data))
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
 
 
 const initialState = { user: null, allUsers: null }; 

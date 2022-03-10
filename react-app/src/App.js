@@ -12,6 +12,7 @@ import Profile from './components/ProfilePage';
 import SearchTags from './components/SearchTags';
 import MainDM from './components/MessagesPage/MainDM';
 import BackUp from './components/backtotop/BackUp' 
+import EditProfileForm from './components/EditProfile/Edit'; 
 import { InfinitySpin } from  'react-loader-spinner'
 
 
@@ -70,10 +71,10 @@ function App() {
           <Navigation isLoaded={loaded} /> 
              <MainDM/> 
           </ProtectedRoute>
-          <ProtectedRoute path='/Analytics' exact={true} >
-            <Navigation isLoaded={loaded} /> 
-              <h1>Analytics Feed</h1>     
-          </ProtectedRoute>
+          <ProtectedRoute path='/users/:userId/edit_profile' exact={true} >
+          <Navigation isLoaded={loaded} />  
+          <EditProfileForm />
+        </ProtectedRoute>
         </Switch> 
 
       

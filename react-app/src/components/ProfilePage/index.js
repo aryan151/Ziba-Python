@@ -59,7 +59,6 @@ function Profile () {
     return (         
     <>
     <div className="profileContainer">    
-    {console.log(user)}
         <div className="profileTop">
         <div className="profileAvatarBox">
           <div className="profileAvatarContainer">
@@ -79,13 +78,12 @@ function Profile () {
                     <button  className="follow followingButton profileButton blueButton button" onClick={followUser}>Follow</button>} 
                 </div>
               </div> :
-              <div className="profileButtonBox">
-                <button  className="editProfile profileButton button">Edit Profile</button>
-              </div> 
+              null
             }
           </div>  
           <div className="profileDetails">
             <div className="profileCounts">
+            <div className="profilePosts"><div className="profileCountsNumber">9</div> posts</div>
               <div className="profileFollowers"><div className="profileCountsNumber">{follows[+userId]?.followers.length}</div> followers</div>
               <div className="profileFollowing"><div className="profileCountsNumber">{follows[+userId]?.following.length}</div> following</div>
             </div>
