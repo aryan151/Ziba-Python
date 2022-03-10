@@ -96,8 +96,10 @@
 }
 
 .redirectSignUp {
-    color: #0095f6;
-    font-weight: bold;
+    
+    color: maroon; 
+    background: none!important;
+    border: none;
+    padding: 0!important;
 }  
-
 

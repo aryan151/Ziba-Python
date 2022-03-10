@@ -20,7 +20,7 @@ function SplashModal() {
                     <div className="redirectContainer">    
                         <div className="redirectText">   
                             {(toggleLogin === true) ? "Don't have an account?" :  "Already Have an Account?" }   
-                            <button onClick={() => setToggleLogin(!toggleLogin)}className='redirectSignUp'>Click Here</button>
+                            <button onClick={() => setToggleLogin(!toggleLogin)}className='redirectSignUp'>   Click Here</button> 
                         </div>    
                         </div>
                     </div> 
