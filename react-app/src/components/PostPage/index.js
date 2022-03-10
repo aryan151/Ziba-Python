@@ -19,9 +19,10 @@ import 'emoji-mart/css/emoji-mart.css'
 import { NimblePicker  } from 'emoji-mart' 
 import DeleteComment from './DeleteComment/index'
 import EditComment from './EditComment/index'
-import CommentHover from './CommentHover/index' 
+// import CommentHover from './CommentHover/index' 
 import PostNav from "./PostNav/PostNav";
-
+import { TiDeleteOutline } from "react-icons/ti"; 
+ 
 
 import './PostPage.css'   
 
@@ -118,6 +119,13 @@ function PostPage() {
         setComment(e.target.value)
         setCommentCharacterCounter(0+e.target.value.length)
     }
+
+    const handleDelete = () => {
+        setCommentBeingEdited(false);
+        setShowDeleteCommentModal(comment.id);    
+        setShowCommentHover(false); 
+    }
+
     const handleEmojiPicker = () => { 
         if (showEmojiPicker) {
             setShowEmojiPicker(false);
@@ -242,12 +250,12 @@ function PostPage() {
                                                         />
                                                     </div> 
                                                     { showCommentHover === comment?.comment?.id && user.id === comment?.comment?.user_id && 
-                                                    <CommentHover     
-                                                    comment={comment?.comment} 
-                                                    setCommentBeingEdited={setCommentBeingEdited}
-                                                    setShowCommentHover={setShowCommentHover} 
-                                                    setShowDeleteCommentModal={setShowDeleteCommentModal}
-                                                    />}
+                                                                <div className="HoverCommentControl">  
+                                                                <div className="message-popup-container">
+                                                                    {/* <span className="iconCommentEdit" onClick={() => setCommentBeingEdited(comment.id)}>edit</span> */} 
+                                                                    <span className="iconCommentDelete" onClick={handleDelete}><TiDeleteOutline/></span>
+                                                                </div>
+                                                            </div>}
                                                 </div> 
                                                 </div>
                     ))}
