@@ -29,7 +29,7 @@ function Splash() {
         'Connect'     
     ]
 
-    const shift = 6000; 
+    const shift = 5000; 
     const session = useSelector(state => state.session.user); 
 
     useEffect(() => {
@@ -70,7 +70,7 @@ function Splash() {
                 </div>
             </div>
             <div className='imagebackground'> 
-            {splashPhotos.map((image, i) => (
+            {splashPhotos.map((image, i) => ( 
                 <img 
                 id={i}
                 key={i}

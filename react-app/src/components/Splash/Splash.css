@@ -31,10 +31,10 @@
 
 .FooterCarText { 
   color: white;
-  font-family: 'Dancing Script', cursive;
+  font-family: 'Dancing Script', cursive; 
 }
 .FootPart1Anim {
-  animation: animright 400s linear infinite; 
+  animation: animright 240s linear infinite; 
   white-space: nowrap; 
 }
 
